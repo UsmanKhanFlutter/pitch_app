@@ -19,9 +19,9 @@ class SignInMethodScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ProfileImage(
-                  height: ConfigSize.convertHeight(context, 130),
-                  width: ConfigSize.convertWidth(context, 130),
-                  radius: ConfigSize.convertHeight(context, 65),
+                  height: 120,
+                  width: 120,
+                  radius: 60,
                 ),
                 SizedBox(height: 30),
                 "Have an Account?".text.make(),

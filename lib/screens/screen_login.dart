@@ -30,8 +30,8 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ProfileImage(
-                        height: ConfigSize.convertHeight(context, 110),
-                        width: ConfigSize.convertWidth(context, 110),
+                        height: 110,
+                        width: 110,
                         radius: 16,
                       ),
                       Container(

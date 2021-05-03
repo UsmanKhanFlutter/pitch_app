@@ -17,18 +17,17 @@ class ProfileImage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: ConfigSize.convertHeight(context, 44),
-            width: ConfigSize.convertWidth(context, 44),
+            height: 50,
+            width: 50,
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(
-                    ConfigSize.convertHeight(context, 24)),
+                borderRadius: BorderRadius.circular(25),
                 border: Border.all(color: Colors.grey, width: 2)),
           ),
           SizedBox(height: 10),
           Container(
-            height: ConfigSize.convertHeight(context, 35),
-            width: ConfigSize.convertWidth(context, 60),
+            height: 35,
+            width: 60,
             decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.only(

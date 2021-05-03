@@ -5,6 +5,8 @@ import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/screens/screen_dashboard.dart';
 import 'package:pitch_app/screens/screen_getting_started.dart';
 import 'package:pitch_app/screens/screen_login.dart';
+import 'package:pitch_app/screens/screen_phone_number.dart';
+import 'package:pitch_app/screens/screen_suggest_friend.dart';
 import 'package:pitch_app/screens/screen_verify_photo.dart';
 
 class MainScreen extends StatefulWidget {
@@ -52,8 +54,8 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           DashboardScreen(),
           GettingStartedScreen(),
-          VerifyPhotoScreen(),
-          LoginScreen(),
+          PhoneNumberScreen(),
+          SuggestFriendScreen(),
         ],
         physics: NeverScrollableScrollPhysics(),
       ),
