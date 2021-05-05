@@ -76,7 +76,14 @@ class SignInMethodScreen extends StatelessWidget {
           ),
           Container(
             height: ConfigSize.convertHeight(context, 150),
-            color: Colors.red.shade400,
+            width: double.infinity,
+            // color: Colors.red.shade400,
+            child: Image.asset(
+              'assets/images/shape_2.png',
+              fit: BoxFit.cover,
+              height: ConfigSize.convertHeight(context, 150),
+              width: double.infinity,
+            ),
           )
         ],
       ),
