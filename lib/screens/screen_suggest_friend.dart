@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_body_type.dart';
 import 'package:pitch_app/widgets/stretched_bordered_button.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -71,7 +72,9 @@ class SuggestFriendScreen extends StatelessWidget {
           SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: StretchedButton(text: "Pitch them", onPressed: () {}),
+            child: StretchedButton(
+                text: "Pitch them",
+                onPressed: () => context.push((context) => BodyTypeScreen())),
           ),
           SizedBox(height: 16),
           Padding(
