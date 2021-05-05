@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/screens/screen_information.dart';
 import 'package:pitch_app/screens/screen_main.dart';
+import 'package:pitch_app/screens/screen_profile.dart';
+import 'package:pitch_app/widgets/profile_image.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GetStartedScreen(),
+      home: ProfileScreen(),
     );
   }
 }
