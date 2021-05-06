@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/screens/catalog/components/catalog_item.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -23,6 +24,7 @@ class CatalogScreen extends StatelessWidget {
               [
                 Expanded(
                     child: TextField(
+                  maxLines: 1,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey.shade200),
@@ -48,7 +50,20 @@ class CatalogScreen extends StatelessWidget {
                         .make()),
               ],
             ),
-          ).box.alignTopCenter.make()
+          ).box.alignTopCenter.make(),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 6 / 7),
+              itemBuilder: (context, index) {
+                return CatalogItem();
+              },
+              itemCount: 15,
+            ).p16(),
+          )
         ],
         crossAlignment: CrossAxisAlignment.center,
       ),

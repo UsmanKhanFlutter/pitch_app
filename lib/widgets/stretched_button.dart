@@ -12,7 +12,7 @@ class StretchedButton extends StatelessWidget {
     Key key,
     @required this.text,
     this.width = double.infinity,
-    this.height = 44.0,
+    this.height = 40.0,
     @required this.onPressed,
   }) : super(key: key);
 

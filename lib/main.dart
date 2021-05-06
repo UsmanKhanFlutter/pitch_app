@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pitch_app/screens/screen_catalog.dart';
+import 'package:pitch_app/screens/catalog/screen_catalog.dart';
+import 'package:pitch_app/screens/screen_bio.dart';
+import 'package:pitch_app/screens/screen_congratulations_2.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/screens/screen_information.dart';
 import 'package:pitch_app/screens/screen_main.dart';
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         canvasColor: Colors.transparent,
       ),
-      home: GetStartedScreen(),
+      home: CongratulationsTwoScreen(),
     );
   }
 }
