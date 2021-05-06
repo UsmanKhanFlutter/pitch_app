@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/screens/profile/screen_profile.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';
@@ -63,7 +64,7 @@ class NameScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) => GetStartedScreen()));
+                                builder: (ctx) => ProfileScreen()));
                       }),
                 ),
               ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/screens/screen_catalog.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/screens/screen_information.dart';
 import 'package:pitch_app/screens/screen_main.dart';
-import 'package:pitch_app/screens/screen_profile.dart';
+import 'package:pitch_app/screens/profile/screen_profile.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
 
 void main() {
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        canvasColor: Colors.transparent,
       ),
-      home: ProfileScreen(),
+      home: GetStartedScreen(),
     );
   }
 }

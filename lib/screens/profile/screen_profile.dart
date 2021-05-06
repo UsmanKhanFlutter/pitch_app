@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/profile/components/profile_bottom_sheet.dart';
+import 'package:pitch_app/screens/screen_catalog.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfileScreen extends StatelessWidget {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<String> titleList = [
     "Bio:",
     "Interested In:",
@@ -21,6 +24,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Colors.white,
       body: VStack(
         [
           Stack(
@@ -70,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               RawMaterialButton(
-                onPressed: () {},
+                onPressed: () => context.push((context) => CatalogScreen()),
                 padding: EdgeInsets.all(8),
                 child: Image.asset(
                   "assets/images/Edit.png",
@@ -96,12 +101,18 @@ class ProfileScreen extends StatelessWidget {
                       child: ListTile(
                         title: "Advance Settings".text.make(),
                         trailing: IconButton(
-                          icon: Icon(
-                            CupertinoIcons.back,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {},
-                        ),
+                            icon: Icon(
+                              CupertinoIcons.back,
+                              color: Colors.black,
+                            ),
+                            onPressed: () =>
+                                _scaffoldKey.currentState.showBottomSheet(
+                                  (context) => ProfileBottomSheet(
+                                    context.screenHeight * 0.7,
+                                  ),
+                                )
+                            // profileBottomSheet(context, context.screenHeight),
+                            ),
                       ),
                     ),
                   );
