@@ -23,7 +23,7 @@ class GettingStartedScreen extends StatelessWidget {
             Expanded(
               child: VxBox(
                 child: VxBox(
-                        child: VStack([
+                  child: VStack([
                   ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.asset(
