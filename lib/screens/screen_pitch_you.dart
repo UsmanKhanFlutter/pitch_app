@@ -79,7 +79,7 @@ class PitchYouScreen extends StatelessWidget {
                   )
                 ])
               ],
-            ),
+            ).box.alignBottomCenter.make(),
           ),
           Row(
             children: [

@@ -25,7 +25,7 @@ class StretchedBorderedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
             side: BorderSide(color: Colors.red.shade400)),
-        color: Colors.white,
+        color: Colors.transparent,
         elevation: 1.4,
         shadowColor: Colors.red.shade300,
         child: InkWell(

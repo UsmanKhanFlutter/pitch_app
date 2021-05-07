@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/catalog/components/catalog_item.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
+import 'package:pitch_app/widgets/message_notification_dialog.dart';
+import 'package:pitch_app/widgets/rate_notification_dialog.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CatalogScreen extends StatelessWidget {
@@ -10,7 +12,9 @@ class CatalogScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: mainAppBar(
-          title: "Catalog", onLeadingPressed: () {}, onActionPressed: () {}),
+          title: "Catalog",
+          onLeadingPressed: () {},
+          onActionPressed: () => rateNotificationDialog(context)),
       body: VStack(
         [
           Container(
@@ -59,7 +63,9 @@ class CatalogScreen extends StatelessWidget {
                   mainAxisSpacing: 10,
                   childAspectRatio: 6 / 7),
               itemBuilder: (context, index) {
-                return CatalogItem();
+                return CatalogItem(
+                  onPitchPressed: () => messageNotificationDialog(context),
+                );
               },
               itemCount: 15,
             ).p16(),

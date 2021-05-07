@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
+import 'package:pitch_app/widgets/bio_notification_dialog.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -13,7 +14,7 @@ class BioScreen extends StatelessWidget {
       appBar: mainAppBar(
           title: "What's your pitch?",
           onLeadingPressed: () {},
-          onActionPressed: () {}),
+          onActionPressed: () => bioNotificationDialog(context)),
       body: VStack([
         SizedBox(height: ConfigSize.convertHeight(context, 80)),
         "Write Bio".text.bold.make().pOnly(left: 36),

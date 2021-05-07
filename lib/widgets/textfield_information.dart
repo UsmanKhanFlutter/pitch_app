@@ -3,16 +3,17 @@ import 'package:velocity_x/velocity_x.dart';
 
 class TextFieldInformation extends StatelessWidget {
   final String title;
-  TextFieldInformation({@required this.title});
+  final double height;
+  TextFieldInformation({@required this.title, @required this.height});
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         title.text.make(),
-        SizedBox(height: 8),
+        SizedBox(height: 4),
         Container(
-          height: 44,
+          height: height,
           child: TextFormField(
             decoration: InputDecoration(
                 filled: true,

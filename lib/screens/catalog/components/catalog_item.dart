@@ -3,6 +3,8 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CatalogItem extends StatelessWidget {
+  final Function onPitchPressed;
+  CatalogItem({@required this.onPitchPressed});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +27,7 @@ class CatalogItem extends StatelessWidget {
             "California".text.white.size(13).make(),
           ]),
           StretchedButton(
-            onPressed: () {},
+            onPressed: onPitchPressed,
             text: 'Pitch',
             height: 20,
           )

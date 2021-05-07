@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_signin_method.dart';
-import 'package:pitch_app/widgets/location_dialog.dart';
+import 'package:pitch_app/widgets/location_notification_dialog.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 

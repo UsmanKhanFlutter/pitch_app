@@ -30,13 +30,25 @@ class InformationScreen extends StatelessWidget {
                             .box
                             .height(60)
                             .make(),
-                        TextFieldInformation(title: "First Name:"),
+                        TextFieldInformation(
+                          title: "First Name:",
+                          height: 44,
+                        ),
                         SizedBox(height: 16),
-                        TextFieldInformation(title: "I am a:"),
+                        TextFieldInformation(
+                          title: "I am a:",
+                          height: 44,
+                        ),
                         SizedBox(height: 16),
-                        TextFieldInformation(title: "Birthday:"),
+                        TextFieldInformation(
+                          title: "Birthday:",
+                          height: 44,
+                        ),
                         SizedBox(height: 16),
-                        TextFieldInformation(title: "Email Address:"),
+                        TextFieldInformation(
+                          title: "Email Address:",
+                          height: 44,
+                        ),
                       ],
                     ),
                   ),
