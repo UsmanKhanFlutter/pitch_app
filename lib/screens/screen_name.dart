@@ -30,9 +30,15 @@ class NameScreen extends StatelessWidget {
                             .box
                             .height(60)
                             .make(),
-                        TextFieldInformation(title: "First Name:"),
+                        TextFieldInformation(
+                          title: "First Name:",
+                          height: 44,
+                        ),
                         SizedBox(height: 16),
-                        TextFieldInformation(title: "Last Name:"),
+                        TextFieldInformation(
+                          title: "Last Name:",
+                          height: 44,
+                        ),
                         SizedBox(height: 24),
                         "What's his email address?".text.bold.make(),
                         SizedBox(height: 16),

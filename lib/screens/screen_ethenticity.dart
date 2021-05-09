@@ -8,12 +8,12 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class EthencityScreen extends StatefulWidget {
+class EthenticityScreen extends StatefulWidget {
   @override
-  _EthencityScreenState createState() => _EthencityScreenState();
+  _EthenticityScreenState createState() => _EthenticityScreenState();
 }
 
-class _EthencityScreenState extends State<EthencityScreen> {
+class _EthenticityScreenState extends State<EthenticityScreen> {
   List<String> itemValue = [
     'Asia',
     'Black/ African',
