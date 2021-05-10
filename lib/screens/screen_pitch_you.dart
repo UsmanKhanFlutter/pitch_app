@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_notification.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -97,7 +98,8 @@ class PitchYouScreen extends StatelessWidget {
               SizedBox(width: 16),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      context.push((context) => NotificationScreen()),
                   elevation: 0,
                   child: "Send Message".text.white.make(),
                   color: Colors.red.shade400,

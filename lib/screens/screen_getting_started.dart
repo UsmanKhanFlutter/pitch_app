@@ -76,7 +76,7 @@ class GettingStartedScreen extends StatelessWidget {
             )
           ],
           crossAlignment: CrossAxisAlignment.start,
-        ).box.make().pSymmetric(v: 16, h: 24),
+        ).box.make().pSymmetric(v: 16, h: 16),
       ),
     );
   }

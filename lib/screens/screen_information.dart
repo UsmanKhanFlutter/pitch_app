@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
+import 'package:pitch_app/screens/screen_height.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -57,12 +58,8 @@ class InformationScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                   child: StretchedButton(
                       text: "Continue",
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => GetStartedScreen()));
-                      }),
+                      onPressed: () =>
+                          context.push((context) => HeightScreen())),
                 ),
               ],
             ),

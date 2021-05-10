@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/screens/screen_pitch_you.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -38,7 +39,7 @@ class WohooScreen extends StatelessWidget {
               SizedBox(width: 16),
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () => context.push((context) => PitchYouScreen()),
                   elevation: 0,
                   child: "Go".text.white.make(),
                   color: Colors.red.shade400,

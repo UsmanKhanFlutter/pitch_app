@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/catalog/screen_catalog.dart';
+import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/screens/screen_height.dart';
 import 'package:pitch_app/screens/screen_photos_wordfile.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         canvasColor: Colors.transparent,
       ),
-      home: HeightScreen(),
+      home: GetStartedScreen(),
     );
   }
 }

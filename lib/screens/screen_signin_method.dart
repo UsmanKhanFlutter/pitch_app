@@ -55,6 +55,7 @@ class SignInMethodScreen extends StatelessWidget {
                 StretchedIconButton(
                   path: "assets/images/Apple.png",
                   onPressed: () {},
+                  color: Colors.white,
                   width: ConfigSize.convertWidth(context, 220),
                 ),
                 SizedBox(height: 10),

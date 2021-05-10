@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_photos_wordfile.dart';
 import 'package:pitch_app/widgets/app_bar_back.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -21,7 +22,7 @@ class AgreeContinueScreen extends StatelessWidget {
         SizedBox(height: ConfigSize.convertHeight(context, 40)),
         StretchedButton(
           text: "Agree & Continue",
-          onPressed: () {},
+          onPressed: () => context.push((context) => PhotosWordFileScreen()),
           height: 36,
         ),
       ]).pSymmetric(h: 36),

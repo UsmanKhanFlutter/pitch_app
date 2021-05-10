@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/catalog/components/catalog_item.dart';
+import 'package:pitch_app/screens/screen_bio.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/message_notification_dialog.dart';
 import 'package:pitch_app/widgets/rate_notification_dialog.dart';
@@ -13,7 +14,7 @@ class CatalogScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: mainAppBar(
           title: "Catalog",
-          onLeadingPressed: () {},
+          onLeadingPressed: () => context.push((context) => BioScreen()),
           onActionPressed: () => rateNotificationDialog(context)),
       body: VStack(
         [

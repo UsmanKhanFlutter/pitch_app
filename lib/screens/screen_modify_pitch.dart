@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/screens/screen_about_you.dart';
 import 'package:pitch_app/screens/screen_wohoo.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -52,7 +53,7 @@ class ModifyPitchScreen extends StatelessWidget {
             ),
           ),
           StretchedButton(
-            onPressed: () => context.push((context) => WohooScreen()),
+            onPressed: () => context.push((context) => AboutYouScreen()),
             text: "Modify Pitch",
           )
         ],

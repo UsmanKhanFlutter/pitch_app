@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_congratulations_2.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bio_notification_dialog.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -46,7 +47,8 @@ class BioScreen extends StatelessWidget {
               ),
               StretchedColorButton(
                 text: "Send",
-                onPressed: () {},
+                onPressed: () =>
+                    context.push((context) => CongratulationsTwoScreen()),
                 color: Colors.cyan,
                 height: 24,
                 width: 50,

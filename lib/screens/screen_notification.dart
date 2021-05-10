@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_modify_pitch.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -64,7 +65,8 @@ class NotificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      context.push((context) => ModifyPitchScreen()),
                   elevation: 0,
                   child: "Accept".text.white.make(),
                   color: Colors.red.shade400,
