@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_phone_number.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -46,7 +47,12 @@ class GettingStartedScreen extends StatelessWidget {
                     SizedBox(height: 16),
                     StretchedColorButton(
                         text: "Pitch Someone",
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (ctx) => PhoneNumberScreen()));
+                        },
                         height: 36,
                         width: ConfigSize.convertWidth(context, 250),
                         color: Colors.lightGreen.shade400),
@@ -76,7 +82,7 @@ class GettingStartedScreen extends StatelessWidget {
             )
           ],
           crossAlignment: CrossAxisAlignment.start,
-        ).box.make().pSymmetric(v: 16, h: 24),
+        ).box.make().pSymmetric(v: 16, h: 16),
       ),
     );
   }

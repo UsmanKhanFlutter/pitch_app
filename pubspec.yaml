@@ -31,6 +31,7 @@ dependencies:
   velocity_x: ^3.0.0
   material_design_icons_flutter: ^4.0.5955
   device_preview: ^0.7.1
+  country_code_picker: ^2.0.1
   
 
 

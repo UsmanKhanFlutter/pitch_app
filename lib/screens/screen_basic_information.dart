@@ -106,7 +106,6 @@ Widget interestedIn(String text){
             .make()
             .pSymmetric(h: 24, v: 1)
   );
-            
 }
 Widget infoTextField(){
   return Container(

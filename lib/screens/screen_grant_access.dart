@@ -17,7 +17,7 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children:[
             "Grant Access"
                 .text
@@ -26,22 +26,23 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
                 .make()
                 .box
                 .alignTopCenter
-                .height(ConfigSize.convertHeight(context, 50))
+                .height(ConfigSize.convertHeight(context, 30))
                 .make(),
-            "In order to upload from your camera, PitchMe needs access to your camera. Go to Settings to enable."
 
+                SizedBox(
+                height: ConfigSize.blockSizeVertical*40,
+              ),
+            "In order to upload from your camera, PitchMe needs access to your camera. Go to Settings to enable."
                 .text
                 .align(TextAlign.center)
-                
                 .make()
                 .box
                 .alignTopCenter
-
                 .make()
-                .pSymmetric(h: 24, v: 17),
+                .pSymmetric(h: 24, v: 1),
                  
               SizedBox(
-                height: ConfigSize.blockSizeVertical*10,
+                height: ConfigSize.blockSizeVertical*35,
               ),
               Center(
                 child: StretchedColorButton(
@@ -52,7 +53,10 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
                 height: 36,
                 width: ConfigSize.convertWidth(context, 300),
                 color: red),
-              )
+              ),
+              SizedBox(
+                height: ConfigSize.blockSizeVertical*1,
+              ),
             ],
           )
       ));

@@ -94,31 +94,34 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
             SizedBox(
               height: ConfigSize.blockSizeVertical*20,
             ),
-            Card(
+            Container(
+              padding: EdgeInsets.only(left:ConfigSize.blockSizeHorizontal*3,right: ConfigSize.blockSizeHorizontal*3),
+              child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side:BorderSide(color:grayborder)),
         elevation: 0,
         child: Scrollbar(
           child: TextField(
-            onChanged: (value) {
-            //Do something with the user input.
-            },
-            minLines: 5, 
-            keyboardType: TextInputType.multiline,
-            maxLines: 5,
-            decoration: InputDecoration(
-              
-              contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              hintText: 'Write something...',
-              hintStyle: TextStyle(
-                fontSize: 12,
-                ),
-              border: InputBorder.none,
-            ),
+              onChanged: (value) {
+              //Do something with the user input.
+              },
+              minLines: 5, 
+              keyboardType: TextInputType.multiline,
+              maxLines: 5,
+              decoration: InputDecoration(
+                
+                contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                hintText: 'Write something...',
+                hintStyle: TextStyle(
+                  fontSize: 12,
+                  ),
+                border: InputBorder.none,
+              ),
           ),
         ),
       ),
+            ),
       Container(
         alignment: Alignment.topRight,
         child: "1500 Character Countdown"
