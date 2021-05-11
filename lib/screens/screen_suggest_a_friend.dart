@@ -81,7 +81,9 @@ class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
                   DeclineContainer(onPress: (){
                       context.push((context) => GiftScreen());
                   }) ,
-                  AcceptContainer(),
+                  AcceptContainer(onPress: (){
+                      context.push((context) => GiftScreen());
+                  }) ,
                 ],
               ),
             ),
@@ -165,7 +167,7 @@ Widget profileCard() {
     );
   }
 
-Widget AcceptContainer(){
+Widget AcceptContainer({Function onPress}){
   return Container(  
     decoration: BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(70.0),),
@@ -179,6 +181,7 @@ Widget AcceptContainer(){
         color: Vx.white,
       ),
       onPressed: (){
+        onPress();
 
       },
     ),
@@ -199,7 +202,7 @@ Widget DeclineContainer({Function onPress}){
         color: Colors.red,
       ),
       onPressed: (){
-        onPress();
+        // onPress();
       },
     ),
   );

@@ -23,10 +23,10 @@ class GetStartedScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   "Friends Pitching Friends"
-                      .text
-                      .xl
-                      .color(Colors.red.shade400)
-                      .make(),
+                  .text
+                  .xl
+                  .color(Colors.red.shade400)
+                  .make(),
                   SizedBox(height: 24),
                   StretchedButton(
                     text: "Get Started",

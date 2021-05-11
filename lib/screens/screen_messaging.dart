@@ -40,7 +40,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                         return Column(
                           children: [
                             recievedMessageContainer(message:'Hi! How are you??'),
-                            sentMessageContainer(message:'I am good. Whats up?'),
+                            sentMessageContainer(message:'I am good. Whats up??'),
                             recievedMessageContainer(message:'Not much just bored. Wondering if we can hang out somewhere?'),
                             sentMessageContainer(message:'Sounds fun! Where and when? '),
                           ],
@@ -48,11 +48,12 @@ class _MessagingScreenState extends State<MessagingScreen> {
                        },
                       ),
                     ),
+                    // SizedBox(
+                    //   height: ConfigSize.blockSizeVertical*2,
+                    // ),
                     textArea(),
-                    Container(
-                      alignment: Alignment.bottomRight,
-                      child: sendButton()),
-
+                    Container(child: sendButton(),
+                    alignment: Alignment.topRight,),
 
                 ]
               ),
@@ -60,33 +61,36 @@ class _MessagingScreenState extends State<MessagingScreen> {
           ),
     );
   }
+}
 
   Widget textArea() {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side:BorderSide(color:Vx.white)),
-      child: Scrollbar(
-        child: TextField(
-          onChanged: (value) {
+        borderRadius: BorderRadius.circular(13.0),
+        side:BorderSide(color:grayborder)),
+        elevation: 0,
+        child: Scrollbar(
+          child: TextField(
+            onChanged: (value) {
             //Do something with the user input.
-          },
-          minLines: 2, 
-          keyboardType: TextInputType.multiline,
-          maxLines: null,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            hintText: 'Write something...',
-            hintStyle: TextStyle(
-              fontSize: 12,
-              ),
-            border: InputBorder.none,
+            },
+            minLines: 2, 
+            keyboardType: TextInputType.multiline,
+            maxLines: 2,
+            decoration: InputDecoration(
+              // suffix: SendButton(),
+              contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              hintText: 'Write something...',
+              hintStyle: TextStyle(
+                fontSize: 12,
+                ),
+              border: InputBorder.none,
+            ),
           ),
         ),
-      ),
-    );
+      );
   }
-}
+
 
 Widget recievedMessageContainer({String message}){
   return Container(
@@ -195,3 +199,46 @@ Widget sendButton(){
       )
     );
   }
+
+
+  class SendButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+    width: ConfigSize.blockSizeHorizontal * 16,
+    height: ConfigSize.blockSizeVertical*5,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+      color: lightGreen
+    ),
+    child: Builder(builder: (BuildContext context) {
+      return MaterialButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(90.0)
+            )
+          ),
+        child: Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Send',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: defaultFontFamily,
+              color: Colors.white,
+              fontSize: 12.0,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
+        onPressed: (){
+          context.push((context) => UploadPhotosScreen());
+          
+
+        }
+        );
+        }  
+      )
+    );
+  }
+}

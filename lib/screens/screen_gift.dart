@@ -4,6 +4,8 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_your_pitch.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/stretched_bordered_button.dart';
+import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class GiftScreen extends StatefulWidget {
@@ -137,7 +139,8 @@ class _GiftScreenState extends State<GiftScreen> {
                   ),
                   child:CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/girl.png',
+                    backgroundImage: AssetImage(
+                      'assets/images/girl.png',
                     ),
                     backgroundColor: Colors.transparent, 
                   ),
@@ -214,41 +217,32 @@ class _GiftScreenState extends State<GiftScreen> {
                 )  
             ),
             Positioned(
-              bottom: ConfigSize.blockSizeVertical*8,
+              bottom: ConfigSize.blockSizeVertical*20,
               left: ConfigSize.blockSizeHorizontal*15,
               right: ConfigSize.blockSizeHorizontal*15,
-
-              child: Container(
+              child: StretchedColorButton(
+                color: red,
                 width: ConfigSize.blockSizeHorizontal*70,
-                height: ConfigSize.blockSizeVertical*14,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      context.push((context) => YourPitchScreen());
-                    },
-                    elevation: 0,
-                    child: "Recieve the Gift".text.white.maxFontSize(12).make(),
-                    color: red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                    ) ,
-                  SizedBox(height: ConfigSize.blockSizeVertical*1,),
-                  MaterialButton(
-                    onPressed: () {},
-                    elevation: 0,
-                    color: Colors.white,
-                    child: "Reject".text.color(red).maxFontSize(12) .make(),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: red),
-                      borderRadius: BorderRadius.circular(8)
-                    ),
-                  ),
-                ],
-              ),
-              ),
-            )
+                height: ConfigSize.blockSizeVertical*5,
+                text: 'Recieve the Gift',
+                onPressed: (){
+                  context.push((context) => YourPitchScreen());
+                },
+              )
+            ),
+            Positioned(
+              bottom: ConfigSize.blockSizeVertical*13,
+              left: ConfigSize.blockSizeHorizontal*15,
+              right: ConfigSize.blockSizeHorizontal*15,
+              child: StretchedBorderedButton(
+                width: ConfigSize.blockSizeHorizontal*70,
+                height: ConfigSize.blockSizeVertical*5,
+                text: 'Reject', 
+                onPressed: (){
+                  context.push((context) => YourPitchScreen());
+                },
+              )
+            ),
           ],
         ),
       ),

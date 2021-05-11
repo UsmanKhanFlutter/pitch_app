@@ -1,10 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_messaging.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/stretched_bordered_button.dart';
+import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class YourPitchScreen extends StatefulWidget {
@@ -215,41 +218,31 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
                 )  
             ),
             Positioned(
-              bottom: ConfigSize.blockSizeVertical*8,
+              bottom: ConfigSize.blockSizeVertical*20,
               left: ConfigSize.blockSizeHorizontal*15,
               right: ConfigSize.blockSizeHorizontal*15,
-
-              child: Container(
+              child: StretchedColorButton(
+                color: red,
                 width: ConfigSize.blockSizeHorizontal*70,
-                height: ConfigSize.blockSizeVertical*14,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      context.push((context) => MessagingScreen());
-                    },
-                    elevation: 0,
-                    child: "Start Conversation".text.white.maxFontSize(12).make(),
-                    color: red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                    ) ,
-                  SizedBox(height: ConfigSize.blockSizeVertical*1,),
-                  MaterialButton(
-                    onPressed: () {},
-                    elevation: 0,
-                    color: Colors.white,
-                    child: "Later".text.color(red).maxFontSize(12) .make(),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: red),
-                      borderRadius: BorderRadius.circular(8)
-                    ),
-                  ),
-                ],
-              ),
-              ),
-            )
+                height: ConfigSize.blockSizeVertical*5,
+                text: 'Start Conversation',
+                onPressed: (){
+                  context.push((context) => MessagingScreen());
+                },
+              )
+            ),
+            Positioned(
+              bottom: ConfigSize.blockSizeVertical*13,
+              left: ConfigSize.blockSizeHorizontal*15,
+              right: ConfigSize.blockSizeHorizontal*15,
+              child: StretchedBorderedButton(
+                width: ConfigSize.blockSizeHorizontal*70,
+                height: ConfigSize.blockSizeVertical*5,
+                text: 'Later', 
+                onPressed: (){
+                },
+              )
+            ),
           ],
         ),
       ),
@@ -263,3 +256,4 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
     );
   }
 }
+

@@ -20,7 +20,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
       bottomNavigationBar: BottomNavigation(),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          // physics: NeverScrollableScrollPhysics(),
           // padding: EdgeInsets.only(left:10,right:10),
           child: Column(
             children: [
@@ -82,7 +82,9 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
                   SizedBox(width: 16),
                   Expanded(
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push((context) => SuggestAFriendScreen());
+                      },
                       elevation: 0,
                       color: Colors.white,
                       child: "Edit your Account info".text.color(red).maxFontSize(12) .make(),

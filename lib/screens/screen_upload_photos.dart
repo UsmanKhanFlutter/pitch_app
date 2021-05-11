@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -52,27 +55,37 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
                     height: ConfigSize.blockSizeVertical*3,
                   ),
 
-                  Container(
-                    height: ConfigSize.blockSizeVertical*47,
-                    width: ConfigSize.blockSizeHorizontal*80,
-                    // child: GridView.builder(
-                    //   itemCount: 6,
-                    //   itemBuilder: (context, index) {
-                    //     return Text('upload');
-                    //   },
-                    //   ),
+                  Container(     
+                    height:ConfigSize.blockSizeVertical*50 ,
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      shrinkWrap: true,
+                      crossAxisSpacing:10,
+                      mainAxisSpacing:29,
+                      // childAspectRatio: MediaQuery.of(context).size.width /(MediaQuery.of(context).size.height / 5),
+                      scrollDirection: Axis.vertical,
+                      children: List.generate(6,(index){
+                        if(index==0|| index==1)
+                        return PhotoUploadedCard();
+                        else
+                        return UploadPhotoCard();
+                      },),
                     ),
-                  SizedBox(
-                    height: ConfigSize.blockSizeVertical*3,
                   ),
+                
+
+                  
                   StretchedColorButton(
                     color: red, 
                     text:'Submit', 
                     width: ConfigSize.blockSizeHorizontal*88,
                     height:ConfigSize.blockSizeVertical*6, 
                     onPressed:() {
-                      // context.push((context) => EmailSentScreen());
+                      context.push((context) => WhatsYourPitchScreen());
                     },
+                  ),
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical*1,
                   ),
                   
 
@@ -80,6 +93,53 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
               ),
             ),
           ),
+    );
+  }
+}
+
+
+
+class UploadPhotoCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+      },
+    child: Container(
+      height: ConfigSize.blockSizeVertical*20,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          side: BorderSide(color: grayUploadPhotoborder)
+        ),
+        child:Container(
+          alignment: Alignment.center,
+          child:Icon(
+            Icons.add,
+            color: grayAddIcon,
+            size: 16,
+            ),
+        ),
+      ),
+    ),
+    );
+  }
+}
+
+class PhotoUploadedCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+      },
+    child: Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40.0),
+      ),
+      child:Image.asset('assets/images/girl.png',
+        fit: BoxFit.fill,
+      ),
+    ),
     );
   }
 }
