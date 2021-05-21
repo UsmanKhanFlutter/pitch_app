@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/screens/catalog/components/catalog_item.dart';
 import 'package:pitch_app/screens/screen_bio.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
@@ -51,7 +52,7 @@ class CatalogScreen extends StatelessWidget {
                         .height(30)
                         .withDecoration(BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.red.shade400))
+                            color: AppColors.mainColor))
                         .make()),
               ],
             ),

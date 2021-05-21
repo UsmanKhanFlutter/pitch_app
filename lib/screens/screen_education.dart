@@ -7,6 +7,8 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../colors.dart';
+
 class EducationScreen extends StatefulWidget {
   @override
   _EducationScreenState createState() => _EducationScreenState();
@@ -55,7 +57,7 @@ class _EducationScreenState extends State<EducationScreen> {
                                   ? Colors.white
                                   : Colors.black,
                               backgroundColor: selectedValue == e
-                                  ? Colors.red[400]
+                                  ? AppColors.mainColor
                                   : Colors.white),
                         )
                         .cast<Widget>()

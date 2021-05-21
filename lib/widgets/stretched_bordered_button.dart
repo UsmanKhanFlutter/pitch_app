@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 
 class StretchedBorderedButton extends StatelessWidget {
   final String text;
@@ -24,7 +25,7 @@ class StretchedBorderedButton extends StatelessWidget {
       child: Material(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: Colors.red.shade400)),
+            side: BorderSide(color: AppColors.mainColor)),
         color: Colors.white,
         elevation: 1.4,
         shadowColor: Colors.red.shade300,
@@ -34,7 +35,7 @@ class StretchedBorderedButton extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                  color: Colors.red.shade400,
+                  color: AppColors.mainColor,
                 ),
               ),
             )),

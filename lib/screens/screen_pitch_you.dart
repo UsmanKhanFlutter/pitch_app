@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_notification.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
@@ -45,7 +46,7 @@ class PitchYouScreen extends StatelessWidget {
                     .text
                     .bold
                     .size(15)
-                    .color(Colors.red.shade400)
+                    .color(AppColors.mainColor)
                     .make(),
                 SizedBox(height: 16),
                 "If you send a message that someone pitched a guy, shouldn't the actions be"
@@ -61,7 +62,7 @@ class PitchYouScreen extends StatelessWidget {
                     child: "Check it out"
                         .text
                         .bold
-                        .color(Colors.red.shade400)
+                        .color(AppColors.mainColor)
                         .underline
                         .make(),
                   )
@@ -74,7 +75,7 @@ class PitchYouScreen extends StatelessWidget {
                     child: "Not Now"
                         .text
                         .bold
-                        .color(Colors.red.shade400)
+                        .color(AppColors.mainColor)
                         .underline
                         .make(),
                   )
@@ -102,7 +103,7 @@ class PitchYouScreen extends StatelessWidget {
                       context.push((context) => NotificationScreen()),
                   elevation: 0,
                   child: "Send Message".text.white.make(),
-                  color: Colors.red.shade400,
+                  color: AppColors.mainColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                 ),

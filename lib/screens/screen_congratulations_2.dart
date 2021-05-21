@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/screens/screen_wohoo.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -38,7 +39,7 @@ class CongratulationsTwoScreen extends StatelessWidget {
                     .text
                     .xl
                     .bold
-                    .color(Colors.red.shade400)
+                    .color(AppColors.mainColor)
                     .make(),
                 SizedBox(height: 16),
                 "Your pitch has been sent to your guy friend. If he declines it, you will get notification asking you to modify it"

@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_ethenticity.dart';
 import 'package:pitch_app/screens/screen_name.dart';
@@ -54,7 +55,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
                                   ? Colors.white
                                   : Colors.black,
                               backgroundColor: selectedValue == e
-                                  ? Colors.red[400]
+                                  ? AppColors.mainColor
                                   : Colors.white),
                         )
                         .cast<Widget>()

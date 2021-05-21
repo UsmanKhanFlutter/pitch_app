@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_login.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
@@ -29,7 +30,7 @@ class SignInMethodScreen extends StatelessWidget {
                   onPressed: () => context.push((context) => LoginScreen()),
                   child: "Sign In"
                       .text
-                      .color(Colors.red.shade400)
+                      .color(AppColors.mainColor)
                       .underline
                       .make(),
                 ),

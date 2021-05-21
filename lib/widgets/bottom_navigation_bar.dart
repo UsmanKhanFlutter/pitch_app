@@ -1,21 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_agreement.dart';
-import 'package:pitch_app/screens/screen_dashboard.dart';
-import 'package:pitch_app/screens/screen_getting_started.dart';
-import 'package:pitch_app/screens/screen_login.dart';
-import 'package:pitch_app/screens/screen_phone_number.dart';
-import 'package:pitch_app/screens/screen_suggest_friend.dart';
-import 'package:pitch_app/screens/screen_verify_photo.dart';
 
-class MainScreen extends StatefulWidget {
+class BottomNavigation extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _BottomNavigationState createState() => _BottomNavigationState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _BottomNavigationState extends State<BottomNavigation> {
+  
   int pageIndex = 0;
   var _pageController;
 
@@ -47,21 +40,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      // extendBody: true,
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: onPageChanged(pageIndex),
-        children: [
-          DashboardScreen(),
-          GettingStartedScreen(),
-          PhoneNumberScreen(),
-          SuggestFriendScreen(),
-        ],
-        physics: NeverScrollableScrollPhysics(),
-      ),
-      bottomNavigationBar: Padding(
+    return Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
         child: Container(
           height: ConfigSize.convertHeight(context, 50),
@@ -95,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
                   btnExpanded(
                     icon: CupertinoIcons.person_fill,
                     iconColor:
-                        pageIndex == 0 ? AppColors.mainColor : Colors.black,
+                        pageIndex == 0 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
                       setState(() {
                         pageIndex = 0;
@@ -106,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
                   btnExpanded(
                     icon: CupertinoIcons.hand_thumbsup_fill,
                     iconColor:
-                        pageIndex == 1 ? AppColors.mainColor : Colors.black,
+                        pageIndex == 1 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
                       setState(() {
                         pageIndex = 1;
@@ -117,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
                   btnExpanded(
                     icon: Icons.favorite,
                     iconColor:
-                        pageIndex == 2 ? AppColors.mainColor : Colors.black,
+                        pageIndex == 2 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
                       setState(() {
                         pageIndex = 2;
@@ -128,7 +107,7 @@ class _MainScreenState extends State<MainScreen> {
                   btnExpanded(
                     icon: CupertinoIcons.chat_bubble_2_fill,
                     iconColor:
-                        pageIndex == 3 ? AppColors.mainColor : Colors.black,
+                        pageIndex == 3 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
                       setState(() {
                         pageIndex = 3;
@@ -141,10 +120,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
-
   Widget btnExpanded({
     @required IconData icon,
     Color iconColor,

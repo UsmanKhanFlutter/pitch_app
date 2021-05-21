@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_modify_pitch.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
@@ -69,7 +70,7 @@ class NotificationScreen extends StatelessWidget {
                       context.push((context) => ModifyPitchScreen()),
                   elevation: 0,
                   child: "Accept".text.white.make(),
-                  color: Colors.red.shade400,
+                  color: AppColors.mainColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                 ),

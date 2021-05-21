@@ -30,6 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   velocity_x: ^3.0.0
   country_code_picker: ^2.0.1
+  device_preview: ^0.7.1
+  material_design_icons_flutter: ^4.0.5955
+
+
 
 
 dev_dependencies:

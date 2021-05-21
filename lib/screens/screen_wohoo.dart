@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/screens/screen_pitch_you.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,7 +15,7 @@ class WohooScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                "Wohoo!".text.xl2.bold.color(Colors.red.shade400).make(),
+                "Wohoo!".text.xl2.bold.color(AppColors.mainColor).make(),
                 SizedBox(height: 8),
                 "Someone has pitched you. Check it out now!"
                     .text
@@ -42,7 +43,7 @@ class WohooScreen extends StatelessWidget {
                   onPressed: () => context.push((context) => PitchYouScreen()),
                   elevation: 0,
                   child: "Go".text.white.make(),
-                  color: Colors.red.shade400,
+                  color: AppColors.mainColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                 ),

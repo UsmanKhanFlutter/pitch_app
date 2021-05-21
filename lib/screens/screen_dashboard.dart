@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -53,7 +54,7 @@ class DashboardScreen extends StatelessWidget {
               height: ConfigSize.convertHeight(context, 80),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.red.shade400,
+                color: AppColors.mainColor,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: VStack(
@@ -100,12 +101,12 @@ class DashboardScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.red.shade400,
+                      color: AppColors.mainColor,
                       spreadRadius: 0,
                       blurRadius: 10,
                     ),
                   ],
-                  color: Colors.red.shade400,
+                  color: AppColors.mainColor,
                   borderRadius: BorderRadius.circular(16)),
               child: HStack(
                 [

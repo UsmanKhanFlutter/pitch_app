@@ -1,8 +1,10 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_education.dart';
+import 'package:pitch_app/screens/screen_pitch_mail.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -51,7 +53,7 @@ class _HeightScreenState extends State<HeightScreen> {
                         width: 100,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            color: Colors.red.shade400,
+                            color: AppColors.mainColor,
                             borderRadius: BorderRadius.circular(16)),
                         child: '7.7"'.text.semiBold.white.make(),
                       ),
@@ -74,7 +76,7 @@ class _HeightScreenState extends State<HeightScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => EducationScreen()))
+                onPressed: () => context.push((context) => PitchMailScreen()))
           ],
         ),
       )),
