@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         canvasColor: Colors.transparent,
       ),
-      home: PitchMailScreen(),
+      home: GetStartedScreen(),
     );
   }
 }
