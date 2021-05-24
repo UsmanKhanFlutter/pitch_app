@@ -6,7 +6,7 @@ import 'package:pitch_app/screens/catalog/screen_catalog.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfileScreen extends StatelessWidget {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<String> titleList = [
     "Bio:",
     "Interested In:",

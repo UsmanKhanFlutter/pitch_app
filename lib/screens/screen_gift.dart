@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_birthday.dart';
 import 'package:pitch_app/screens/screen_your_pitch.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
+import 'package:pitch_app/widgets/bottomsheet_gift.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:pitch_app/widgets/stretched_bordered_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -14,10 +16,12 @@ class GiftScreen extends StatefulWidget {
 }
 
 class _GiftScreenState extends State<GiftScreen> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         body: Stack(
           children: <Widget>[
@@ -27,13 +31,6 @@ class _GiftScreenState extends State<GiftScreen> {
                 left: ConfigSize.blockSizeHorizontal * 0.01,
                 right: ConfigSize.blockSizeHorizontal * 0.01,
                 child: CustomAppBar(titletext: 'Notification')),
-            // Navigation bar
-            Positioned(
-              bottom: ConfigSize.blockSizeVertical * 0.01,
-              left: ConfigSize.blockSizeHorizontal * 0.01,
-              right: ConfigSize.blockSizeHorizontal * 0.01,
-              child: BottomNavigation(),
-            ),
 
             Positioned(
               left: ConfigSize.blockSizeHorizontal * 50,
@@ -57,7 +54,6 @@ class _GiftScreenState extends State<GiftScreen> {
                 ),
               ),
             ),
-
             Positioned(
                 top: ConfigSize.blockSizeVertical * 10,
                 left: ConfigSize.blockSizeHorizontal * 0.5,
@@ -78,7 +74,6 @@ class _GiftScreenState extends State<GiftScreen> {
                           .make(),
                       "You just recieve a gift from:"
                           .text
-                          .bold
                           .size(16)
                           .make()
                           .box
@@ -229,7 +224,7 @@ class _GiftScreenState extends State<GiftScreen> {
                   height: ConfigSize.blockSizeVertical * 5,
                   text: 'Recieve the Gift',
                   onPressed: () {
-                    context.push((context) => YourPitchScreen());
+                    context.push((context) => BirthdayScreen());
                   },
                 )),
             Positioned(
@@ -240,9 +235,11 @@ class _GiftScreenState extends State<GiftScreen> {
                   width: ConfigSize.blockSizeHorizontal * 70,
                   height: ConfigSize.blockSizeVertical * 5,
                   text: 'Reject',
-                  onPressed: () {
-                    context.push((context) => YourPitchScreen());
-                  },
+                  onPressed: () => _scaffoldKey.currentState.showBottomSheet(
+                    (context) => GiftBottomSheet(
+                      context.screenHeight * 0.6,
+                    ),
+                  ),
                 )),
           ],
         ),

@@ -10,7 +10,15 @@ class ProfileBottomSheet extends StatelessWidget {
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            spreadRadius: 0,
+            blurRadius: 10,
+          ),
+        ],
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(50), topLeft: Radius.circular(50)),
         color: Colors.white,
       ),
       child: VStack(

@@ -11,45 +11,31 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:ConfigSize.blockSizeVertical*7,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-
-          IconButton(
-            icon: Icon(
-              Icons.favorite_border,
-              size: 18,
-              color: Color(0xFF3a3737),
-            ),
-            onPressed: () => Navigator.of(context).pop(),
+      height: ConfigSize.blockSizeVertical * 7,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        IconButton(
+          icon: Icon(
+            Icons.favorite_border,
+            // size: 18,
+            color: Color(0xFF3a3737),
           ),
-
-          Text(titletext, 
-            textAlign: TextAlign.center,
-            style: TextStyle(
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        Text(
+          titletext,
+          textAlign: TextAlign.center,
+          style: TextStyle(
               color: Colors.black,
               fontSize: 16,
               fontFamily: defaultFontFamily,
-              fontWeight: FontWeight.normal
-            ),
-          ),
-
-
-          IconButton(
-            icon: new Icon(
-              Icons.multiple_stop,
-              color: Color(0xFF3a3737),
-            size: 28,),
+              fontWeight: FontWeight.normal),
+        ),
+        IconButton(
+            icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
             onPressed: () {
               context.push((context) => CustomDialogBox());
-              
-            }
-          ),
-
-
-        ]
-      ),
+            }),
+      ]),
     );
   }
 }

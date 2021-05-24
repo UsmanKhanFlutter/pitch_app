@@ -20,10 +20,7 @@ AppBar mainAppBar(
     ),
     actions: [
       IconButton(
-        icon: Icon(
-          Icons.multiple_stop,
-          color: Colors.black,
-        ),
+        icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
         onPressed: onActionPressed,
       )
     ],

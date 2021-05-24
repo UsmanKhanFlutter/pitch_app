@@ -34,7 +34,7 @@ class _EmailSentScreenState extends State<EmailSentScreen> {
                 Container(
                   width: ConfigSize.blockSizeHorizontal * 80,
                   height: ConfigSize.blockSizeVertical * 33,
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   decoration: BoxDecoration(
                     color: lightBlue,
                     borderRadius: BorderRadius.all(
@@ -42,31 +42,59 @@ class _EmailSentScreenState extends State<EmailSentScreen> {
                     ),
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        'Your Email has been sent',
-                        style: TextStyle(color: Vx.white, fontSize: 20),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Your Email has been Sent!',
+                              style: TextStyle(
+                                  color: Vx.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      spreadRadius: 0,
+                                      blurRadius: 10,
+                                    ),
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Icon(
+                                Icons.done,
+                                color: lightBlue,
+                                size: 30,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Vx.white,
-                          child: Icon(
-                            Icons.check,
-                            color: lightBlue,
-                          )),
                       InkWell(
                         onTap: () {
                           context.push((context) => WelcomeToPitchScreen());
                         },
                         child: Container(
                           width: ConfigSize.blockSizeHorizontal * 55,
-                          height: ConfigSize.blockSizeVertical * 4,
+                          height: ConfigSize.blockSizeVertical * 4.5,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Vx.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 0,
+                                blurRadius: 10,
+                              ),
+                            ],
                             borderRadius: BorderRadius.all(
-                              Radius.circular(13.0),
+                              Radius.circular(12.0),
                             ),
                           ),
                           child: Text(

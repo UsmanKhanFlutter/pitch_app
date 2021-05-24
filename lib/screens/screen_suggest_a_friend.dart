@@ -3,9 +3,12 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_gift.dart';
+import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../colors.dart';
 
 class SuggestAFriendScreen extends StatefulWidget {
   @override
@@ -21,8 +24,11 @@ class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
       child: Scaffold(
         // Navigation bar
         backgroundColor: Colors.white,
-        bottomNavigationBar: BottomNavigation(),
-
+        // bottomNavigationBar: BottomNavigation(),
+        appBar: mainAppBar(
+            title: "Find a match",
+            onLeadingPressed: () {},
+            onActionPressed: () {}),
         body: Container(
           padding: EdgeInsets.only(
             top: ConfigSize.blockSizeVertical * 2,
@@ -32,21 +38,22 @@ class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
           child: Column(
             children: [
               //App bar
-              CustomAppBar(titletext: 'Find a Match'),
 
               SizedBox(height: ConfigSize.blockSizeVertical * 6),
 
               //list of friends suggestions
               Container(
                 height: ConfigSize.blockSizeVertical * 50,
-                width: ConfigSize.blockSizeHorizontal * 90,
+                // width: ConfigSize.blockSizeHorizontal * 90,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   physics: AlwaysScrollableScrollPhysics(),
                   controller: _pageMatchRequestController,
                   itemCount: 10,
                   itemBuilder: (context, index) {
-                    return Center(child: profileCard());
+                    return Center(
+                      child: profileCard(),
+                    );
                   },
                 ),
               ),
@@ -54,14 +61,8 @@ class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
 
               // Match or Unmatch container
               Container(
-                width: ConfigSize.blockSizeHorizontal * 60,
-                height: ConfigSize.blockSizeVertical * 6,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     DeclineContainer(onPress: () {
                       context.push((context) => GiftScreen());
@@ -86,6 +87,9 @@ Widget profileCard() {
       Container(
         height: ConfigSize.blockSizeVertical * 50,
         width: ConfigSize.blockSizeVertical * 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+        ),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.0),
@@ -153,7 +157,16 @@ Widget infoContainer() {
 
 Widget AcceptContainer({Function onPress}) {
   return Container(
+    height: 60,
+    width: 60,
     decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: AppColors.mainColor,
+          spreadRadius: 0,
+          blurRadius: 10,
+        ),
+      ],
       borderRadius: BorderRadius.all(
         Radius.circular(70.0),
       ),
@@ -174,6 +187,8 @@ Widget AcceptContainer({Function onPress}) {
 
 Widget DeclineContainer({Function onPress}) {
   return Container(
+    width: 60,
+    height: 60,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.all(
         Radius.circular(70.0),

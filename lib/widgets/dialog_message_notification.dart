@@ -82,7 +82,7 @@ Future<Widget> messageNotificationDialog(BuildContext context) {
       builder: (ctx) {
         return Dialog(
           clipBehavior: Clip.antiAlias,
-          backgroundColor: Colors.white.withOpacity(0.3),
+          backgroundColor: Colors.grey.withOpacity(0.1),
           insetPadding: EdgeInsets.symmetric(horizontal: 24),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

@@ -51,9 +51,9 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
                         fontSize: 12,
                       ),
                     ),
-                    CustomizableTextField(
+                    customTextField(
                       controller: recieverController,
-                      obsecuretext: false,
+                      obscureText: false,
                       hintText: 'Sean Luke',
                       isPasswordField: false,
                       // textInputType: TextInputType.text,
@@ -78,9 +78,9 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
                         fontSize: 12,
                       ),
                     ),
-                    CustomizableTextField(
+                    customTextField(
                       controller: senderController,
-                      obsecuretext: false,
+                      obscureText: false,
                       hintText: 'Noreply@pitchme.com',
                       isPasswordField: false,
                       // textInputType: TextInputType.text,
@@ -105,9 +105,9 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
                         fontSize: 12,
                       ),
                     ),
-                    CustomizableTextField(
+                    customTextField(
                       controller: subjectController,
-                      obsecuretext: false,
+                      obscureText: false,
                       hintText: 'Welcome to Pitch!',
 
                       isPasswordField: false,
