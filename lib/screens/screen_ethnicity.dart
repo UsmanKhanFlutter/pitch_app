@@ -9,17 +9,18 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class EthenticityScreen extends StatefulWidget {
+class EthnicityScreen extends StatefulWidget {
   @override
-  _EthenticityScreenState createState() => _EthenticityScreenState();
+  _EthnicityScreenState createState() => _EthnicityScreenState();
 }
 
-class _EthenticityScreenState extends State<EthenticityScreen> {
+class _EthnicityScreenState extends State<EthnicityScreen> {
   List<String> itemValue = [
-    'Asia',
+    'Asian',
     'Black/ African',
     'Indian',
     'Latino/ Hispanic',
+    'Middle Eastern',
     'White/ Caucasian',
     'Mixed/ Other'
   ];
@@ -36,7 +37,7 @@ class _EthenticityScreenState extends State<EthenticityScreen> {
             Expanded(
               child: VStack(
                 [
-                  "What's his Ethencity?"
+                  "What's his Ethnicity?"
                       .text
                       .align(TextAlign.center)
                       .xl

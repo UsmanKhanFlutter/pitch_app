@@ -18,9 +18,9 @@ class _EducationScreenState extends State<EducationScreen> {
   List<String> itemValue = [
     'No Degree',
     'High School Graduate',
-    'Attend College',
+    'Attended College',
     'College Graduate',
-    'Advance Degree'
+    'Advanced Degree'
   ];
   String selectedValue;
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_upload_photo.dart';
+import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -21,7 +22,7 @@ class AgreementScreen extends StatelessWidget {
                     Container(
                       height: ConfigSize.convertHeight(context, 90),
                       width: ConfigSize.convertWidth(context, 90),
-                      child: Image.asset("assets/images/pitch_me.png"),
+                      child: Image.asset(Strings.appLogo),
                     ),
                     "I agree to"
                         .text
@@ -50,7 +51,7 @@ class AgreementScreen extends StatelessWidget {
                         .alignCenter
                         .height(ConfigSize.convertWidth(context, 60))
                         .make(),
-                    "Be Looking for a real relationship"
+                    "Be looking for a real relationship"
                         .text
                         .xl
                         .bold

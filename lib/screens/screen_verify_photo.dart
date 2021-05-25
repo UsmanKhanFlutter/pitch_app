@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_congratulations.dart';
+import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -21,7 +22,7 @@ class VerifyPhotoScreen extends StatelessWidget {
                     Container(
                       height: ConfigSize.convertHeight(context, 90),
                       width: ConfigSize.convertWidth(context, 90),
-                      child: Image.asset("assets/images/pitch_me.png"),
+                      child: Image.asset(Strings.appLogo),
                     ),
                     "Take a selfie for verification"
                         .text
@@ -38,7 +39,7 @@ class VerifyPhotoScreen extends StatelessWidget {
                         .color(Colors.grey)
                         .make(),
                     SizedBox(height: 16),
-                    "Tip: This picture will only compared to your profile photo to verify your identity, so avoid sunglasses, masks or other face coverings!"
+                    "Tip: This picture will be compared to your profile photo to verify your identity, so avoid sunglasses, masks or other face coverings!"
                         .text
                         .size(13)
                         .align(TextAlign.center)

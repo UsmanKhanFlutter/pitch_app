@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_signin_method.dart';
+import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/dialog_location_notification.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../colors.dart';
 
 class GetStartedScreen extends StatelessWidget {
   @override
@@ -17,17 +20,20 @@ class GetStartedScreen extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Image.asset(
-                    "assets/images/pitch_me.png",
-                    height: ConfigSize.convertHeight(context, 220),
+                    Strings.appLogo,
+                    height: ConfigSize.convertHeight(context, 160),
                     fit: BoxFit.cover,
                   ),
+                  SizedBox(height: 16),
+                  Strings.appName.text.uppercase.bold.xl.make(),
                   "Friends Pitching Friends"
                       .text
-                      .xl
-                      .color(Colors.red.shade400)
+                      .xl2
+                      .fontFamily("Calligraffiti")
+                      .color(AppColors.mainColor)
                       .make(),
                   SizedBox(height: 24),
                   StretchedButton(
@@ -40,13 +46,20 @@ class GetStartedScreen extends StatelessWidget {
                   ),
                   MaterialButton(
                     onPressed: () async => locationDialog(context),
-                    child: "Login"
-                        .text
-                        .size(16)
-                        .color(Colors.red.shade400)
-                        .underline
-                        .make(),
+                    child: Column(
+                      children: [
+                        "Login".text.size(16).color(AppColors.mainColor).make(),
+                        Container(
+                          height: 1,
+                          width: 42,
+                          color: AppColors.mainColor,
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(
+                    height: ConfigSize.convertHeight(context, 20),
+                  )
                 ],
               ),
             ),

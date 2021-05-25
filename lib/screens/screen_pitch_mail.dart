@@ -14,6 +14,8 @@ import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:pitch_app/widgets/textfield_rounded.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../colors.dart';
+
 class PitchMailScreen extends StatefulWidget {
   @override
   _PitchMailScreenState createState() => _PitchMailScreenState();
@@ -141,6 +143,8 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                                 width: ConfigSize.convertHeight(context, 180),
                                 // child: TextFormField()
                                 child: RoundedTextField(
+                                  initialValue:
+                                      "A friend pitched you on Pitch Me!",
                                   maxLines: 3,
                                 ),
                               ),
@@ -167,7 +171,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                'Wow! Jake just recommended you on PITCH ME, the dating site where friends pitch friends '
+                                'Wow! Jake just recommended you on Pitch Me, the dating site where friends pitch friends '
                                     .text
                                     .size(13)
                                     .make(),
@@ -272,7 +276,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                             _buttonContainer(
                               title: "Make it live!",
                               onPressed: () {},
-                              color: lightGreen,
+                              color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 25,
                             ),
                             _buttonContainer(
@@ -282,9 +286,9 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
                             _buttonContainer(
-                              title: 'Ask a friend to pitch',
+                              title: 'Ask another friend to pitch',
                               onPressed: () {},
-                              color: lightGreen,
+                              color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
                           ]),

@@ -5,6 +5,8 @@ import 'package:pitch_app/widgets/stretched_bordered_button.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../strings.dart';
+
 class UploadPhotoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class UploadPhotoScreen extends StatelessWidget {
                     Container(
                       height: ConfigSize.convertHeight(context, 90),
                       width: ConfigSize.convertWidth(context, 90),
-                      child: Image.asset("assets/images/pitch_me.png"),
+                      child: Image.asset(Strings.appLogo),
                     ),
                     "Upload your Profile Photo:"
                         .text

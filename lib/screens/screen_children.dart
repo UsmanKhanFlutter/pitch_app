@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethenticity.dart';
+import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -17,7 +17,6 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
   List<String> itemValue = [
     'No',
     'Yes, at home with me',
-    'Attend College',
     "Yes, But they don't live with me",
   ];
   String selectedValue;
@@ -67,7 +66,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => EthenticityScreen()))
+                onPressed: () => context.push((context) => EthnicityScreen()))
           ],
         ),
       )),

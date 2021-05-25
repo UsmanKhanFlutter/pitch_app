@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_cannabis.dart';
-import 'package:pitch_app/screens/screen_ethenticity.dart';
+import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -16,7 +16,7 @@ class SmokeScreen extends StatefulWidget {
 
 class _SmokeScreenState extends State<SmokeScreen> {
   List<String> itemValue = [
-    'Not that I am aware',
+    'Not that I\'m aware',
     'Yes, Socially',
     'Yes, Regularly',
   ];

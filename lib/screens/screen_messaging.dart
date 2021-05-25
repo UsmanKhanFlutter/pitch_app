@@ -7,6 +7,8 @@ import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../colors.dart';
+
 class MessagingScreen extends StatefulWidget {
   @override
   _MessagingScreenState createState() => _MessagingScreenState();
@@ -169,7 +171,7 @@ Widget sendButton() {
       height: ConfigSize.blockSizeVertical * 4,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          color: lightGreen),
+          color: AppColors.lightGreen),
       child: Builder(builder: (BuildContext context) {
         return MaterialButton(
             shape: RoundedRectangleBorder(
@@ -201,7 +203,7 @@ class SendButton extends StatelessWidget {
         height: ConfigSize.blockSizeVertical * 5,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            color: lightGreen),
+            color: AppColors.lightGreen),
         child: Builder(builder: (BuildContext context) {
           return MaterialButton(
               shape: RoundedRectangleBorder(
