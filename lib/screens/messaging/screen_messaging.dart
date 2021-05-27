@@ -27,6 +27,20 @@ class _MessagingScreenState extends State<MessagingScreen> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         elevation: 0,
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _scaffoldKey.currentState.showBottomSheet(
+                  (context) => SafetyToolkitBottomSheet(
+                    context.screenHeight * 0.4,
+                  ),
+                );
+              })
+        ],
       ),
 
       // Navigation bar
