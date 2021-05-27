@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_email_sent.dart';
-import 'package:pitch_app/screens/screen_your_pitch.dart';
 import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
+import 'package:pitch_app/widgets/textfield_rounded.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class FriendSuggestionEmailScreen extends StatefulWidget {
@@ -53,91 +49,113 @@ class _FriendSuggestionEmailScreenState
                 height: ConfigSize.blockSizeVertical * 3,
               ),
               Container(
-                width: ConfigSize.blockSizeHorizontal * 70,
-                height: ConfigSize.blockSizeVertical * 6,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'To:',
-                      style: TextStyle(
-                        fontFamily: defaultFontFamily,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'To:',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontFamily: defaultFontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
                     Expanded(
-                      child: customTextField(
-                        controller: recieverController,
-                        obscureText: false,
-                        hintText: 'Sean Luke',
-                        isPasswordField: false,
-                        // textInputType: TextInputType.text,
-                        textCapitalization: TextCapitalization.words,
-                        // enable:_isSigningUIn ? false : true,
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          // color: Colors.red,
+                          height: ConfigSize.convertHeight(context, 26),
+                          width: ConfigSize.convertHeight(context, 180),
+                          // child: TextFormField()
+                          child: RoundedTextField(
+                            hint: "Sean Luke",
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(height: 8),
               Container(
-                width: ConfigSize.blockSizeHorizontal * 80,
-                height: ConfigSize.blockSizeVertical * 6,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      'From:',
-                      style: TextStyle(
-                        fontFamily: defaultFontFamily,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'From:',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontFamily: defaultFontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
                     Expanded(
-                      child: customTextField(
-                        controller: senderController,
-                        obscureText: false,
-                        hintText: 'Noreply@pitchme.com',
-                        isPasswordField: false,
-                        // textInputType: TextInputType.text,
-                        textCapitalization: TextCapitalization.words,
-                        // enable:_isSigningUIn ? false : true,
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          // color: Colors.red,
+                          height: ConfigSize.convertHeight(context, 26),
+                          width: ConfigSize.convertHeight(context, 180),
+                          // child: TextFormField()
+                          child: RoundedTextField(
+                            hint: "Noreply@pitchme.com",
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(height: 8),
               Container(
-                width: ConfigSize.blockSizeHorizontal * 80,
-                height: ConfigSize.blockSizeVertical * 8,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Subject:',
-                      style: TextStyle(
-                        fontFamily: defaultFontFamily,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Subject:',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontFamily: defaultFontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
                     Expanded(
-                      child: customTextField(
-                        controller: subjectController,
-                        obscureText: false,
-                        hintText: 'A friend pitched you on Pitch Me!',
-                        isPasswordField: false,
-                        // textInputType: TextInputType.text,
-                        textCapitalization: TextCapitalization.words,
-                        // enable:_isSigningUIn ? false : true,
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          // color: Colors.red,
+                          height: ConfigSize.convertHeight(context, 50),
+                          width: ConfigSize.convertHeight(context, 180),
+                          // child: TextFormField()
+                          child: RoundedTextField(
+                            maxLines: 5,
+                            hint: 'Message Sent!',
+                            // hint: "A friend pitched you on Pitch Me.",
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: ConfigSize.blockSizeVertical * 2,
               ),
               Container(
                   width: ConfigSize.blockSizeHorizontal * 80,
@@ -152,22 +170,29 @@ class _FriendSuggestionEmailScreenState
                     ),
                   ),
                   child: SingleChildScrollView(
+                    padding: EdgeInsets.all(8),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Text(
+                            'Ask another person to recommend you on Pitch Me',
+                            textAlign: TextAlign.left,
+                          ),
                           InkWell(
-                              onTap: () {
-                                context.push((context) => YourPitchesScreen());
-                              },
-                              child: Text(
-                                  '  Ask another person to recommend you on PitchMe')),
+                            onTap: () {
+                              context.push((context) => YourPitchesScreen());
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: ConfigSize.convertHeight(context, 110),
+                              width: ConfigSize.convertWidth(context, 110),
+                              child: Image.asset("assets/images/pitch_me.png"),
+                            ),
+                          ),
                         ]),
                   )),
               SizedBox(height: ConfigSize.blockSizeVertical * 1),
-              SizedBox(
-                height: ConfigSize.blockSizeVertical * 1.5,
-              ),
             ],
           ),
         ),

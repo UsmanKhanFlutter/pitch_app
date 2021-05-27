@@ -24,10 +24,15 @@ class CongratulationsScreen extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       height: ConfigSize.convertHeight(context, 200),
                       width: ConfigSize.convertWidth(context, 200),
-                      child: Image.asset(
-                        Strings.appLogo,
-                        height: ConfigSize.convertHeight(context, 90),
-                        width: ConfigSize.convertWidth(context, 90),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            Strings.appLogo,
+                            height: ConfigSize.convertHeight(context, 70),
+                            fit: BoxFit.cover,
+                          ),
+                          "PitchMe".text.size(11).bold.make(),
+                        ],
                       ),
                     ),
                     "Congratulations!"

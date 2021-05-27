@@ -31,7 +31,7 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
             SizedBox(
               height: ConfigSize.blockSizeVertical * 40,
             ),
-            "In order to upload from your camera, PitchMe needs access to your camera. Go to Settings to enable."
+            "In order to upload from your camera, Pitch Me needs access to your camera. Go to Settings to enable."
                 .text
                 .align(TextAlign.center)
                 .make()

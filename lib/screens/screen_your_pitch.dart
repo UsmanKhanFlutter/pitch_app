@@ -3,12 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_messaging.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:pitch_app/widgets/stretched_bordered_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import 'messaging/screen_messaging.dart';
 
 class YourPitchScreen extends StatefulWidget {
   @override
@@ -18,10 +19,10 @@ class YourPitchScreen extends StatefulWidget {
 class _YourPitchScreenState extends State<YourPitchScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
           children: <Widget>[
             //App bar
             Positioned(

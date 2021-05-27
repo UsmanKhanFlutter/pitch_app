@@ -20,61 +20,56 @@ class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // Navigation bar
-        backgroundColor: Colors.white,
-        // bottomNavigationBar: BottomNavigation(),
-        appBar: mainAppBar(
-            title: "Find a match",
-            onLeadingPressed: () {},
-            onActionPressed: () {}),
-        body: Container(
-          padding: EdgeInsets.only(
-            top: ConfigSize.blockSizeVertical * 2,
-            left: 10,
-            right: 10,
-          ),
-          child: Column(
-            children: [
-              //App bar
+    return Scaffold(
+      // Navigation bar
+      backgroundColor: Colors.white,
+      // bottomNavigationBar: BottomNavigation(),
+      appBar: appBarFilterIcon(title: 'Find a match', onActionPressed: () {}),
+      body: Container(
+        padding: EdgeInsets.only(
+          top: ConfigSize.blockSizeVertical * 2,
+          left: 10,
+          right: 10,
+        ),
+        child: Column(
+          children: [
+            //App bar
 
-              SizedBox(height: ConfigSize.blockSizeVertical * 6),
+            SizedBox(height: ConfigSize.blockSizeVertical * 6),
 
-              //list of friends suggestions
-              Container(
-                height: ConfigSize.blockSizeVertical * 50,
-                // width: ConfigSize.blockSizeHorizontal * 90,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  physics: AlwaysScrollableScrollPhysics(),
-                  controller: _pageMatchRequestController,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Center(
-                      child: profileCard(),
-                    );
-                  },
-                ),
+            //list of friends suggestions
+            Container(
+              height: ConfigSize.blockSizeVertical * 50,
+              // width: ConfigSize.blockSizeHorizontal * 90,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                physics: AlwaysScrollableScrollPhysics(),
+                controller: _pageMatchRequestController,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Center(
+                    child: profileCard(),
+                  );
+                },
               ),
-              SizedBox(height: ConfigSize.blockSizeVertical * 4),
+            ),
+            SizedBox(height: ConfigSize.blockSizeVertical * 4),
 
-              // Match or Unmatch container
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    DeclineContainer(onPress: () {
-                      context.push((context) => GiftScreen());
-                    }),
-                    AcceptContainer(onPress: () {
-                      context.push((context) => GiftScreen());
-                    }),
-                  ],
-                ),
+            // Match or Unmatch container
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  DeclineContainer(onPress: () {
+                    context.push((context) => GiftScreen());
+                  }),
+                  AcceptContainer(onPress: () {
+                    context.push((context) => GiftScreen());
+                  }),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
