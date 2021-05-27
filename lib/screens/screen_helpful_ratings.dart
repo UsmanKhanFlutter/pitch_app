@@ -205,26 +205,30 @@ Widget RatingsItems(String text1, String text2){
         .make()
         .pSymmetric(h: 10, v: 10),
         dividerLine(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-
-              child: text2
-              .text
-              .align(TextAlign.left)  
-              .fontWeight(FontWeight.normal)              
-              .make()
-              .box
-              .alignTopLeft
-              .make()
-              .pSymmetric(h: 10, v: 10),
-            ),
-            Container(
-              child: CircularProgressIndicator()
+        SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                child: text2
+                .text
+                .align(TextAlign.left)  
+                .fontWeight(FontWeight.normal)              
+                .make()
+                .box
+                .alignTopLeft
+                .make()
+                .pSymmetric(h: 10, v: 10),
               ),
-          ],
+              Container(
+                child: CircularProgressIndicator(
+                  color: Vx.white,
+                  backgroundColor: red,
+                )
+                ),
+            ],
+          ),
         ),
           
         

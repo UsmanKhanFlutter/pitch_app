@@ -5,6 +5,8 @@ import 'package:pitch_app/screens/screen_grant_access.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../colors.dart';
+
 class WhatsYourPitchScreen extends StatefulWidget {
   @override
   _WhatsYourPitchScreenState createState() => _WhatsYourPitchScreenState();
@@ -21,7 +23,7 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
     "Why you're not dating him",
     "What are some possible deal breakers",
     "What he does for living",
-    "What type is he? Athletic, serious, academic,hippie, thrill, "
+    "What type is he? Athletic, serious, academic,hippie, thrill. "
     ];
   @override
   Widget build(BuildContext context) {
@@ -72,12 +74,12 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
                     child: ListTile(
                       dense: true,
                       leading: bullet(),
-                      minLeadingWidth: ConfigSize.blockSizeHorizontal*5,
+                      minLeadingWidth: ConfigSize.blockSizeHorizontal*1,
                       title: suggestedTopics[index]
                       .text
                       .xs
                       .make()
-                      .pSymmetric(h: 24, v: 1),
+                      .pSymmetric(h: 10, v: 1),
                     ),
                   );
                 },
@@ -116,34 +118,30 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
                 ),
               ),
             ),
-      Container(
-        alignment: Alignment.topRight,
-        child: "1500 Character Countdown"
-              .text
+            Container(
+              alignment: Alignment.topRight,
+              child: "1500 Character Countdown"
+                  .text
                   .xs
                   .make()
                   .pSymmetric(h: 24, v: 1),
-      ),
-
-SizedBox(
-              height: ConfigSize.blockSizeVertical*10,
             ),
-                  Center(
-                    child: StretchedColorButton(
-              text: "Save",
-              onPressed: () {
-                context.push((context) => GrantAccessScreen());
-              },
-              height: 36,
-              width: ConfigSize.convertWidth(context, 300),
-              color: red),
-                  )
-                ]
-                
+            SizedBox(
+              height: ConfigSize.blockSizeVertical * 5,
+            ),
+            Center(
+              child: StretchedColorButton(
+                      text: "Save",
+                      onPressed: () {
+                        context.push((context) => GrantAccessScreen());
+                      },
+                      height: 36,
+                      width: ConfigSize.convertWidth(context, 300),
+                      color: AppColors.mainColor)
+                  .pOnly(bottom: 16),
             )
-            ));
-  }
-    
+          ],
+        )));
   }
 Widget bullet() {
 
@@ -222,3 +220,24 @@ Widget bullet() {
             //     .make()
             //     .pSymmetric(h: 24, v: 1),
 
+Widget _textWithBullet(String title) {
+  return Container(
+    child: HStack([
+      _bullet(),
+      SizedBox(width: 16),
+      "$title".text.size(13).make(),
+    ]),
+  ).pSymmetric(h: 36);
+}
+
+Widget _bullet() {
+  return new Container(
+    height: 5.0,
+    width: 5.0,
+    decoration: new BoxDecoration(
+      color: Vx.gray900,
+      shape: BoxShape.circle,
+    ),
+  );
+}
+}

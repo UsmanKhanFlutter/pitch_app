@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethenticity.dart';
+import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -16,8 +16,9 @@ class DrinkScreen extends StatefulWidget {
 
 class _DrinkScreenState extends State<DrinkScreen> {
   List<String> itemValue = [
-    'Not that I am aware',
-    'Socially',
+    'Not that I\'m aware',
+    'Rarely'
+        'Socially',
     'Often',
   ];
   String selectedValue;
@@ -33,7 +34,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
             Expanded(
               child: VStack(
                 [
-                  "Does he Drink?"
+                  "Does he Drink (alcoholic beverages)?"
                       .text
                       .align(TextAlign.center)
                       .xl

@@ -14,6 +14,8 @@ import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:pitch_app/widgets/textfield_rounded.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../colors.dart';
+
 class PitchMailScreen extends StatefulWidget {
   @override
   _PitchMailScreenState createState() => _PitchMailScreenState();
@@ -282,7 +284,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                             _buttonContainer(
                               title: "Make it live!",
                               onPressed: () {},
-                              color: lightGreen,
+                              color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 25,
                             ),
                             _buttonContainer(
@@ -294,7 +296,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                             _buttonContainer(
                               title: 'Ask a friend to pitch you',
                               onPressed: () {},
-                              color: lightGreen,
+                              color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
                           ]),

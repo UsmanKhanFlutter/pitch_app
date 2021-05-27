@@ -88,7 +88,7 @@ SizedBox(
               ),
               Center(
                 child: StretchedColorButton(
-                text: "Ask Another friend to pitch you",
+                text: "Ask another friend to pitch you",
                 onPressed: () {
                   context.push((context) => CongratulationEmailScreen());
                 },

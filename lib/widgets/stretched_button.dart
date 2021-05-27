@@ -22,8 +22,17 @@ class StretchedButton extends StatelessWidget {
     return Container(
       width: width,
       height: height,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.mainColor,
+            spreadRadius: 0,
+            blurRadius: 10,
+          ),
+        ],
+      ),
       child: Material(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         color: AppColors.mainColor,
         elevation: 1.4,
         shadowColor: Colors.red.shade300,

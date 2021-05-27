@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_agreement.dart';
+import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: ConfigSize.convertHeight(context, 110),
                         width: ConfigSize.convertWidth(context, 110),
-                        child: Image.asset("assets/images/pitch_me.png"),
+                        child: Image.asset(Strings.appLogo),
                       ),
                     ],
                   ),
@@ -52,6 +53,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {},
                     child: "Edit the info you provide"
                         .text
+                        .fontWeight(FontWeight.w400)
                         .color(Colors.blue)
                         .underline
                         .make(),

@@ -4,15 +4,16 @@ import 'package:flutter/widgets.dart';
 import '../colors.dart';
 
 class RoundedTextField extends StatelessWidget {
-  final String hint;
+  final String hint, initialValue;
   int maxLines;
   TextStyle customhintStyle;
-  RoundedTextField({this.hint, this.maxLines = 1, this.customhintStyle});
+  RoundedTextField({this.hint, this.maxLines = 1, this.customhintStyle,this.initialValue});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       
       maxLines: maxLines,
+      initialValue: initialValue,
       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
       decoration: InputDecoration(
         

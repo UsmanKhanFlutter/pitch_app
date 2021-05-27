@@ -104,7 +104,7 @@ class _MainScreenState extends State<MainScreen> {
                     },
                   ),
                   btnExpanded(
-                    icon: CupertinoIcons.hand_thumbsup_fill,
+                    icon: CupertinoIcons.house_fill,
                     iconColor:
                         pageIndex == 1 ? AppColors.mainColor : Colors.black,
                     onPress: () {
@@ -115,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
                     },
                   ),
                   btnExpanded(
-                    icon: Icons.favorite,
+                    icon: CupertinoIcons.hand_thumbsup_fill,
                     iconColor:
                         pageIndex == 2 ? AppColors.mainColor : Colors.black,
                     onPress: () {

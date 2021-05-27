@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -49,18 +50,20 @@ class GettingStartedScreen extends StatelessWidget {
                         onPressed: () {},
                         height: 36,
                         width: ConfigSize.convertWidth(context, 250),
-                        color: Colors.lightGreen.shade400),
+                        color: AppColors.lightGreen),
                     MaterialButton(
                       onPressed: () {},
                       child: "Edit your pitches".text.gray500.underline.make(),
                     ),
                     "OR".text.xl.gray700.bold.align(TextAlign.center).make(),
                     SizedBox(height: 16),
-                    StretchedButton(
-                        text: "Find a match",
-                        height: 36,
-                        width: ConfigSize.convertWidth(context, 250),
-                        onPressed: () {}),
+                    StretchedColorButton(
+                      text: "Find a match",
+                      height: 36,
+                      width: ConfigSize.convertWidth(context, 250),
+                      onPressed: () {},
+                      color: AppColors.mainColor,
+                    ),
                   ],
                   crossAlignment: CrossAxisAlignment.center,
                 ).pSymmetric(h: 24, v: 16))

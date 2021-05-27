@@ -46,8 +46,8 @@ class PhoneNumberScreen extends StatelessWidget {
                             print(val);
                           },
                           // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                          initialSelection: 'IT',
-                          favorite: ['+39', 'FR'],
+                          initialSelection: 'US',
+                          favorite: ['+1', 'US'],
                           // optional. Shows only country name and flag
                           showCountryOnly: false,
                           showFlag: false,

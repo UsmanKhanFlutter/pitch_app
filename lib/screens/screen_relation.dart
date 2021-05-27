@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethenticity.dart';
+import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/screens/screen_interest.dart';
 import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
@@ -126,7 +126,7 @@ class _RelationScreenState extends State<RelationScreen> {
         height: 10,
         width: 10,
         decoration: BoxDecoration(
-          color: lightGreen,
+          color: AppColors.lightGreen,
           borderRadius: BorderRadius.circular(5),
         ),
       ),
