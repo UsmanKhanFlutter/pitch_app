@@ -16,8 +16,10 @@ class MessagingScreen extends StatefulWidget {
 
 class _MessagingScreenState extends State<MessagingScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ConfigSize configSize = ConfigSize();
   @override
   Widget build(BuildContext context) {
+    configSize.init(context);
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,

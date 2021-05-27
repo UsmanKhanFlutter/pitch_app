@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -44,7 +46,7 @@ class _HelpfulRatingsScreenState extends State<HelpfulRatingsScreen> {
                           image: AssetImage("assets/images/girl_2x.png"),
                           fit: BoxFit.cover,
                           colorFilter: new ColorFilter.mode(
-                              Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                              Colors.black.withOpacity(0.3), BlendMode.darken),
                         )),
                         child: Container(
                           padding: EdgeInsets.all(10),
@@ -54,7 +56,7 @@ class _HelpfulRatingsScreenState extends State<HelpfulRatingsScreen> {
                             children: [
                               "Shawn Jones".text.xl.white.bold.make(),
                               SizedBox(width: 4),
-                              "29".text.xl.white.make(),
+                              "29".text.xl.bold.white.make(),
                             ],
                           ),
                         ),
@@ -205,7 +207,7 @@ Widget RatingsItems(String text1, String text2) {
     children: [
       text1.text
           .align(TextAlign.left)
-          .fontWeight(FontWeight.bold)
+          .semiBold
           .make()
           .box
           .alignTopLeft
@@ -228,14 +230,17 @@ Widget RatingsItems(String text1, String text2) {
                   .pSymmetric(h: 10, v: 10),
             ),
             Container(
-                height: 30,
-                width: 30,
-                child: CircularProgressIndicator(
-                  backgroundColor: red,
-                )).pSymmetric(h: 16),
+              child: CircularPercentIndicator(
+                radius: 40.0,
+                lineWidth: 5.0,
+                percent: 0.7,
+                // center: new Text(""),
+                progressColor: AppColors.mainColor,
+              ),
+            ),
           ],
         ),
       ),
     ],
-  );
+  ).pSymmetric(h: 16);
 }

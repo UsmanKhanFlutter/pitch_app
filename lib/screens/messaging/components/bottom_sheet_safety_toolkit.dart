@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/helpers/size_config.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SafetyToolkitBottomSheet extends StatelessWidget {
- 
   final height;
   SafetyToolkitBottomSheet(this.height);
   @override
@@ -25,20 +25,26 @@ class SafetyToolkitBottomSheet extends StatelessWidget {
       ),
       child: VStack(
         [
-          
           Container(
             width: 80,
             height: 1,
             color: Colors.grey,
           ).box.width(double.infinity).alignCenter.make(),
           SizedBox(height: 36),
-          "Safetly Tool Kit".text.align(TextAlign.end).bold.make().box.width(100).make(),
+          "Safetly Tool Kit"
+              .text
+              .align(TextAlign.end)
+              .bold
+              .make()
+              .box
+              .width(100)
+              .make(),
           SizedBox(height: 36),
-          _rowContainer(icon: Icons.report_gmailerrorred_outlined, iconColor:red,text: 'Report'),
+          _rowContainer(path: "assets/images/flag.png", text: 'Report'),
           SizedBox(height: 16),
-          _rowContainer(icon: Icons.close,iconColor:red, text: 'Unmatch'),
+          _rowContainer(path: "assets/images/cross.png", text: 'Unmatch'),
           SizedBox(height: 16),
-          _rowContainer(icon: Icons.security, iconColor:lightBlue, text: ''),
+          _rowContainer(path: "assets/images/shield.png", text: ''),
           SizedBox(height: 16),
         ],
         crossAlignment: CrossAxisAlignment.start,
@@ -46,10 +52,14 @@ class SafetyToolkitBottomSheet extends StatelessWidget {
     );
   }
 
-  _rowContainer({IconData icon, Color iconColor,String text}) {
+  _rowContainer({String path, String text}) {
     return HStack(
       [
-        Icon(icon,color: iconColor,),
+        Image.asset(
+          path,
+          height: 24,
+          width: 24,
+        ),
         SizedBox(width: 24),
         '$text'.text.size(13).make()
       ],

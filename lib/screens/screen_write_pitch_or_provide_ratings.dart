@@ -3,6 +3,7 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_helpful_ratings.dart';
 import 'package:pitch_app/screens/screen_your_pitch.dart';
+import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -35,29 +36,28 @@ class _WritePitchOrProvideRatingsScreenState
                   .box
                   // .alignCenter
                   // .height(ConfigSize.convertHeight(context, 60))
-                  .width(ConfigSize.blockSizeHorizontal * 90)
+                  .width(ConfigSize.blockSizeHorizontal * 85)
                   .make(),
               SizedBox(
                 height: ConfigSize.blockSizeVertical * 25,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                StretchedColorButton(
-                    text: "Write your pitch",
-                    onPressed: () {
-                      context.push((context) => YourPitchScreen());
-                    },
-                    height: 36,
-                    width: ConfigSize.convertWidth(context, 180),
-                    color: red),
+                StretchedButton(
+                  text: "Write your pitch",
+                  onPressed: () {
+                    context.push((context) => YourPitchScreen());
+                  },
+                  height: 36,
+                  width: ConfigSize.convertWidth(context, 180),
+                ),
                 SizedBox(width: ConfigSize.blockSizeHorizontal * 3),
-                StretchedColorButton(
+                StretchedButton(
                     text: "Provide helpful rating",
                     onPressed: () {
                       context.push((context) => HelpfulRatingsScreen());
                     },
                     height: 36,
-                    width: ConfigSize.convertWidth(context, 180),
-                    color: red),
+                    width: ConfigSize.convertWidth(context, 180)),
               ]),
             ],
           ),
