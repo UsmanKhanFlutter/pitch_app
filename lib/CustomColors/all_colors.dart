@@ -11,3 +11,4 @@ Color grayUploadPhotoborder = Color.fromRGBO(111, 111, 111, 1);
 Color grayAddIcon = Color.fromRGBO(175, 175, 175, 1);
 Color grayTextField = Color.fromRGBO(241, 241, 241, 1);
 Color blueInterets = Color.fromRGBO(111, 156, 186, 1);
+Color viewGrayBorder = Color.fromRGBO(196, 196, 196, 1);

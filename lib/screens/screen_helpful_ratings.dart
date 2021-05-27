@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_basic_information.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HelpfulRatingsScreen extends StatefulWidget {
@@ -32,11 +30,52 @@ class _HelpfulRatingsScreenState extends State<HelpfulRatingsScreen> {
               .make()
               .box
               .alignTopCenter
-              .height(ConfigSize.convertHeight(context, 50))
+              .height(ConfigSize.convertHeight(context, 30))
               .make(),
 
-
-              
+              Stack(
+                alignment: AlignmentDirectional.bottomCenter,
+                children: [
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: ConfigSize.convertHeight(context, 320),
+                    width: double.infinity,
+                    child: Container(
+                      height: ConfigSize.convertHeight(context, 300),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade500,
+                              spreadRadius: 0,
+                              blurRadius: 10,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(16),
+                            bottomRight: Radius.circular(16)),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/girl_2x.png"),
+                            fit: BoxFit.cover,
+                            colorFilter: new ColorFilter.mode(
+                                Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                          )),
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:[
+                              "Shawn Jones".text.xl.white.bold.make(),
+                              SizedBox(width: 4),
+                              "29".text.xl.white.make(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               RatingsItems("What’s his energy level?",'Chilling on the couch',),
               RatingsItems('Sense of humor?','Stand-up comedy',),
               RatingsItems('What’s his outlook on life?','Views the world through rose coloured Glasses',),

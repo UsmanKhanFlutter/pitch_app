@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/screen_agree_continue.dart';
-import 'package:pitch_app/screens/screen_get_started.dart';
-import 'package:pitch_app/screens/screen_photos_wordfile.dart';
 import 'package:pitch_app/widgets/app_bar_back.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';

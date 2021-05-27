@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_welcome_to_pitch.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/app_bar_back_security.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class EmailSentScreen extends StatefulWidget {

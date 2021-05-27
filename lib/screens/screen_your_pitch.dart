@@ -3,9 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_find_a_match.dart';
 import 'package:pitch_app/screens/screen_messaging.dart';
+import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/app_bar_back_security.dart';
 import 'package:pitch_app/widgets/stretched_bordered_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -20,6 +22,7 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // appBar: appBarFilterIcon(title: "Your Pitch", onActionPressed: () {}),
         backgroundColor: Colors.white,
         body: Stack(
           children: <Widget>[
@@ -28,7 +31,20 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
                 top: ConfigSize.blockSizeVertical * 0.01,
                 left: ConfigSize.blockSizeHorizontal * 0.01,
                 right: ConfigSize.blockSizeHorizontal * 0.01,
-                child: CustomAppBar(titletext: 'Your Pitch')),
+                child: 
+                // CustomAppBar(titletext: 'Your Pitch'),
+                Container(
+                  height: ConfigSize.blockSizeVertical * 7,
+                  child: Row(mainAxisAlignment: MainAxisAlignment.end, 
+                  children: [
+                    IconButton(
+                        icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
+                        onPressed: () {
+                          context.push((context) => CustomDialogBox());
+                        }),
+                  ]),
+                ),
+                ),
             // Navigation bar
             Positioned(
               bottom: ConfigSize.blockSizeVertical * 0.01,
@@ -68,7 +84,7 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      "Congratulation!"
+                      "Congratulations!"
                           .text
                           .green400
                           .bold
@@ -78,7 +94,7 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
                           .height(ConfigSize.convertWidth(context, 30))
                           .alignCenter
                           .make(),
-                      "You have matched with::"
+                      "You have matched with:"
                           .text
                           .bold
                           .size(12)

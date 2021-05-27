@@ -1,12 +1,10 @@
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_suggest_a_friend.dart';
+import 'package:pitch_app/screens/screen_find_a_match.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
-import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class WelcomeToPitchScreen extends StatefulWidget {
@@ -45,7 +43,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
           Container(
             width: ConfigSize.blockSizeHorizontal * 75,
             child: Text(
-              '''PitchMe works by having a female friends Pitch You by creating your profile.\n\nBy Clicking below you agree to allow your friends to post information about you.\n\nYou cannot edit the information they write, although you can delete it or cancel your account or delete the information at any time. ''',
+              '''PitchMe works by having a female friends "pitch you" by creating your profile.\n\nBy Clicking below you agree to allow your friends to post information about you.\n\nYou cannot edit the information they write, although you can delete it or cancel your account and delete the information at any time. ''',
               textAlign: TextAlign.start,
               textScaleFactor: 0.96,
             ),
@@ -60,7 +58,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () {
-                      context.push((context) => SuggestAFriendScreen());
+                      context.push((context) => FindAMatchScreen());
                     },
                     // context.push((contsext) => AgreementScreen()),
                     elevation: 0,
@@ -74,7 +72,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () {
-                      context.push((context) => SuggestAFriendScreen());
+                      context.push((context) => FindAMatchScreen());
                     },
                     elevation: 0,
                     color: Colors.white,

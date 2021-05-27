@@ -6,16 +6,22 @@ import '../colors.dart';
 class RoundedTextField extends StatelessWidget {
   final String hint;
   int maxLines;
-  RoundedTextField({this.hint, this.maxLines = 1});
+  TextStyle customhintStyle;
+  RoundedTextField({this.hint, this.maxLines = 1, this.customhintStyle});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       maxLines: maxLines,
       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(top: 8, left: 8),
+        
+        contentPadding: EdgeInsets.only(top: 8, left: 8,right: 12),
         hintText: hint,
-        hintStyle: TextStyle(color: AppColors.greyColor),
+        hintStyle: customhintStyle,
+        // TextStyle(
+        //   color: AppColors.greyColor
+        // ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(13.0)),
           borderSide: BorderSide(

@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_suggest_a_friend.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-class CustomAppBar extends StatelessWidget {
-  final String titletext;
-  CustomAppBar({this.titletext});
-
-  @override
-  Widget build(BuildContext context) {
+  
+  Widget AppBarBackSecurity({
+    @required String title,
+    @required Function onLeadingPressed,
+    @required Function onActionPressed})
+    {
     return Container(
       height: ConfigSize.blockSizeVertical * 7,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         IconButton(
           icon: Icon(
-            Icons.favorite_border,
+            Icons.arrow_back_ios,
             // size: 18,
             color: Color(0xFF3a3737),
           ),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: onLeadingPressed,
         ),
         Text(
-          titletext,
+          title,
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Colors.black,
@@ -31,11 +28,15 @@ class CustomAppBar extends StatelessWidget {
               fontWeight: FontWeight.normal),
         ),
         IconButton(
-            icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
-            onPressed: () {
-              context.push((context) => CustomDialogBox());
-            }),
+          icon: Icon(
+            Icons.security,
+            // size: 18,
+            color: Color(0xFF3a3737),
+          ),
+            // icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
+            onPressed: onActionPressed
+            ),
       ]),
     );
   }
-}
+

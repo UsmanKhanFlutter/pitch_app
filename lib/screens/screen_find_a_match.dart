@@ -5,17 +5,16 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_gift.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../colors.dart';
 
-class SuggestAFriendScreen extends StatefulWidget {
+class FindAMatchScreen extends StatefulWidget {
   @override
-  _SuggestAFriendScreenState createState() => _SuggestAFriendScreenState();
+  _FindAMatchScreenState createState() => _FindAMatchScreenState();
 }
 
-class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
+class _FindAMatchScreenState extends State<FindAMatchScreen> {
   final _pageMatchRequestController = PageController(viewportFraction: 0.3);
 
   @override
@@ -24,11 +23,8 @@ class _SuggestAFriendScreenState extends State<SuggestAFriendScreen> {
       child: Scaffold(
         // Navigation bar
         backgroundColor: Colors.white,
-        // bottomNavigationBar: BottomNavigation(),
-        appBar: mainAppBar(
-            title: "Find a match",
-            onLeadingPressed: () {},
-            onActionPressed: () {}),
+        bottomNavigationBar: BottomNavigation(),
+        appBar: appBarFilterIcon(title: "Find a Match", onActionPressed: () {}),
         body: Container(
           padding: EdgeInsets.only(
             top: ConfigSize.blockSizeVertical * 2,

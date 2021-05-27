@@ -5,7 +5,7 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/app_bar_back_security.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 
 import 'package:velocity_x/velocity_x.dart';
@@ -27,8 +27,15 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
           padding: EdgeInsets.only(left: 20, top: 10, right: 20),
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             //App bar
-            CustomAppBar(titletext: 'Upload photos'),
-
+            "Upload photos"
+              .text
+              .xl
+              .fontWeight(FontWeight.bold)
+              .make()
+              .box
+              .alignTopCenter
+              .height(ConfigSize.convertHeight(context, 30))
+              .make(),
             SizedBox(
               height: ConfigSize.blockSizeVertical * 2,
             ),

@@ -17,8 +17,10 @@ class _MessageBackToFriendScreenState extends State<MessageBackToFriendScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: VStack(
-          
           [
+            SizedBox(
+                height: ConfigSize.blockSizeVertical*2,
+              ),
             "Message Back to Friend"
                 .text
                 .xl
@@ -26,10 +28,10 @@ class _MessageBackToFriendScreenState extends State<MessageBackToFriendScreen> {
                 .make()
                 .box
                 .alignTopCenter
-                .height(ConfigSize.convertHeight(context, 50))
+                .height(ConfigSize.convertHeight(context, 30))
                 .make(),
                 SizedBox(
-                height: ConfigSize.blockSizeVertical*30,
+                height: ConfigSize.blockSizeVertical*28,
               ),
             "Thanks for pitching me on PitchMe the dating site where friends pitch friends. Before the profile goes live, I have some questions."
                 .text
@@ -50,7 +52,7 @@ class _MessageBackToFriendScreenState extends State<MessageBackToFriendScreen> {
                 .make()
                 .pSymmetric(h: 24, v: 1),
                 
-          "Is there something I am missing?"
+          "Something to be added?"
           .text
           .align(TextAlign.center)                
           .make()
@@ -70,7 +72,7 @@ class _MessageBackToFriendScreenState extends State<MessageBackToFriendScreen> {
 SizedBox(
                 height: ConfigSize.blockSizeVertical*2,
               ),
-          "MyPitch/Profile/settings"
+          "MyPitch/Profile"
           .text
           .align(TextAlign.center)    
           .underline            
@@ -86,7 +88,7 @@ SizedBox(
               ),
               Center(
                 child: StretchedColorButton(
-                text: "Ask Another fan to pitch you",
+                text: "Ask Another friend to pitch you",
                 onPressed: () {
                   context.push((context) => CongratulationEmailScreen());
                 },

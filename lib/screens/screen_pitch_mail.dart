@@ -9,7 +9,7 @@ import 'package:pitch_app/screens/screen_email_sent.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/app_bar_back_security.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:pitch_app/widgets/textfield_rounded.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -38,6 +38,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
         onActionPressed: () {},
       ),
       body: SingleChildScrollView(
+        // physics: NeverScrollableScrollPhysics(),
         child: Container(
           height: context.screenHeight - 80,
           child: Column(
@@ -107,6 +108,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                                 // child: TextFormField()
                                 child: RoundedTextField(
                                   hint: "Noreply@pitchme.com",
+                                  
                                 ),
                               ),
                             ),
@@ -141,7 +143,14 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                                 width: ConfigSize.convertHeight(context, 180),
                                 // child: TextFormField()
                                 child: RoundedTextField(
-                                  maxLines: 3,
+                                  maxLines: 5,
+                                  hint: 'A friend pitched you on Pitch Me!',
+                                  customhintStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  // hint: "A friend pitched you on Pitch Me.",
                                 ),
                               ),
                             ),
@@ -167,7 +176,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                'Wow! Jake just recommended you on PITCH ME, the dating site where friends pitch friends '
+                                'Wow! Jake just recommended you on Pitch Me, the dating site where friends pitch friends '
                                     .text
                                     .size(13)
                                     .make(),
@@ -211,6 +220,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 6),
                                   width: double.infinity,
+                                  alignment: Alignment.center,
                                   child: RichText(
                                     textAlign: TextAlign.left,
                                     text: TextSpan(
@@ -282,7 +292,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
                             _buttonContainer(
-                              title: 'Ask a friend to pitch',
+                              title: 'Ask a friend to pitch you',
                               onPressed: () {},
                               color: lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 30,

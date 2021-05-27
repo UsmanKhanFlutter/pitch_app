@@ -5,7 +5,7 @@ import 'package:pitch_app/screens/screen_birthday.dart';
 import 'package:pitch_app/screens/screen_your_pitch.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/bottomsheet_gift.dart';
-import 'package:pitch_app/widgets/custom_app_bar.dart';
+import 'package:pitch_app/widgets/app_bar_back_security.dart';
 import 'package:pitch_app/widgets/stretched_bordered_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -30,7 +30,30 @@ class _GiftScreenState extends State<GiftScreen> {
                 top: ConfigSize.blockSizeVertical * 0.01,
                 left: ConfigSize.blockSizeHorizontal * 0.01,
                 right: ConfigSize.blockSizeHorizontal * 0.01,
-                child: CustomAppBar(titletext: 'Notification')),
+                child: 
+                // CustomAppBar(titletext: 'Notification')
+                Container(
+                  height: ConfigSize.blockSizeVertical * 7,
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                  children: [
+                    Container(),
+                    Text(
+                      'Notification',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal),
+                    ),
+                    IconButton(
+                        icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
+                        onPressed: () {
+
+                        }),
+                  ]),
+                ),
+                ),
+                
 
             Positioned(
               left: ConfigSize.blockSizeHorizontal * 50,
