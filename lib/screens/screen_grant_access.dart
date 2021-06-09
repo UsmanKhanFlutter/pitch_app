@@ -18,43 +18,10 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children:[
-            Container(
-              height: 120,
-              width: 120,
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(60),
-                  border: Border.all(color: Colors.grey,)
-                  ),
-              child: Center(
-                child:Container(
-                  height: 63,
-                  width: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade500,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.grey, width: 2)
-                    ),
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: black,
-                    size: 45,
-                  ),
-                ),
-              ),
-            ),
-            "In order to upload from your camera, Pitch Me needs access to your camera. Go to Settings to enable."
-                .text
-                .align(TextAlign.center)
-                .make()
-                .box
-                .alignTopCenter
-                .make()
-                .pSymmetric(h: 24, v: 1),
             SizedBox(
-                height: ConfigSize.blockSizeVertical*3,
+                height: ConfigSize.blockSizeVertical*1,
               ),
             "Grant Access"
               .text
@@ -65,9 +32,55 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
               .alignTopCenter
               .height(ConfigSize.convertHeight(context, 30))
               .make(),
+              
+            // Container(
+            //   height: 120,
+            //   width: 120,
+            //   decoration: BoxDecoration(
+            //       color: Colors.grey.shade200,
+            //       borderRadius: BorderRadius.circular(60),
+            //       border: Border.all(color: Colors.grey,)
+            //       ),
+            //   child: Center(
+            //     child:Container(
+            //       height: 63,
+            //       width: 60,
+            //       decoration: BoxDecoration(
+            //         color: Colors.grey.shade500,
+            //         borderRadius: BorderRadius.circular(16),
+            //         border: Border.all(color: Colors.grey, width: 2)
+            //         ),
+            //       child: Icon(
+            //         Icons.camera_alt,
+            //         color: black,
+            //         size: 45,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // "In order to upload from your camera, Pitch Me needs access to your camera. Go to Settings to enable."
+            //     .text
+            //     .align(TextAlign.center)
+            //     .make()
+            //     .box
+            //     .alignTopCenter
+            //     .make()
+            //     .pSymmetric(h: 24, v: 1),
+            // SizedBox(
+            //     height: ConfigSize.blockSizeVertical*3,
+            //   ),
+            // "Grant Access"
+            //   .text
+            //   .xl
+            //   .fontWeight(FontWeight.bold)
+            //   .make()
+            //   .box
+            //   .alignTopCenter
+            //   .height(ConfigSize.convertHeight(context, 30))
+            //   .make(),
 
               SizedBox(
-                height: ConfigSize.blockSizeVertical*3,
+                height: ConfigSize.blockSizeVertical*33,
               ),
 
               Container(
