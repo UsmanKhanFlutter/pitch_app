@@ -43,7 +43,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
           Container(
             width: ConfigSize.blockSizeHorizontal * 75,
             child: Text(
-              '''PitchMe works by having a female friends "pitch you" by creating your profile.\n\nBy Clicking below you agree to allow your friends to post information about you.\n\nYou cannot edit the information they write, although you can delete it or cancel your account and delete the information at any time. ''',
+              '''PitchMe works by having a female friend "pitch you" by creating your profile.\n\nBy Clicking below you agree to allow your friends to post information about you.\n\nYou cannot edit the information they write, although you can delete it or cancel your account and delete the information at any time. ''',
               textAlign: TextAlign.start,
               textScaleFactor: 0.96,
             ),

@@ -294,7 +294,7 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
                             _buttonContainer(
-                              title: 'Ask a friend to pitch you',
+                              title: 'Ask another friend to pitch you',
                               onPressed: () {},
                               color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 30,

@@ -22,7 +22,7 @@ class _FindAMatchScreenState extends State<FindAMatchScreen> {
     return Scaffold(
       // Navigation bar
       backgroundColor: Colors.white,
-      // bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: BottomNavigation(),
       appBar: appBarFilterIcon(title: 'Find a match', onActionPressed: () {}),
       body: Container(
         padding: EdgeInsets.only(

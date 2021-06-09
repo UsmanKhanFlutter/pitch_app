@@ -30,8 +30,8 @@ import 'package:pitch_app/helpers/size_config.dart';
         IconButton(
           icon: Icon(
             Icons.security,
-            // size: 18,
-            color: Color(0xFF3a3737),
+            size: 18,
+            color: Colors.black//Color(0xFF3a3737),
           ),
             // icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
             onPressed: onActionPressed

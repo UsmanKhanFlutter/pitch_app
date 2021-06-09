@@ -23,17 +23,29 @@ class _MessagingScreenState extends State<MessagingScreen> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigation(),
       appBar: AppBar(
         title: "Message".text.fontWeight(FontWeight.w400).black.make(),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            // size: 18,
+            color: Color(0xFF3a3737),
+          ),
+          onPressed: (){
+                Navigator.pop(context);
+
+              },
+        ),
         actions: [
           IconButton(
               icon: Icon(
-                Icons.home,
-                color: Colors.white,
+                Icons.security,
+                color: Color(0xFF3a3737),
               ),
               onPressed: () {
                 _scaffoldKey.currentState.showBottomSheet(
