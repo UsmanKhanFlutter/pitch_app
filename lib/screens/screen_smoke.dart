@@ -15,9 +15,9 @@ class SmokeScreen extends StatefulWidget {
 
 class _SmokeScreenState extends State<SmokeScreen> {
   List<String> itemValue = [
-    'Not that I\'m aware',
-    'Yes, Socially',
-    'Yes, Regularly',
+    'No',
+    'Yes, socially',
+    'Yes, regularly',
   ];
   String selectedValue;
   @override

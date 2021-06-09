@@ -97,16 +97,16 @@ class SignInMethodScreen extends StatelessWidget {
                           width: ConfigSize.convertWidth(context, 220),
                         ),
                         SizedBox(height: 10),
-                        MaterialButton(
-                          onPressed: () =>
-                              context.push((context) => LoginScreen()),
-                          child: "Use Email"
-                              .text
-                              .fontWeight(FontWeight.w400)
-                              .color(Colors.blue.shade700)
-                              .underline
-                              .make(),
-                        ),
+                        // MaterialButton(
+                        //   onPressed: () =>
+                        //       context.push((context) => LoginScreen()),
+                        //   child: "Use Email"
+                        //       .text
+                        //       .fontWeight(FontWeight.w400)
+                        //       .color(Colors.blue.shade700)
+                        //       .underline
+                        //       .make(),
+                        // ),
                         SizedBox(height: 10),
                         Container(
                           width: ConfigSize.convertWidth(context, 220),

@@ -16,8 +16,8 @@ class DrinkScreen extends StatefulWidget {
 class _DrinkScreenState extends State<DrinkScreen> {
   List<String> itemValue = [
     'Not that I\'m aware',
-    'Rarely'
-        'Socially',
+    'Rarely',
+    'Socially',
     'Often',
   ];
   String selectedValue;
@@ -33,7 +33,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
             Expanded(
               child: VStack(
                 [
-                  "Does he Drink (alcoholic beverages)?"
+                  "Does he drink (alcoholic, beverages)?"
                       .text
                       .align(TextAlign.center)
                       .xl
