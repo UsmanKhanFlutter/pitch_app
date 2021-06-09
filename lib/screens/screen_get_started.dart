@@ -27,8 +27,8 @@ class GetStartedScreen extends StatelessWidget {
                     height: ConfigSize.convertHeight(context, 160),
                     fit: BoxFit.cover,
                   ),
+                  "PitchMe".text.bold.xl.make(),
                   SizedBox(height: 16),
-                  Strings.appName.text.uppercase.bold.xl.make(),
                   "Friends Pitching Friends"
                       .text
                       .xl2

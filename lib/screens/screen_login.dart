@@ -40,7 +40,12 @@ class LoginScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: ConfigSize.convertHeight(context, 110),
                         width: ConfigSize.convertWidth(context, 110),
-                        child: Image.asset(Strings.appLogo),
+                        child: Column(
+                          children: [
+                            Image.asset(Strings.appLogo),
+                            "PitchMe".text.bold.make(),
+                          ],
+                        ),
                       ),
                     ],
                   ),

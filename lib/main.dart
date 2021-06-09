@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/catalog/screen_catalog.dart';
+import 'package:pitch_app/screens/messaging/screen_messaging.dart';
 import 'package:pitch_app/screens/profile/screen_profile.dart';
 import 'package:pitch_app/screens/screen_dashboard.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.transparent,
       ),
       home: GetStartedScreen(),
+      // home: MessagingScreen(),
     );
   }
 }

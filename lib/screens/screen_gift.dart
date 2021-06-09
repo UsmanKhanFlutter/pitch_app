@@ -19,11 +19,11 @@ class _GiftScreenState extends State<GiftScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: Colors.white,
-        body: Stack(
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
           children: <Widget>[
             //App bar
             Positioned( 
@@ -224,16 +224,16 @@ class _GiftScreenState extends State<GiftScreen> {
                           .height(ConfigSize.convertWidth(context, 30))
                           .alignCenter
                           .make(),
-                      "Added extra"
-                          .text
-                          .black
-                          .bold
-                          .size(20)
-                          .make()
-                          .box
-                          .height(ConfigSize.convertWidth(context, 30))
-                          .alignCenter
-                          .make(),
+                      // "Added extra"
+                      //     .text
+                      //     .black
+                      //     .bold
+                      //     .size(20)
+                      //     .make()
+                      //     .box
+                      //     .height(ConfigSize.convertWidth(context, 30))
+                      //     .alignCenter
+                      //     .make(),
                     ],
                   ),
                 )),

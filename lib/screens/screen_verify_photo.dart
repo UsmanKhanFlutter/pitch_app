@@ -22,7 +22,12 @@ class VerifyPhotoScreen extends StatelessWidget {
                     Container(
                       height: ConfigSize.convertHeight(context, 90),
                       width: ConfigSize.convertWidth(context, 90),
-                      child: Image.asset(Strings.appLogo),
+                      child: Column(
+                        children: [
+                          Image.asset(Strings.appLogo),
+                          "PitchMe".text.size(11).bold.make(),
+                        ],
+                      ),
                     ),
                     "Take a selfie for verification"
                         .text

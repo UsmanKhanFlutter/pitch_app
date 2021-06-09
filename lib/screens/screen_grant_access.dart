@@ -45,6 +45,14 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
                 ),
               ),
             ),
+            "In order to upload from your camera, Pitch Me needs access to your camera. Go to Settings to enable."
+                .text
+                .align(TextAlign.center)
+                .make()
+                .box
+                .alignTopCenter
+                .make()
+                .pSymmetric(h: 24, v: 1),
             SizedBox(
                 height: ConfigSize.blockSizeVertical*3,
               ),

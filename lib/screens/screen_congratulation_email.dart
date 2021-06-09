@@ -6,7 +6,6 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_friend_suggestion_email.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/app_bar_back_security.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:pitch_app/widgets/textfield_rounded.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -36,133 +35,126 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: ConfigSize.blockSizeVertical*2,
+                height: ConfigSize.blockSizeVertical * 2,
               ),
               "Congratulation Email"
-                .text
-                .xl
-                .fontWeight(FontWeight.bold)
-                .make()
-                .box
-                .alignTopCenter
-                .height(ConfigSize.convertHeight(context, 50))
-                .make(),
+                  .text
+                  .xl
+                  .fontWeight(FontWeight.bold)
+                  .make()
+                  .box
+                  .alignTopCenter
+                  .height(ConfigSize.convertHeight(context, 50))
+                  .make(),
 
-                Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'To:',
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                fontFamily: defaultFontFamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                // color: Colors.red,
-                                height: ConfigSize.convertHeight(context, 26),
-                                width: ConfigSize.convertHeight(context, 180),
-                                // child: TextFormField()
-                                child: RoundedTextField(
-                                  hint: "Sean Luke",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+              Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'To:',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontFamily: defaultFontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'From:',
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                fontFamily: defaultFontFamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          // color: Colors.red,
+                          height: ConfigSize.convertHeight(context, 26),
+                          width: ConfigSize.convertHeight(context, 180),
+                          // child: TextFormField()
+                          child: RoundedTextField(
+                            hint: "Sean Luke",
                           ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                // color: Colors.red,
-                                height: ConfigSize.convertHeight(context, 26),
-                                width: ConfigSize.convertHeight(context, 180),
-                                // child: TextFormField()
-                                child: RoundedTextField(
-                                  hint: "Noreply@pitchme.com",
-                                  
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Container(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              'Subject:',
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                fontFamily: defaultFontFamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                // color: Colors.red,
-                                height: ConfigSize.convertHeight(context, 50),
-                                width: ConfigSize.convertHeight(context, 180),
-                                // child: TextFormField()
-                                child: RoundedTextField(
-                                  maxLines: 5,
-                                  hint: 'Welcome to Pitch!',
-                                  customhintStyle: TextStyle(
-                                    
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                  // hint: "A friend pitched you on Pitch Me.",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                  ],
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'From:',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontFamily: defaultFontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          // color: Colors.red,
+                          height: ConfigSize.convertHeight(context, 26),
+                          width: ConfigSize.convertHeight(context, 180),
+                          // child: TextFormField()
+                          child: RoundedTextField(
+                            hint: "Noreply@pitchme.com",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'Subject:',
+                        textAlign: TextAlign.end,
+                        style: TextStyle(
+                          fontFamily: defaultFontFamily,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          // color: Colors.red,
+                          height: ConfigSize.convertHeight(context, 50),
+                          width: ConfigSize.convertHeight(context, 180),
+                          // child: TextFormField()
+                          child: RoundedTextField(
+                            maxLines: 5,
+                            hint: 'Welcome to Pitch!',
+                            // hint: "A friend pitched you on Pitch Me.",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(
-                height: ConfigSize.blockSizeVertical*2,
+                height: ConfigSize.blockSizeVertical * 2,
               ),
               // Container(
               //   width: ConfigSize.blockSizeHorizontal * 80,
@@ -257,7 +249,6 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
                         ]),
                   )),
               SizedBox(height: ConfigSize.blockSizeVertical * 1),
-              
             ],
           ),
         ),
