@@ -11,15 +11,15 @@ class ProfileScreen extends StatelessWidget {
     "Bio:",
     "Interested In:",
     "Email:",
-    "Hobbies/Interests:",
-    "Advance Settings",
+    // "Hobbies/Interests:",
+    // "Advance Settings",
   ];
   final List<String> subList = [
     "I am who I am, You will find out if we talk",
     "Men",
     "UX/UI@gmail.com",
-    "Pets",
-    "Advance Settings",
+    // "Pets",
+    // "Advance Settings",
   ];
   @override
   Widget build(BuildContext context) {
@@ -89,34 +89,34 @@ class ProfileScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.separated(
-              itemCount: 5,
+              itemCount: 3,
               itemBuilder: (context, index) {
-                if (index == 4) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 16, left: 8, right: 8),
-                    child: Container(
-                      height: 50,
-                      alignment: Alignment.center,
-                      child: ListTile(
-                        title: "Advance Settings".text.make(),
-                        trailing: IconButton(
-                            icon: Icon(
-                              CupertinoIcons.back,
-                              color: Colors.black,
-                            ),
-                            onPressed: () =>
-                                _scaffoldKey.currentState.showBottomSheet(
-                                  (context) => ProfileBottomSheet(
-                                    context.screenHeight * 0.7,
-                                  ),
-                                )
-                            // profileBottomSheet(context, context.screenHeight),
-                            ),
-                      ),
-                    ),
-                  );
-                }
+                // if (index == 4) {
+                //   return Padding(
+                //     padding:
+                //         const EdgeInsets.only(bottom: 16, left: 8, right: 8),
+                //     child: Container(
+                //       height: 50,
+                //       alignment: Alignment.center,
+                //       child: ListTile(
+                //         title: "Advance Settings".text.make(),
+                //         trailing: IconButton(
+                //             icon: Icon(
+                //               CupertinoIcons.back,
+                //               color: Colors.black,
+                //             ),
+                //             onPressed: () =>
+                //                 _scaffoldKey.currentState.showBottomSheet(
+                //                   (context) => ProfileBottomSheet(
+                //                     context.screenHeight * 0.7,
+                //                   ),
+                //                 )
+                //             // profileBottomSheet(context, context.screenHeight),
+                //             ),
+                //       ),
+                //     ),
+                //   );
+                // }
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16, left: 8, right: 8),
                   child: Container(

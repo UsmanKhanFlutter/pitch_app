@@ -247,7 +247,7 @@ class _GiftScreenState extends State<GiftScreen> {
                   height: ConfigSize.blockSizeVertical * 5,
                   text: 'Recieve the Gift',
                   onPressed: () {
-                    context.push((context) => BirthdayScreen());
+                    context.push((context) => YourPitchScreen());
                   },
                 )),
             Positioned(

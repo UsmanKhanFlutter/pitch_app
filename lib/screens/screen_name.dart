@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/screens/profile/screen_profile.dart';
+import 'package:pitch_app/screens/screen_birthday.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';
@@ -39,6 +40,12 @@ class NameScreen extends StatelessWidget {
                           title: "Last Name:",
                           height: 44,
                         ),
+                        SizedBox(height: 16),
+                        "Where does he live?".text.bold.make(),
+                        TextFieldInformation(
+                          title: "",
+                          height: 44,
+                        ),
                         SizedBox(height: 24),
                         "What's his email address?".text.bold.make(),
                         SizedBox(height: 16),
@@ -70,7 +77,10 @@ class NameScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) => ProfileScreen()));
+                              builder: (ctx) => BirthdayScreen()));
+                              
+
+                                // builder: (ctx) => ProfileScreen()));
                       }),
                 ),
               ],

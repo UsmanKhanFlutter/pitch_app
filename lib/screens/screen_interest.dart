@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/profile/screen_profile.dart';
 import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
@@ -106,7 +107,8 @@ class _InterestScreenState extends State<InterestScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => YourPitchScreen()))
+                onPressed: () => context.push((context) => ProfileScreen()))
+                // YourPitchScreen()))
           ],
         ),
       )),
