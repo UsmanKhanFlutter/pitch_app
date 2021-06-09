@@ -26,33 +26,33 @@ class _GiftScreenState extends State<GiftScreen> {
         body: Stack(
           children: <Widget>[
             //App bar
-            Positioned(
-                top: ConfigSize.blockSizeVertical * 0.01,
-                left: ConfigSize.blockSizeHorizontal * 0.01,
-                right: ConfigSize.blockSizeHorizontal * 0.01,
-                child: 
-                // CustomAppBar(titletext: 'Notification')
-                Container(
-                  height: ConfigSize.blockSizeVertical * 7,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-                  children: [
-                    Container(),
-                    Text(
-                      'Notification',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal),
-                    ),
-                    IconButton(
-                        icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
-                        onPressed: () {
+            Positioned( 
+              top: ConfigSize.blockSizeVertical * 0.01,
+              left: ConfigSize.blockSizeHorizontal * 0.01,
+              right: ConfigSize.blockSizeHorizontal * 0.01,
+              child: 
+              // CustomAppBar(titletext: 'Notification')
+              Container(
+                height: ConfigSize.blockSizeVertical * 7,
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+                children: [
+                  Container(),
+                  Text(
+                    'Notification',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal),
+                  ),
+                  IconButton(
+                    icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
+                    onPressed: () {
 
-                        }),
+                    }),
                   ]),
                 ),
-                ),
+              ),
                 
 
             Positioned(
