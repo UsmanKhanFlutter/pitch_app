@@ -2,21 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethnicity.dart';
+import 'package:pitch_app/screens/screen_children.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_children.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ChildrenScreen extends StatefulWidget {
+
+class WomanEducationScreen extends StatefulWidget {
   @override
-  _ChildrenScreenState createState() => _ChildrenScreenState();
+  _WomanEducationScreenState createState() => _WomanEducationScreenState();
 }
 
-class _ChildrenScreenState extends State<ChildrenScreen> {
+class _WomanEducationScreenState extends State<WomanEducationScreen> {
   List<String> itemValue = [
-    'No',
-    'Yes, at home with him',
-    "Yes, But they don't live with him",
+    'No Degree',
+    'High School Graduate',
+    'Attended College',
+    'College Graduate',
+    'Advanced Degree'
   ];
   String selectedValue;
   @override
@@ -31,7 +35,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             Expanded(
               child: VStack(
                 [
-                  "Does he have Children?"
+                  "What's your highest level of education?"
                       .text
                       .align(TextAlign.center)
                       .xl
@@ -65,7 +69,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => EthnicityScreen()))
+                onPressed: () => context.push((context) => WomanChildrenScreen()))
           ],
         ),
       )),

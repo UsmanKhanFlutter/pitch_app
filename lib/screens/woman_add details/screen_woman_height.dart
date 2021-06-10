@@ -5,16 +5,17 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_body_type.dart';
 import 'package:pitch_app/screens/screen_education.dart';
 import 'package:pitch_app/screens/screen_pitch_mail.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_body_type.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class HeightScreen extends StatefulWidget {
+class WomanHeightScreen extends StatefulWidget {
   @override
-  _HeightScreenState createState() => _HeightScreenState();
+  _WomanHeightScreenState createState() => _WomanHeightScreenState();
 }
 
-class _HeightScreenState extends State<HeightScreen> {
+class _WomanHeightScreenState extends State<WomanHeightScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,7 @@ class _HeightScreenState extends State<HeightScreen> {
         padding: EdgeInsets.symmetric(horizontal: 36, vertical: 16),
         child: Column(
           children: [
-            "What's His Height?"
+            "What's Your Height?"
                 .text
                 .align(TextAlign.center)
                 .xl
@@ -76,7 +77,7 @@ class _HeightScreenState extends State<HeightScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => BodyTypeScreen()))
+                onPressed: () => context.push((context) => WomanBodyTypeScreen()))
                 // PitchMailScreen
           ],
         ),

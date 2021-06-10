@@ -4,6 +4,7 @@ import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/screens/screen_name.dart';
+import 'package:pitch_app/screens/screen_write_pitch_or_provide_ratings.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -67,7 +68,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => NameScreen()))
+                onPressed: () => context.push((context) => WritePitchOrProvideRatingsScreen()))
           ],
         ),
       )),

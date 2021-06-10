@@ -3,6 +3,7 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_basic_information.dart';
+import 'package:pitch_app/screens/screen_getting_started.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -114,7 +115,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                 child: StretchedColorButton(
                     text: "Pitch another friend",
                     onPressed: () {
-                      context.push((context) => BasicInformationScreen());
+                      context.push((context) => GettingStartedScreen());
                     },
                     height: 36,
                     width: ConfigSize.convertWidth(context, 300),
@@ -150,7 +151,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                 child: StretchedColorButton(
                     text: "Ask another friend to pitch you",
                     onPressed: () {
-                      context.push((context) => BasicInformationScreen());
+                      context.push((context) => GettingStartedScreen());
                     },
                     height: 36,
                     width: ConfigSize.convertWidth(context, 300),

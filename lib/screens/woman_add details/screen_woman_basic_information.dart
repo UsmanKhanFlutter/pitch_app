@@ -4,19 +4,17 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/Model/gender.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_agreement.dart';
-import 'package:pitch_app/screens/screen_write_pitch_or_provide_ratings.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_height.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_interest.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
-import 'package:pitch_app/widgets/textfield_information.dart';
-import 'package:pitch_app/widgets/textfield_rounded.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
-class BasicInformationScreen extends StatefulWidget {
+class WomanBasicInformationScreen extends StatefulWidget {
   @override
-  _BasicInformationScreenState createState() => _BasicInformationScreenState();
+  _WomanBasicInformationScreenState createState() => _WomanBasicInformationScreenState();
 }
 
-class _BasicInformationScreenState extends State<BasicInformationScreen> {
+class _WomanBasicInformationScreenState extends State<WomanBasicInformationScreen> {
   
   List<Gender> genders = [];
 
@@ -158,7 +156,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
               ),
               StretchedButton(
                 text: "Continue",
-                onPressed: () => context.push((context) => AgreementScreen()),
+                onPressed: () => context.push((context) => WomanInterestScreen()),
                 height: 40,
               ),
               SizedBox(

@@ -3,6 +3,7 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_gift.dart';
+import 'package:pitch_app/screens/screen_your_pitch.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -60,7 +61,7 @@ class _FindAMatchScreenState extends State<FindAMatchScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   DeclineContainer(onPress: () {
-                    context.push((context) => GiftScreen());
+                    context.push((context) => YourPitchScreen());
                   }),
                   AcceptContainer(onPress: () {
                     context.push((context) => GiftScreen());
@@ -197,7 +198,7 @@ Widget DeclineContainer({Function onPress}) {
         color: Colors.red,
       ),
       onPressed: () {
-        // onPress();
+        onPress();
       },
     ),
   );

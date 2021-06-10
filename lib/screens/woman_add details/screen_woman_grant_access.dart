@@ -2,17 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_message_back_to_friend.dart';
 import 'package:pitch_app/screens/screen_upload_photos_of_your_guy_friend.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_upload_photos.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class GrantAccessScreen extends StatefulWidget {
+class WomanGrantAccessScreen extends StatefulWidget {
   @override
-  _GrantAccessScreenState createState() => _GrantAccessScreenState();
+  _WomanGrantAccessScreenState createState() => _WomanGrantAccessScreenState();
 }
 
-class _GrantAccessScreenState extends State<GrantAccessScreen> {
+class _WomanGrantAccessScreenState extends State<WomanGrantAccessScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -124,7 +124,7 @@ class _GrantAccessScreenState extends State<GrantAccessScreen> {
                 child: StretchedColorButton(
                 text: "Go to Settings",
                 onPressed: () {
-                  context.push((context) => UploadPhotosScreen());
+                  context.push((context) => WomanUploadPhotosScreen());
                 },
                 height: 36,
                 width: ConfigSize.convertWidth(context, 300),

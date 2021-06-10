@@ -4,6 +4,7 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_friend_suggestion_email.dart';
+import 'package:pitch_app/screens/screen_pitch_mail.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -226,9 +227,10 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
                             width: ConfigSize.blockSizeHorizontal * 88,
                             height: ConfigSize.blockSizeVertical * 5,
                             onPressed: () {
+                              
                               context.push(
-                                  (context) => FriendSuggestionEmailScreen());
-                            },
+                                  (context) => PitchMailScreen());
+                            } 
                           ),
                           SizedBox(
                             height: ConfigSize.blockSizeVertical * 1,
@@ -239,8 +241,7 @@ class _CongratulationEmailScreenState extends State<CongratulationEmailScreen> {
                             width: ConfigSize.blockSizeHorizontal * 88,
                             height: ConfigSize.blockSizeVertical * 4,
                             onPressed: () {
-                              context.push(
-                                  (context) => FriendSuggestionEmailScreen());
+                              
                             },
                           ),
                           SizedBox(

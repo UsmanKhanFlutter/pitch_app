@@ -2,21 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethnicity.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_ethnicity.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ChildrenScreen extends StatefulWidget {
+class WomanChildrenScreen extends StatefulWidget {
   @override
-  _ChildrenScreenState createState() => _ChildrenScreenState();
+  _WomanChildrenScreenState createState() => _WomanChildrenScreenState();
 }
 
-class _ChildrenScreenState extends State<ChildrenScreen> {
+class _WomanChildrenScreenState extends State<WomanChildrenScreen> {
   List<String> itemValue = [
     'No',
-    'Yes, at home with him',
-    "Yes, But they don't live with him",
+    'Yes, at home with me',
+    "Yes, But they don't live with me",
   ];
   String selectedValue;
   @override
@@ -31,7 +31,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             Expanded(
               child: VStack(
                 [
-                  "Does he have Children?"
+                  "Do You Have Children?"
                       .text
                       .align(TextAlign.center)
                       .xl
@@ -65,7 +65,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => EthnicityScreen()))
+                onPressed: () => context.push((context) => WomanEthnicityScreen()))
           ],
         ),
       )),

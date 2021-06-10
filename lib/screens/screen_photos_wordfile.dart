@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_information.dart';
+import 'package:pitch_app/screens/screen_pitch_mail.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -79,7 +80,7 @@ class PhotosWordFileScreen extends StatelessWidget {
           SizedBox(height: 24),
           StretchedButton(
             text: "Verify your photos",
-            onPressed: () => context.push((context) => InformationScreen()),
+            onPressed: () => context.push((context) => PitchMailScreen()),//InformationScreen
             height: 36,
           ),
           SizedBox(height: 10),

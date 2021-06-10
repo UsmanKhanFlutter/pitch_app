@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_pitch_mail.dart';
 import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
@@ -109,7 +110,7 @@ class _FriendSuggestionEmailScreenState
                           width: ConfigSize.convertHeight(context, 180),
                           // child: TextFormField()
                           child: RoundedTextField(
-                            hint: "Noreply@pitchme.com",
+                            hint: "Jean@email.com",
                           ),
                         ),
                       ),
@@ -145,7 +146,7 @@ class _FriendSuggestionEmailScreenState
                           // child: TextFormField()
                           child: RoundedTextField(
                             maxLines: 5,
-                            hint: 'Message Sent!',
+                            hint: 'Message Sent! Your message has been sent to Sean Luke',
                             // hint: "A friend pitched you on Pitch Me.",
                           ),
                         ),
@@ -181,7 +182,7 @@ class _FriendSuggestionEmailScreenState
                           ),
                           InkWell(
                             onTap: () {
-                              context.push((context) => YourPitchesScreen());
+                              context.push((context) => PitchMailScreen());
                             },
                             child: Container(
                               alignment: Alignment.center,

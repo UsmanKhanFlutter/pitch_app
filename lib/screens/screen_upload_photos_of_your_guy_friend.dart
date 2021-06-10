@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_congratulations_2.dart';
+import 'package:pitch_app/screens/screen_grant_access.dart';
 import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -87,7 +89,7 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
               width: ConfigSize.blockSizeHorizontal * 88,
               height: ConfigSize.blockSizeVertical * 6,
               onPressed: () {
-                context.push((context) => WhatsYourPitchScreen());
+                context.push((context) => CongratulationsTwoScreen());
               },
             ),
             SizedBox(
@@ -104,7 +106,9 @@ class UploadPhotoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.push((context) => GrantAccessScreen());
+      },
       child: Container(
         height: ConfigSize.blockSizeVertical * 20,
         child: Card(

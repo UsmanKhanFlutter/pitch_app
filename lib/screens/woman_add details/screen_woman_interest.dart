@@ -10,16 +10,17 @@ import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
 import 'package:pitch_app/screens/screen_your_pitch.dart';
 import 'package:pitch_app/screens/screen_your_pitches.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_height.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class InterestScreen extends StatefulWidget {
+class WomanInterestScreen extends StatefulWidget {
   @override
-  _InterestScreenState createState() => _InterestScreenState();
+  _WomanInterestScreenState createState() => _WomanInterestScreenState();
 }
 
-class _InterestScreenState extends State<InterestScreen> {
+class _WomanInterestScreenState extends State<WomanInterestScreen> {
   List<String> itemValue = [
     'Single',
     'Married, but Separated',
@@ -46,7 +47,7 @@ class _InterestScreenState extends State<InterestScreen> {
             Expanded(
               child: VStack(
                 [
-                  "What's his relationship status?"
+                  "What's Your relationship status?"
                       .text
                       .align(TextAlign.center)
                       .xl
@@ -75,7 +76,7 @@ class _InterestScreenState extends State<InterestScreen> {
                         .toList()),
                   ),
                   SizedBox(height: ConfigSize.convertHeight(context, 60)),
-                  "What is he interested in?"
+                  "What are you interested in?"
                       .text
                       .align(TextAlign.center)
                       .xl
@@ -108,7 +109,7 @@ class _InterestScreenState extends State<InterestScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => HeightScreen()))
+                onPressed: () => context.push((context) => WomanHeightScreen()))
                 // ProfileScreen
                 // YourPitchScreen()))
           ],

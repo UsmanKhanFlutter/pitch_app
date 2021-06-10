@@ -5,7 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_ask_another_friend_to_pitch.dart';
+import 'package:pitch_app/screens/screen_congratulation_email.dart';
 import 'package:pitch_app/screens/screen_email_sent.dart';
+import 'package:pitch_app/screens/screen_friend_suggestion_email.dart';
+import 'package:pitch_app/screens/screen_message_back_to_friend.dart';
+import 'package:pitch_app/screens/screen_suggest_friend.dart';
+import 'package:pitch_app/screens/screen_welcome_to_pitch.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
@@ -283,19 +289,25 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
                           children: [
                             _buttonContainer(
                               title: "Make it live!",
-                              onPressed: () {},
+                              onPressed: () {
+                                context.push((context) => CongratulationEmailScreen());
+                              },
                               color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 25,
                             ),
                             _buttonContainer(
-                              title: 'Send an Email to your friend',
-                              onPressed: () {},
+                              title: 'Send feedback to your friend',
+                              onPressed: () {
+                                context.push((context) => MessageBackToFriendScreen());
+                              },
                               color: yellow,
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
                             _buttonContainer(
                               title: 'Ask another friend to pitch you',
-                              onPressed: () {},
+                              onPressed: () {
+                                context.push((context) => InviteAnotherFriendToPitchScreen());
+                              },
                               color: AppColors.lightGreen,
                               width: ConfigSize.blockSizeHorizontal * 30,
                             ),
@@ -328,7 +340,9 @@ class _PitchMailScreenState extends State<PitchMailScreen> {
       @required Function onPressed,
       @required Color color}) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onPressed();
+      },
       child: Container(
         // alignment: Alignment.center,
         height: ConfigSize.blockSizeVertical * 6,

@@ -224,16 +224,6 @@ class _GiftScreenState extends State<GiftScreen> {
                           .height(ConfigSize.convertWidth(context, 30))
                           .alignCenter
                           .make(),
-                      // "Added extra"
-                      //     .text
-                      //     .black
-                      //     .bold
-                      //     .size(20)
-                      //     .make()
-                      //     .box
-                      //     .height(ConfigSize.convertWidth(context, 30))
-                      //     .alignCenter
-                      //     .make(),
                     ],
                   ),
                 )),

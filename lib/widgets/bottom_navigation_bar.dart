@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/catalog/screen_catalog.dart';
+import 'package:pitch_app/screens/profile/screen_profile.dart';
+import 'package:pitch_app/screens/screen_find_a_match.dart';
+import 'package:pitch_app/screens/screen_your_pitches.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -10,19 +14,19 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   
   int pageIndex = 0;
-  var _pageController;
+//   var _pageController;
 
-  @override
-  void initState() {
-    _pageController = PageController();
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     _pageController = PageController();
+//     super.initState();
+//   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     _pageController.dispose();
+//     super.dispose();
+//   }
 
   onPageChanged(int pageIndex) {
     setState(() {
@@ -30,14 +34,21 @@ class _BottomNavigationState extends State<BottomNavigation> {
     });
   }
 
-  onTap(int pageIndex) {
-    _pageController.animateToPage(
-      pageIndex,
-      duration: Duration(milliseconds: 50),
-      curve: Curves.easeInOut,
-    );
-  }
+//   onTap(int pageIndex) {
+//     _pageController.animateToPage(
+//       pageIndex,
+//       duration: Duration(milliseconds: 50),
+//       curve: Curves.easeInOut,
+      
+//     );
+//   }
 
+// final tabs = [
+//     ProfileScreen(),
+//     YourPitchesScreen(),
+//     CatalogScreen(),
+//     FindAMatchScreen(),
+//   ];
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,13 +84,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 children: [
                   btnExpanded(
                     icon: CupertinoIcons.person_fill,
-                    iconColor:
-                        pageIndex == 0 ? Colors.red.shade400 : Colors.black,
+                    iconColor:pageIndex == 0 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
-                      setState(() {
-                        pageIndex = 0;
-                      });
-                      onTap(pageIndex);
+                      // setState(() {
+                      //   pageIndex = 0;
+                      // });
+                      // onTap(pageIndex);
+
                     },
                   ),
                   btnExpanded(
@@ -87,10 +98,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     iconColor:
                         pageIndex == 1 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
-                      setState(() {
-                        pageIndex = 1;
-                      });
-                      onTap(pageIndex);
+                      // setState(() {
+                      //   pageIndex = 1;
+                      // });
+                      // onTap(pageIndex);
                     },
                   ),
                   btnExpanded(
@@ -98,10 +109,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     iconColor:
                         pageIndex == 2 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
-                      setState(() {
-                        pageIndex = 2;
-                      });
-                      onTap(pageIndex);
+                      
+                      // setState(() {
+                      //   pageIndex = 2;
+                      // });
+                      // onTap(pageIndex);
+                      
                     },
                   ),
                   btnExpanded(
@@ -109,10 +122,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     iconColor:
                         pageIndex == 3 ? Colors.red.shade400 : Colors.black,
                     onPress: () {
-                      setState(() {
-                        pageIndex = 3;
-                      });
-                      onTap(pageIndex);
+                      // setState(() {
+                      //   pageIndex = 3;
+                      // });
+                      // onTap(pageIndex);
                     },
                   ),
                 ],
@@ -132,7 +145,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child: Container(
           height: MediaQuery.of(context).size.height / 15,
           child: IconButton(
-            onPressed: onPress,
+            onPressed: onPress(),
             icon: Icon(
               icon,
               color: iconColor,

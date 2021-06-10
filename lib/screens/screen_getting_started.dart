@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_find_a_match.dart';
+import 'package:pitch_app/screens/screen_phone_number.dart';
+import 'package:pitch_app/screens/screen_your_pitches.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_basic_information.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -47,12 +51,16 @@ class GettingStartedScreen extends StatelessWidget {
                     SizedBox(height: 16),
                     StretchedColorButton(
                         text: "Pitch Someone",
-                        onPressed: () {},
+                        onPressed: () {
+                      context.push((context) => PhoneNumberScreen());
+                    },
                         height: 36,
                         width: ConfigSize.convertWidth(context, 250),
                         color: AppColors.lightGreen),
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push((context) => YourPitchesScreen());
+                      },
                       child: "Edit your pitches".text.gray500.underline.make(),
                     ),
                     "OR".text.xl.gray700.bold.align(TextAlign.center).make(),
@@ -61,7 +69,9 @@ class GettingStartedScreen extends StatelessWidget {
                       text: "Find a match",
                       height: 36,
                       width: ConfigSize.convertWidth(context, 250),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push((context) => WomanBasicInformationScreen());//FindAMatchScreen
+                      },
                       color: AppColors.mainColor,
                     ),
                   ],

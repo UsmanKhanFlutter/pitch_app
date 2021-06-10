@@ -142,7 +142,7 @@ class _HelpfulRatingsScreenState extends State<HelpfulRatingsScreen> {
                     ),
                   ),
                 ).pSymmetric(h: 16),
-                "In your opinion, describe wrong type of person to date him:"
+                "In your opinion, describe right type of person to date him:"
                     .text
                     .align(TextAlign.left)
                     .fontWeight(FontWeight.normal)

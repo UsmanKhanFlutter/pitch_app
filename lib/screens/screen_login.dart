@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_agreement.dart';
+import 'package:pitch_app/screens/screen_basic_information.dart';
+// import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -85,8 +86,10 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(width: 16),
                 Expanded(
                   child: MaterialButton(
-                    onPressed: () =>
-                        context.push((context) => AgreementScreen()),
+                    onPressed: () {
+                      context.push((context) => BasicInformationScreen());
+                    },
+                        // AgreementScreen()),
                     elevation: 0,
                     child: "Login".text.white.make(),
                     color: Colors.blue,

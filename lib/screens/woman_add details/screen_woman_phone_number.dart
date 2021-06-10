@@ -6,7 +6,7 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class PhoneNumberScreen extends StatelessWidget {
+class WomanPhoneNumberScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class PhoneNumberScreen extends StatelessWidget {
                       .alignTopCenter
                       .height(ConfigSize.convertHeight(context, 50))
                       .make(),
-                  "What is his Phone Number?"
+                  "What'\ Your hone Number?"
                       .text
                       .xl
                       .make()

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_bio.dart';
 import 'package:pitch_app/screens/screen_grant_access.dart';
+import 'package:pitch_app/screens/screen_upload_photos_of_your_guy_friend.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -30,117 +32,119 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
     return  Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: VStack(
-          [
-            SizedBox(
-              height: ConfigSize.blockSizeVertical*5,
-            ),
-            "what’s Your Pitch?"
-            .text
-            .xl
-            .fontWeight(FontWeight.w400)
-            .make()
-            .box
-            .make()
-            .pSymmetric(h: 24, v: 16),
-            "Make a pitch for your single guy friend, so other women can hear that how great he is! We suggest it to do from the heart,as if you are telling a girlfriend why she should date him and other issus that you know that other women should know about."
-            .text
-            .xs
-            .make()
-            .pSymmetric(h: 24, v: 16),
-
-            "Suggested topics if you are getting difficulties to describe him:"
-            .text
-            .xs
-            .make()
-            .pSymmetric(h: 24, v: 1),
-           
-            Container(
-              height: ConfigSize.blockSizeVertical*30,
-              child: 
-              ListView.separated(
-                shrinkWrap: true,
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: ConfigSize.blockSizeVertical*0,
-                  );
-                },
-                itemCount: suggestedTopics.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: ConfigSize.blockSizeVertical*3,
-                    // color: yellow,
-                    padding: new EdgeInsets.only(left:ConfigSize.blockSizeHorizontal*5),
-                    child: ListTile(
-                      dense: true,
-                      leading: bullet(),
-                      minLeadingWidth: ConfigSize.blockSizeHorizontal*1,
-                      title: suggestedTopics[index]
-                      .text
-                      .xs
-                      .make()
-                      .pSymmetric(h: 10, v: 1),
-                    ),
-                  );
-                },
+        child: SingleChildScrollView(
+            child: VStack(
+            [
+              SizedBox(
+                height: ConfigSize.blockSizeVertical*5,
               ),
-            ),
-            SizedBox(
-              height: ConfigSize.blockSizeVertical*2,
-            ),
-            Container(
-              padding: EdgeInsets.only(
-                left:ConfigSize.blockSizeHorizontal*3,
-                right: ConfigSize.blockSizeHorizontal*3),
-              child: Card(
-              shape: RoundedRectangleBorder(
-                // borderRadius: BorderRadius.circular(5.0),
-                side:BorderSide(color:grayborder)),
-                elevation: 0,
-                child: Scrollbar(
-                  child: TextField(
-                      onChanged: (value) {
-                      //Do something with the user input.
-                      },
-                      minLines: 5, 
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        
-                        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                        hintText: 'Write something...',
-                        hintStyle: TextStyle(
-                          fontSize: 12,
-                          ),
-                        border: InputBorder.none,
+              "what’s Your Pitch?"
+              .text
+              .xl
+              .fontWeight(FontWeight.w400)
+              .make()
+              .box
+              .make()
+              .pSymmetric(h: 24, v: 16),
+              "Make a pitch for your single guy friend, so other women can hear that how great he is! We suggest it to do from the heart,as if you are telling a girlfriend why she should date him and other issus that you know that other women should know about."
+              .text
+              .xs
+              .make()
+              .pSymmetric(h: 24, v: 16),
+
+              "Suggested topics if you are getting difficulties to describe him:"
+              .text
+              .xs
+              .make()
+              .pSymmetric(h: 24, v: 1),
+             
+              Container(
+                height: ConfigSize.blockSizeVertical*30,
+                child: 
+                ListView.separated(
+                  shrinkWrap: true,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: ConfigSize.blockSizeVertical*0,
+                    );
+                  },
+                  itemCount: suggestedTopics.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: ConfigSize.blockSizeVertical*3,
+                      // color: yellow,
+                      padding: new EdgeInsets.only(left:ConfigSize.blockSizeHorizontal*5),
+                      child: ListTile(
+                        dense: true,
+                        leading: bullet(),
+                        minLeadingWidth: ConfigSize.blockSizeHorizontal*1,
+                        title: suggestedTopics[index]
+                        .text
+                        .xs
+                        .make()
+                        .pSymmetric(h: 10, v: 1),
                       ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: ConfigSize.blockSizeVertical*2,
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left:ConfigSize.blockSizeHorizontal*3,
+                  right: ConfigSize.blockSizeHorizontal*3),
+                child: Card(
+                shape: RoundedRectangleBorder(
+                  // borderRadius: BorderRadius.circular(5.0),
+                  side:BorderSide(color:grayborder)),
+                  elevation: 0,
+                  child: Scrollbar(
+                    child: TextField(
+                        onChanged: (value) {
+                        //Do something with the user input.
+                        },
+                        minLines: 5, 
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          
+                          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                          hintText: 'Write something...',
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            ),
+                          border: InputBorder.none,
+                        ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              alignment: Alignment.topRight,
-              child: "1500 Character Countdown"
-                  .text
-                  .xs
-                  .make()
-                  .pSymmetric(h: 24, v: 1),
-            ),
-            SizedBox(
-              height: ConfigSize.blockSizeVertical * 5,
-            ),
-            Center(
-              child: StretchedColorButton(
-                      text: "Save",
-                      onPressed: () {
-                        context.push((context) => GrantAccessScreen());
-                      },
-                      height: 36,
-                      width: ConfigSize.convertWidth(context, 300),
-                      color: AppColors.mainColor)
-                  .pOnly(bottom: 16),
-            )
-          ],
+              Container(
+                alignment: Alignment.topRight,
+                child: "1500 Character Countdown"
+                    .text
+                    .xs
+                    .make()
+                    .pSymmetric(h: 24, v: 1),
+              ),
+              SizedBox(
+                height: ConfigSize.blockSizeVertical * 5,
+              ),
+              Center(
+                child: StretchedColorButton(
+                        text: "Save",
+                        onPressed: () {
+                          context.push((context) => BioScreen());
+                        },
+                        height: 36,
+                        width: ConfigSize.convertWidth(context, 300),
+                        color: AppColors.mainColor)
+                    .pOnly(bottom: 16),
+              )
+            ],
+          ),
         )));
   }
 Widget bullet() {

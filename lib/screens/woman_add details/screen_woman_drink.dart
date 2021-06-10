@@ -2,21 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethnicity.dart';
+import 'package:pitch_app/screens/screen_find_a_match.dart';
+import 'package:pitch_app/screens/screen_write_pitch_or_provide_ratings.dart';
+import 'package:pitch_app/screens/woman_add%20details/screen_woman_write_your_pitch.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class ChildrenScreen extends StatefulWidget {
+class WomanDrinkScreen extends StatefulWidget {
   @override
-  _ChildrenScreenState createState() => _ChildrenScreenState();
+  _WomanDrinkScreenState createState() => _WomanDrinkScreenState();
 }
 
-class _ChildrenScreenState extends State<ChildrenScreen> {
+class _WomanDrinkScreenState extends State<WomanDrinkScreen> {
   List<String> itemValue = [
     'No',
-    'Yes, at home with him',
-    "Yes, But they don't live with him",
+    'Rarely',
+    'Socially',
+    'Often',
   ];
   String selectedValue;
   @override
@@ -31,7 +33,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             Expanded(
               child: VStack(
                 [
-                  "Does he have Children?"
+                  "Do you drink (alcoholic, beverages)?"
                       .text
                       .align(TextAlign.center)
                       .xl
@@ -65,7 +67,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => EthnicityScreen()))
+                onPressed: () => context.push((context) => WomanWriteYourPitchScreen()))
           ],
         ),
       )),

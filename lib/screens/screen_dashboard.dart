@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_welcome_to_pitch.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
-import 'package:pitch_app/widgets/dialog_message_notification.dart';
 import 'package:pitch_app/widgets/dialog_pitch_notification.dart';
-import 'package:pitch_app/widgets/dialog_rate_notification.dart';
 import 'package:pitch_app/widgets/dialog_suggestion_notification.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -99,17 +98,22 @@ class DashboardScreen extends StatelessWidget {
                 child: HStack(
                   [
                     "Notifications".text.white.size(13).make(),
-                    Container(
-                      alignment: Alignment.center,
-                      height: ConfigSize.convertHeight(context, 25),
-                      width: ConfigSize.convertHeight(context, 25),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(
-                            ConfigSize.convertHeight(context, 15),
-                          )),
-                      child:
-                          "1".text.size(13).color(Colors.red.shade400).make(),
+                    InkWell(
+                      onTap: (){
+                        context.push((context) => WelcomeToPitchScreen());
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: ConfigSize.convertHeight(context, 25),
+                        width: ConfigSize.convertHeight(context, 25),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(
+                              ConfigSize.convertHeight(context, 15),
+                            )),
+                        child:
+                            "1".text.size(13).color(Colors.red.shade400).make(),
+                      ),
                     )
                   ],
                   alignment: MainAxisAlignment.spaceBetween,

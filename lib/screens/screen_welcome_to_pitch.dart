@@ -4,6 +4,7 @@ import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_find_a_match.dart';
+import 'package:pitch_app/screens/screen_welcome_to_pitch_2.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -58,7 +59,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () {
-                      context.push((context) => FindAMatchScreen());
+                      context.push((context) => WelcomeToPitchTwoScreen());
                     },
                     // context.push((contsext) => AgreementScreen()),
                     elevation: 0,
