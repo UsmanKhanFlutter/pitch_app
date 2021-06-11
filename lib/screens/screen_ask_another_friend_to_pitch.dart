@@ -94,8 +94,8 @@ class _InviteAnotherFriendToPitchScreenState extends State<InviteAnotherFriendTo
                 width: ConfigSize.blockSizeHorizontal * 80,
                 height: ConfigSize.blockSizeVertical * 4,
                 onPressed: () {
-                  context.push(
-                      (context) => PitchMailScreen());
+                  // context.push(
+                  //     (context) => PitchMailScreen());
                 },
               ),
               // Container(

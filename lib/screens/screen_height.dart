@@ -15,6 +15,7 @@ class HeightScreen extends StatefulWidget {
 }
 
 class _HeightScreenState extends State<HeightScreen> {
+  double height=7.7;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +48,12 @@ class _HeightScreenState extends State<HeightScreen> {
                             Icons.expand_less_outlined,
                             size: 30,
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+                              
+                             height= double.parse((height+= 0.1).toStringAsFixed(2));
+                            });
+                          }),
                       Container(
                         height: 40,
                         width: 100,
@@ -55,14 +61,20 @@ class _HeightScreenState extends State<HeightScreen> {
                         decoration: BoxDecoration(
                             color: AppColors.mainColor,
                             borderRadius: BorderRadius.circular(16)),
-                        child: '7.7"'.text.semiBold.white.make(),
+                        child: '${height}"'.text.semiBold.white.make(),
                       ),
                       IconButton(
                           icon: Icon(
                             Icons.expand_more_outlined,
                             size: 30,
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+                              height= double.parse((height-0.1).toStringAsFixed(2));  
+                            });
+                            
+
+                          }),
                     ],
                   ),
                   Image.asset(

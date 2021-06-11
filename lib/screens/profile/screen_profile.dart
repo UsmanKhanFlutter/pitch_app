@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/profile/components/profile_bottom_sheet.dart';
 import 'package:pitch_app/screens/catalog/screen_catalog.dart';
+import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -26,6 +26,8 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigation(),
+
       body: VStack(
         [
           Stack(

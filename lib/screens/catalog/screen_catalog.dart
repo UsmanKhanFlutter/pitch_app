@@ -4,6 +4,7 @@ import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/screens/catalog/components/catalog_item.dart';
 import 'package:pitch_app/screens/screen_bio.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
+import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/dialog_message_notification.dart';
 import 'package:pitch_app/widgets/dialog_rate_notification.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -15,8 +16,9 @@ class CatalogScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: mainAppBar(
           title: "Catalog",
-          onLeadingPressed: () => context.push((context) => BioScreen()),
+          onLeadingPressed: () {},
           onActionPressed: () => rateNotificationDialog(context)),
+      bottomNavigationBar: BottomNavigation(),
       body: VStack(
         [
           Container(

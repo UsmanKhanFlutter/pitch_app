@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_find_a_match.dart';
 import 'package:pitch_app/screens/screen_phone_number.dart';
 import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_basic_information.dart';
-import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -14,6 +12,8 @@ class GettingStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      // bottomNavigationBar: BottomNavigation(),
+
       body: SafeArea(
         child: VStack(
           [

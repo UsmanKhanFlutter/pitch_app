@@ -16,6 +16,7 @@ class WomanHeightScreen extends StatefulWidget {
 }
 
 class _WomanHeightScreenState extends State<WomanHeightScreen> {
+  double height=7.7;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,11 @@ class _WomanHeightScreenState extends State<WomanHeightScreen> {
                             Icons.expand_less_outlined,
                             size: 30,
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+                              height= double.parse((height+= 0.1).toStringAsFixed(2));
+                            });
+                          }),
                       Container(
                         height: 40,
                         width: 100,
@@ -56,14 +61,19 @@ class _WomanHeightScreenState extends State<WomanHeightScreen> {
                         decoration: BoxDecoration(
                             color: AppColors.mainColor,
                             borderRadius: BorderRadius.circular(16)),
-                        child: '7.7"'.text.semiBold.white.make(),
+                        child: '${height}"'.text.semiBold.white.make(),
                       ),
                       IconButton(
                           icon: Icon(
                             Icons.expand_more_outlined,
                             size: 30,
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                            setState(() {
+
+                              height= double.parse((height-0.1).toStringAsFixed(2)); 
+                            });
+                          }),
                     ],
                   ),
                   Image.asset(

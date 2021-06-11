@@ -30,11 +30,11 @@ class GetStartedScreen extends StatelessWidget {
                   "PitchMe".text.bold.xl.make(),
                   SizedBox(height: 16),
                   "Friends Pitching Friends"
-                      .text
-                      .xl2
-                      .fontFamily("Calligraffiti")
-                      .color(AppColors.mainColor)
-                      .make(),
+                  .text
+                  .xl2
+                  .fontFamily("Calligraffiti")
+                  .color(AppColors.mainColor)
+                  .make(),
                   SizedBox(height: 24),
                   StretchedButton(
                     text: "Get Started",

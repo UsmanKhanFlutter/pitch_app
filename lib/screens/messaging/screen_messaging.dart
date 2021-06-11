@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolkit.dart';
+import 'package:pitch_app/screens/screen_main.dart';
 import 'package:pitch_app/screens/screen_upload_photos_of_your_guy_friend.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
@@ -134,7 +136,7 @@ class MessageTextArea extends StatelessWidget {
             width: ConfigSize.blockSizeHorizontal * 15,
             height: ConfigSize.blockSizeVertical * 4,
             onPressed: () {
-              
+              // Get.to(MainScreen());
             },
           ).pSymmetric(h: 16, v: 8),
         ]),

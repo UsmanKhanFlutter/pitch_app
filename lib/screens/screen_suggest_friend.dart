@@ -74,7 +74,9 @@ class SuggestFriendScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: StretchedButton(
                 text: "Pitch them",
-                onPressed: () => context.push((context) => BodyTypeScreen())),
+                onPressed:(){
+
+                }),
           ),
           SizedBox(height: 16),
           Padding(
