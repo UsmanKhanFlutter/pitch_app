@@ -188,7 +188,7 @@ class _FriendSuggestionEmailScreenState
                               alignment: Alignment.center,
                               height: ConfigSize.convertHeight(context, 110),
                               width: ConfigSize.convertWidth(context, 110),
-                              child: Image.asset("assets/images/pitch_me.png"),
+                              child: Image.asset("assets/images/logo.png"),
                             ),
                           ),
                         ]),

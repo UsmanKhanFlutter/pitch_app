@@ -33,7 +33,7 @@ class _InterestScreenState extends State<InterestScreen> {
     'Marriage'
   ];
 
-  String selectedValue;
+  String selectedRelationshipValue, selectedValue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,12 +62,12 @@ class _InterestScreenState extends State<InterestScreen> {
                         .map(
                           (e) => _selectionContainer(
                               onPressed: () =>
-                                  setState(() => selectedValue = e),
+                                  setState(() => selectedRelationshipValue = e),
                               title: "$e",
-                              textColor: selectedValue == e
+                              textColor: selectedRelationshipValue == e
                                   ? Colors.white
                                   : Colors.black,
-                              backgroundColor: selectedValue == e
+                              backgroundColor: selectedRelationshipValue == e
                                   ? AppColors.mainColor
                                   : Colors.white),
                         )
