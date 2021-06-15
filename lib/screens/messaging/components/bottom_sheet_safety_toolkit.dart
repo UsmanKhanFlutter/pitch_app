@@ -31,7 +31,7 @@ class SafetyToolkitBottomSheet extends StatelessWidget {
             color: Colors.grey,
           ).box.width(double.infinity).alignCenter.make(),
           SizedBox(height: 36),
-          "Safetly Tool Kit"
+          "Safety Tool Kit"
               .text
               .align(TextAlign.end)
               .bold
