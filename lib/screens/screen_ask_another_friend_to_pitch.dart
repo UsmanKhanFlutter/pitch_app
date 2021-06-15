@@ -56,24 +56,31 @@ class _InviteAnotherFriendToPitchScreenState extends State<InviteAnotherFriendTo
                 width: ConfigSize.blockSizeHorizontal * 80,
                 // height: ConfigSize.convertHeight(context, 250),
                 padding: EdgeInsets.only(left:8,right: 8),
-                child: Text(
-                  'Jake wants you to pitch him on dating site where friends pitch friends.'),
-              ),
-              Container(
-                width: ConfigSize.blockSizeHorizontal * 80,
-                // height: ConfigSize.convertHeight(context, 250),
-                padding: EdgeInsets.only(left:8,right: 8),
-                child: Text(
-                  'Help your friends find their catch by telling other world why he\'s so great.'),
+                child: 'Jake wants you to pitch him on dating site where friends pitch friends.'.text
+                .align(TextAlign.left)
+                .sm
+                .make(),
               ),
               Container(
                 width: ConfigSize.blockSizeHorizontal * 80,
                 padding: EdgeInsets.only(left:8,right: 8),
-                child: Text(
-                    "Download the App and use phone number to get started"),
+                child: 
+                  'Help your friends find their catch by telling others why he\'s so great.'.text
+                  .align(TextAlign.left)
+                  .sm
+                  .make(),
+              ),
+              Container(
+                width: ConfigSize.blockSizeHorizontal * 80,
+                padding: EdgeInsets.only(left:8,right: 8),
+                child: "Download the App and use phone number to get started"
+                .text
+                .align(TextAlign.left)
+                .sm
+                .make(),
               ),
               SizedBox(
-                height: ConfigSize.blockSizeVertical * 14,
+                height: ConfigSize.blockSizeVertical * 10,
               ),
               StretchedColorButton(
                 color: black,

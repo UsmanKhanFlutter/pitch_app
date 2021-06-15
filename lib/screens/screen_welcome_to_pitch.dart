@@ -6,6 +6,7 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_find_a_match.dart';
 import 'package:pitch_app/screens/screen_welcome_to_pitch_2.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
+import 'package:pitch_app/widgets/dialog_bio_notification.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class WelcomeToPitchScreen extends StatefulWidget {
@@ -14,6 +15,13 @@ class WelcomeToPitchScreen extends StatefulWidget {
 }
 
 class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +30,9 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
       appBar: mainAppBar(
           title: "Welcome to Pitch",
           onLeadingPressed: () {},
-          onActionPressed: () {}),
+          onActionPressed: () {
+            bioNotificationDialog(context);
+          }),
       body: SingleChildScrollView(
         // physics: NeverScrollableScrollPhysics(),
         // padding: EdgeInsets.only(left:10,right:10),
@@ -44,7 +54,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
           Container(
             width: ConfigSize.blockSizeHorizontal * 75,
             child: Text(
-              '''PitchMe works by having a female friend "pitch you" by creating your profile.\n\nBy Clicking below you agree to allow your friends to post information about you.\n\nYou cannot edit the information they write, although you can delete it or cancel your account and delete the information at any time. ''',
+              '''PitchMe works by having a female friend pitch you by creating your profile.\n\nBy Clicking below you agree to allow your friends to post information about you.\n\nYou cannot edit the information they write, although you can delete it or cancel your account and delete the information at any time. ''',
               textAlign: TextAlign.start,
               textScaleFactor: 0.96,
             ),
@@ -59,6 +69,8 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () {
+                      bioNotificationDialog(context);
+
                       context.push((context) => WelcomeToPitchTwoScreen());
                     },
                     // context.push((contsext) => AgreementScreen()),
@@ -73,7 +85,7 @@ class _WelcomeToPitchScreenState extends State<WelcomeToPitchScreen> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () {
-                      context.push((context) => FindAMatchScreen());
+                      bioNotificationDialog(context);
                     },
                     elevation: 0,
                     color: Colors.white,

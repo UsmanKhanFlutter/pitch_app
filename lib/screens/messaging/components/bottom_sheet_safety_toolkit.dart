@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/widgets/dialog_unmatch_notification.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SafetyToolkitBottomSheet extends StatelessWidget {
@@ -42,7 +43,10 @@ class SafetyToolkitBottomSheet extends StatelessWidget {
           SizedBox(height: 36),
           _rowContainer(path: "assets/images/flag.png", text: 'Report'),
           SizedBox(height: 16),
-          _rowContainer(path: "assets/images/cross.png", text: 'Unmatch'),
+          InkWell(
+            onTap: (){
+              unmatchNotificationDialog(context);
+            },child: _rowContainer(path: "assets/images/cross.png", text: 'Unmatch'),),
           SizedBox(height: 16),
           _rowContainer(path: "assets/images/shield.png", text: ''),
           SizedBox(height: 16),
@@ -53,17 +57,22 @@ class SafetyToolkitBottomSheet extends StatelessWidget {
   }
 
   _rowContainer({String path, String text}) {
-    return HStack(
-      [
-        Image.asset(
-          path,
-          height: 24,
-          width: 24,
-        ),
-        SizedBox(width: 24),
-        '$text'.text.size(13).make()
-      ],
-      alignment: MainAxisAlignment.spaceBetween,
+    return InkWell(
+      onTap: (){
+
+      },
+          child: HStack(
+        [
+          Image.asset(
+            path,
+            height: 24,
+            width: 24,
+          ),
+          SizedBox(width: 24),
+          '$text'.text.size(13).make()
+        ],
+        alignment: MainAxisAlignment.spaceBetween,
+      ),
     );
   }
 }

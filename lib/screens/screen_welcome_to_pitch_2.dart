@@ -24,31 +24,26 @@ class _WelcomeToPitchTwoScreenState extends State<WelcomeToPitchTwoScreen> {
           title: "Welcome to Pitch",
           onLeadingPressed: () {},
           onActionPressed: () {}),
-      body: SafeArea(
-        child: Padding(
+      body:SafeArea(
+        child: Container(
           padding: EdgeInsets.symmetric(horizontal: 36, vertical: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: VStack(
-                  
-                  [
-                    SizedBox(height: 26),
-                    
-                    "Your first step is to ask a friend who knows you well to create a profile for you "
-                        .text
-                        .align(TextAlign.left)
-                        .size(11)
-                        .make(),
-                    "You will get a chance to see it and delete it if it doesn'\t reveal the real you."
-                        .text
-                        .align(TextAlign.left)
-                        .size(11)
-                        .make(),
-                  ],
-                  crossAlignment: CrossAxisAlignment.center,
-                ).box.alignTopCenter.make(),
-              ),
+              SizedBox(height: ConfigSize.blockSizeVertical*10),
+              
+              "Your first step is to ask a friend who knows you well to create a profile for you."
+              .text
+              .align(TextAlign.left)
+              .sm
+              .make(),
+              "You will get a chance to see it and delete it if it doesn'\t reveal the real you."
+              .text
+              .align(TextAlign.left)
+              .sm
+              .make(),
+              SizedBox(height: ConfigSize.blockSizeVertical*10),
+
               StretchedButton(
                 text: "Ask a friend to pitch you",
                 onPressed: () => context.push((context) => InviteAnotherFriendToPitchScreen()),
@@ -60,6 +55,6 @@ class _WelcomeToPitchTwoScreenState extends State<WelcomeToPitchTwoScreen> {
           ),
         ),
       ),
-    );
+      );
   }
 }
