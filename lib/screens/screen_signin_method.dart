@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_login.dart';
+import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_icon_button.dart';
@@ -32,7 +33,7 @@ class SignInMethodScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Image.asset(
-                          "assets/images/logo.png",
+                          Strings.appLogo,
                           height: ConfigSize.convertHeight(context, 70),
                         ),
                         "PitchMe".text.size(8).bold.make(),

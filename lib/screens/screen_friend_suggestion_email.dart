@@ -4,6 +4,7 @@ import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_pitch_mail.dart';
 import 'package:pitch_app/screens/screen_your_pitches.dart';
+import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/CustomTextField.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/textfield_rounded.dart';
@@ -188,7 +189,7 @@ class _FriendSuggestionEmailScreenState
                               alignment: Alignment.center,
                               height: ConfigSize.convertHeight(context, 110),
                               width: ConfigSize.convertWidth(context, 110),
-                              child: Image.asset("assets/images/logo.png"),
+                              child: Image.asset(Strings.appLogo),
                             ),
                           ),
                         ]),
