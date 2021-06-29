@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "1057405559125",
+    "project_id": "pitchapp-6aed2",
+    "storage_bucket": "pitchapp-6aed2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057405559125:android:b14eaecaa76e08b7500fdc",
+        "android_client_info": {
+          "package_name": "com.imwasil.pitch_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057405559125-qk9dgevm4pkb7qvq30dkq4aq6rj4tonh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imwasil.pitch_app",
+            "certificate_hash": "ecf821cd0d29495312fd265d87243503dc5f414d"
+          }
+        },
+        {
+          "client_id": "1057405559125-nlpab9sftd5j33b0urig7pf75ng8lmjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKuA51_c1VfiAOHRFsQcuviN7HWnj0_OQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057405559125-nlpab9sftd5j33b0urig7pf75ng8lmjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057405559125:android:812a4181de9ccee9500fdc",
+        "android_client_info": {
+          "package_name": "com.toddcrick.pitchme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057405559125-nlpab9sftd5j33b0urig7pf75ng8lmjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKuA51_c1VfiAOHRFsQcuviN7HWnj0_OQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057405559125-nlpab9sftd5j33b0urig7pf75ng8lmjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

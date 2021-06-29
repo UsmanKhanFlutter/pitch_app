@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_religion.dart';
@@ -23,6 +26,17 @@ class _WomanEthnicityScreenState extends State<WomanEthnicityScreen> {
     'Mixed/ Other'
   ];
   String selectedValue;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+      "ethnicity": selectedValue,
+    }).then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => WomanReligionScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +83,9 @@ class _WomanEthnicityScreenState extends State<WomanEthnicityScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WomanReligionScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

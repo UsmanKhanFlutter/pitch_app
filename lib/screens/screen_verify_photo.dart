@@ -1,12 +1,60 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+
 import 'package:pitch_app/screens/screen_congratulations.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class VerifyPhotoScreen extends StatelessWidget {
+class VerifyPhotoScreen extends StatefulWidget {
+  @override
+  _VerifyPhotoScreenState createState() => _VerifyPhotoScreenState();
+}
+
+class _VerifyPhotoScreenState extends State<VerifyPhotoScreen> {
+  String imageUrl;
+  uploadImage() async {
+    final _firebaseStorage = FirebaseStorage.instance;
+    final _imagePicker = ImagePicker();
+    PickedFile image;
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      //Select Image
+      image = await _imagePicker.getImage(source: ImageSource.camera);
+      var file = File(image.path);
+
+      if (image != null) {
+        //Upload to Firebase
+        var snapshot = await _firebaseStorage
+            .ref()
+            .child('images/imageName')
+            .putFile(file)
+            .whenComplete(() => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CongratulationsScreen())));
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+      } else {
+        print('No Image Path Received');
+      }
+    } else {
+      print('Permission not granted. Try Again with permission access');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,18 +109,23 @@ class VerifyPhotoScreen extends StatelessWidget {
                               border: Border.all(color: Colors.grey),
                               borderRadius: BorderRadius.circular(16)),
                         ),
-                        Container(
-                          height: 30,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.lightGreen.shade400,
-                          ),
-                          child: Icon(
-                            CupertinoIcons.camera_fill,
-                            color: Colors.grey.shade200,
-                          ),
-                        ).pOnly(bottom: 8),
+                        InkWell(
+                          onTap: () {
+                            uploadImage();
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.lightGreen.shade400,
+                            ),
+                            child: Icon(
+                              CupertinoIcons.camera_fill,
+                              color: Colors.grey.shade200,
+                            ),
+                          ).pOnly(bottom: 8),
+                        ),
                       ],
                     ),
                     SizedBox(height: 8),

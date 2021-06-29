@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_children.dart';
@@ -7,7 +10,6 @@ import 'package:pitch_app/screens/woman_add%20details/screen_woman_children.dart
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 
 class WomanEducationScreen extends StatefulWidget {
   @override
@@ -23,6 +25,17 @@ class _WomanEducationScreenState extends State<WomanEducationScreen> {
     'Advanced Degree'
   ];
   String selectedValue;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+      "education": selectedValue,
+    }).then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => WomanChildrenScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +82,9 @@ class _WomanEducationScreenState extends State<WomanEducationScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WomanChildrenScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

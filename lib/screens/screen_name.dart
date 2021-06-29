@@ -1,13 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pitch_app/screens/profile/screen_profile.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/screens/screen_birthday.dart';
-import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class NameScreen extends StatelessWidget {
+class NameScreen extends StatefulWidget {
+  @override
+  _NameScreenState createState() => _NameScreenState();
+}
+
+class _NameScreenState extends State<NameScreen> {
+  TextEditingController firstnamecontroller = TextEditingController();
+  TextEditingController lastnamecontroller = TextEditingController();
+  TextEditingController locationcontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
+  final firestoreinstance = FirebaseFirestore.instance;
+
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "firstname": firstnamecontroller.text,
+      "lastname": lastnamecontroller.text,
+      "location": locationcontroller.text,
+      "email": emailcontroller.text,
+    }).then((value) {
+      Get.to(BirthdayScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,39 +55,44 @@ class NameScreen extends StatelessWidget {
                             .height(60)
                             .make(),
                         TextFieldInformation(
+                          controller: firstnamecontroller,
                           title: "First Name:",
                           height: 44,
                         ),
                         SizedBox(height: 16),
                         TextFieldInformation(
+                          controller: lastnamecontroller,
                           title: "Last Name:",
                           height: 44,
                         ),
                         SizedBox(height: 16),
                         "Where does he live?".text.bold.make(),
                         TextFieldInformation(
+                          controller: locationcontroller,
                           title: "",
                           height: 44,
                         ),
                         SizedBox(height: 24),
                         "What's his email address?".text.bold.make(),
-                        SizedBox(height: 16),
-                        Container(
-                          height: 44,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey.shade200,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade200),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            Theme.of(context).primaryColor))),
-                          ),
-                        ),
+                        // SizedBox(height: 4),
+                        TextFieldInformation(
+                            title: "", height: 44, controller: emailcontroller)
+                        // Container(
+                        //   height: 44,
+                        //   child: TextFormField(
+                        //     decoration: InputDecoration(
+                        //         filled: true,
+                        //         fillColor: Colors.grey.shade200,
+                        //         enabledBorder: OutlineInputBorder(
+                        //           borderSide:
+                        //               BorderSide(color: Colors.grey.shade200),
+                        //         ),
+                        //         focusedBorder: OutlineInputBorder(
+                        //             borderSide: BorderSide(
+                        //                 color:
+                        //                     Theme.of(context).primaryColor))),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -74,13 +102,8 @@ class NameScreen extends StatelessWidget {
                   child: StretchedButton(
                       text: "Save",
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (ctx) => BirthdayScreen()));
-                              
-
-                                // builder: (ctx) => ProfileScreen()));
+                        senddata();
+                        // builder: (ctx) => ProfileScreen()));
                       }),
                 ),
               ],

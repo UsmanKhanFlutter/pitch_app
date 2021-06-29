@@ -1,18 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/profile/screen_profile.dart';
-import 'package:pitch_app/screens/screen_ethnicity.dart';
-import 'package:pitch_app/screens/screen_height.dart';
-import 'package:pitch_app/screens/screen_name.dart';
-import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
-import 'package:pitch_app/screens/screen_your_pitch.dart';
-import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_height.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class WomanInterestScreen extends StatefulWidget {
@@ -35,6 +29,19 @@ class _WomanInterestScreenState extends State<WomanInterestScreen> {
   ];
 
   String selectedValue;
+  String selectedValue2;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+      "relationshipstatus": selectedValue,
+      "interestedin": selectedValue2,
+    }).then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => WomanHeightScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,12 +98,12 @@ class _WomanInterestScreenState extends State<WomanInterestScreen> {
                         .map(
                           (e) => _selectionContainer(
                               onPressed: () =>
-                                  setState(() => selectedValue = e),
+                                  setState(() => selectedValue2 = e),
                               title: "$e",
-                              textColor: selectedValue == e
+                              textColor: selectedValue2 == e
                                   ? Colors.white
                                   : Colors.black,
-                              backgroundColor: selectedValue == e
+                              backgroundColor: selectedValue2 == e
                                   ? AppColors.mainColor
                                   : Colors.white),
                         )
@@ -109,9 +116,11 @@ class _WomanInterestScreenState extends State<WomanInterestScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WomanHeightScreen()))
-                // ProfileScreen
-                // YourPitchScreen()))
+                onPressed: () {
+                  senddata();
+                })
+            // ProfileScreen
+            // YourPitchScreen()))
           ],
         ),
       )),

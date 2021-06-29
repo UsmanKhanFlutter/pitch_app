@@ -4,7 +4,9 @@ import 'package:velocity_x/velocity_x.dart';
 class TextFieldInformation extends StatelessWidget {
   final String title;
   final double height;
-  TextFieldInformation({@required this.title, @required this.height});
+  final TextEditingController controller;
+  TextFieldInformation(
+      {@required this.title, @required this.height, @required this.controller});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,6 +17,7 @@ class TextFieldInformation extends StatelessWidget {
         Container(
           height: height,
           child: TextFormField(
+            controller: controller,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.grey.shade200,

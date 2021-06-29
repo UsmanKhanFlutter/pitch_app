@@ -1,16 +1,46 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_login.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
-import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_icon_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SignInMethodScreen extends StatelessWidget {
+class SignInMethodScreen extends StatefulWidget {
+  @override
+  _SignInMethodScreenState createState() => _SignInMethodScreenState();
+}
+
+class _SignInMethodScreenState extends State<SignInMethodScreen> {
+  Userservices user = Userservices();
+  // final FirebaseAuth auth = FirebaseAuth.instance;
+  // // final GoogleSignIn googleSignIn = GoogleSignIn();
+  // Future<UserCredential> signInWithGoogle() async {
+  //   // Trigger the authentication flow
+  //   final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+  //   // Obtain the auth details from the request
+  //   final GoogleSignInAuthentication googleAuth =
+  //       await googleUser.authentication;
+  //   print(googleAuth);
+  //   // Create a new credential
+  //   final OAuthCredential credential = GoogleAuthProvider.credential(
+  //     accessToken: googleAuth.accessToken,
+  //     idToken: googleAuth.idToken,
+  //   );
+
+  //   // Once signed in, return the UserCredential
+  //   return await FirebaseAuth.instance
+  //       .signInWithCredential(credential)
+  //       .then((value) {
+  //     return ;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +123,9 @@ class SignInMethodScreen extends StatelessWidget {
                         StretchedIconButton(
                           shadowColor: Colors.lightGreen.shade200,
                           path: "assets/images/Google.png",
-                          onPressed: () {},
+                          onPressed: () {
+                            Userservices().signInWithGoogle();
+                          },
                           color: Colors.lightGreen.shade400,
                           width: ConfigSize.convertWidth(context, 220),
                         ),

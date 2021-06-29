@@ -1,12 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ethnicity.dart';
-import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/screens/screen_write_pitch_or_provide_ratings.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DrinkScreen extends StatefulWidget {
@@ -22,6 +22,15 @@ class _DrinkScreenState extends State<DrinkScreen> {
     'Often',
   ];
   String selectedValue;
+  final firestoreinstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "drink": selectedValue,
+    }).then((value) {
+      Get.to(WritePitchOrProvideRatingsScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +77,9 @@ class _DrinkScreenState extends State<DrinkScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WritePitchOrProvideRatingsScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

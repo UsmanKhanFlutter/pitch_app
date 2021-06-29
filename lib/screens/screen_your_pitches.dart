@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_ask_another_friend_to_pitch.dart';
-import 'package:pitch_app/screens/screen_basic_information.dart';
-import 'package:pitch_app/screens/screen_getting_started.dart';
-import 'package:pitch_app/screens/screen_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -39,9 +35,8 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      // bottomNavigationBar: BottomNavigation(),
-
+        backgroundColor: Colors.white,
+        bottomNavigationBar: GettingStartedBottomNavigation(),
         body: SafeArea(
           child: VStack(
             [

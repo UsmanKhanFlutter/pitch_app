@@ -39,10 +39,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
             // size: 18,
             color: Color(0xFF3a3737),
           ),
-          onPressed: (){
-                Navigator.pop(context);
-
-              },
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
@@ -91,9 +90,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
               },
             ),
           ),
-          // SizedBox(
-          //   height: ConfigSize.blockSizeVertical*2,
-          // ),
+          SizedBox(
+            height: ConfigSize.blockSizeVertical * 10,
+          ),
           MessageTextArea(),
         ]),
       ),
@@ -136,9 +135,7 @@ class MessageTextArea extends StatelessWidget {
             color: AppColors.lightGreen,
             width: ConfigSize.blockSizeHorizontal * 15,
             height: ConfigSize.blockSizeVertical * 4,
-            onPressed: () {
-              
-            },
+            onPressed: () {},
           ).pSymmetric(h: 16, v: 8),
         ]),
       ),

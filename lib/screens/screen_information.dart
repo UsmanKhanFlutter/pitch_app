@@ -34,21 +34,25 @@ class InformationScreen extends StatelessWidget {
                         TextFieldInformation(
                           title: "First Name:",
                           height: 44,
+                          controller: null,
                         ),
                         SizedBox(height: 16),
                         TextFieldInformation(
                           title: "I am a:",
                           height: 44,
+                          controller: null,
                         ),
                         SizedBox(height: 16),
                         TextFieldInformation(
                           title: "Birthday:",
                           height: 44,
+                          controller: null,
                         ),
                         SizedBox(height: 16),
                         TextFieldInformation(
                           title: "Email Address:",
                           height: 44,
+                          controller: null,
                         ),
                       ],
                     ),

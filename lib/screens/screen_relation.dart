@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_ethnicity.dart';
@@ -18,6 +21,17 @@ class RelationScreen extends StatefulWidget {
 class _RelationScreenState extends State<RelationScreen> {
   List<String> itemValue = ['Friend', 'Relative', 'Ex', 'Other'];
   String selectedValue;
+  TextEditingController yearcontroller = TextEditingController();
+  final firestoreinstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "relation": selectedValue,
+      "knowingyears": yearcontroller.text,
+    }).then((value) {
+      Get.to(InterestScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,14 +83,16 @@ class _RelationScreenState extends State<RelationScreen> {
                       .alignTopCenter
                       .height(ConfigSize.convertHeight(context, 50))
                       .make(),
-                  _titleTextField("Years")
+                  _titleTextField("Years", yearcontroller)
                 ],
                 crossAlignment: CrossAxisAlignment.center,
               ),
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => InterestScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),
@@ -119,7 +135,7 @@ class _RelationScreenState extends State<RelationScreen> {
     );
   }
 
-  _titleTextField(String title) {
+  _titleTextField(String title, TextEditingController controller) {
     return HStack([
       Container(
         height: 10,
@@ -134,9 +150,11 @@ class _RelationScreenState extends State<RelationScreen> {
       SizedBox(width: 36),
       Container(
         height: 30,
-        width: 40,
+        width: 55,
         alignment: Alignment.center,
         child: TextFormField(
+          keyboardType: TextInputType.phone,
+          controller: controller,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.grey.shade300,

@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_education.dart';
@@ -19,6 +22,17 @@ class _WomanBodyTypeScreenState extends State<WomanBodyTypeScreen> {
     'Stout',
   ];
   String selectedValue;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+      "bodytype": selectedValue,
+    }).then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => WomanEducationScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +79,9 @@ class _WomanBodyTypeScreenState extends State<WomanBodyTypeScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WomanEducationScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

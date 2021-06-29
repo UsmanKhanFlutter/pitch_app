@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_children.dart';
@@ -27,6 +30,15 @@ class _ReligionScreenState extends State<ReligionScreen> {
     'Other'
   ];
   String selectedValue;
+  final firestoreinstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "religion": selectedValue,
+    }).then((value) {
+      Get.to(SmokeScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +85,9 @@ class _ReligionScreenState extends State<ReligionScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => SmokeScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

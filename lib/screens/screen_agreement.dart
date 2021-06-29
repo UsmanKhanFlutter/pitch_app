@@ -4,7 +4,6 @@ import 'package:pitch_app/screens/screen_upload_photo.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class AgreementScreen extends StatelessWidget {
   @override

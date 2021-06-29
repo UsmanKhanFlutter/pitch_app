@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_drink.dart';
@@ -22,6 +25,17 @@ class _WomanCannabisScreenState extends State<WomanCannabisScreen> {
     'Often',
   ];
   String selectedValue;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+      "cannabis": selectedValue,
+    }).then((value) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => WomanDrinkScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +82,9 @@ class _WomanCannabisScreenState extends State<WomanCannabisScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WomanDrinkScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

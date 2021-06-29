@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_drink.dart';
@@ -21,6 +24,15 @@ class _CannabisScreenState extends State<CannabisScreen> {
     'Often',
   ];
   String selectedValue;
+  final firestoreinstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "cannabis": selectedValue,
+    }).then((value) {
+      Get.to(DrinkScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +79,9 @@ class _CannabisScreenState extends State<CannabisScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => DrinkScreen()))
+                onPressed: () {
+                  senddata();
+                })
           ],
         ),
       )),

@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_body_type.dart';
@@ -15,7 +18,16 @@ class HeightScreen extends StatefulWidget {
 }
 
 class _HeightScreenState extends State<HeightScreen> {
-  double height=7.7;
+  double height = 7.7;
+  final firestoreinstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "height": height,
+    }).then((value) {
+      Get.to(BodyTypeScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +62,8 @@ class _HeightScreenState extends State<HeightScreen> {
                           ),
                           onPressed: () {
                             setState(() {
-                              
-                             height= double.parse((height+= 0.1).toStringAsFixed(2));
+                              height = double.parse(
+                                  (height += 0.1).toStringAsFixed(2));
                             });
                           }),
                       Container(
@@ -70,10 +82,9 @@ class _HeightScreenState extends State<HeightScreen> {
                           ),
                           onPressed: () {
                             setState(() {
-                              height= double.parse((height-0.1).toStringAsFixed(2));  
+                              height = double.parse(
+                                  (height - 0.1).toStringAsFixed(2));
                             });
-                            
-
                           }),
                     ],
                   ),
@@ -88,8 +99,10 @@ class _HeightScreenState extends State<HeightScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => BodyTypeScreen()))
-                // PitchMailScreen
+                onPressed: () {
+                  senddata();
+                })
+            // PitchMailScreen
           ],
         ),
       )),

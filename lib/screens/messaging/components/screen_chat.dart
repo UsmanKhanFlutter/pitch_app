@@ -58,6 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Scaffold(
          backgroundColor: Colors.white,
+         
         appBar: mainAppBar(
           title: "Chat",
           onLeadingPressed: () {},

@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_body_type.dart';
@@ -16,7 +19,18 @@ class WomanHeightScreen extends StatefulWidget {
 }
 
 class _WomanHeightScreenState extends State<WomanHeightScreen> {
-  double height=7.7;
+  var firebaseUser = FirebaseAuth.instance.currentUser;
+  final firestoreInstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+      "height": height,
+    }).then((value) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => WomanBodyTypeScreen()));
+    });
+  }
+
+  double height = 7.7;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +65,8 @@ class _WomanHeightScreenState extends State<WomanHeightScreen> {
                           ),
                           onPressed: () {
                             setState(() {
-                              height= double.parse((height+= 0.1).toStringAsFixed(2));
+                              height = double.parse(
+                                  (height += 0.1).toStringAsFixed(2));
                             });
                           }),
                       Container(
@@ -70,8 +85,8 @@ class _WomanHeightScreenState extends State<WomanHeightScreen> {
                           ),
                           onPressed: () {
                             setState(() {
-
-                              height= double.parse((height-0.1).toStringAsFixed(2)); 
+                              height = double.parse(
+                                  (height - 0.1).toStringAsFixed(2));
                             });
                           }),
                     ],
@@ -87,8 +102,10 @@ class _WomanHeightScreenState extends State<WomanHeightScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => WomanBodyTypeScreen()))
-                // PitchMailScreen
+                onPressed: () {
+                  senddata();
+                })
+            // PitchMailScreen
           ],
         ),
       )),

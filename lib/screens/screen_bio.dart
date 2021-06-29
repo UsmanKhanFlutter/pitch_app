@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_congratulations_2.dart';
 import 'package:pitch_app/screens/screen_upload_photos_of_your_guy_friend.dart';
@@ -8,10 +11,27 @@ import 'package:pitch_app/widgets/dialog_bio_notification.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class BioScreen extends StatelessWidget {
+class BioScreen extends StatefulWidget {
+  @override
+  _BioScreenState createState() => _BioScreenState();
+}
+
+class _BioScreenState extends State<BioScreen> {
+  TextEditingController biocontroller = TextEditingController();
+  final firestoreinstance = FirebaseFirestore.instance;
+
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "bio": biocontroller.text,
+    }).then((value) {
+      Get.to(UploadPhotosScreen());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: CupertinoColors.white,
       appBar: mainAppBar(
           title: "What's your pitch?",
@@ -31,6 +51,7 @@ class BioScreen extends StatelessWidget {
             alignment: AlignmentDirectional.bottomEnd,
             children: [
               TextFormField(
+                controller: biocontroller,
                 maxLines: null,
                 expands: true,
                 textAlignVertical: TextAlignVertical.top,
@@ -48,8 +69,9 @@ class BioScreen extends StatelessWidget {
               ),
               StretchedColorButton(
                 text: "Send",
-                onPressed: () =>
-                    context.push((context) => UploadPhotosScreen()),
+                onPressed: () {
+                  senddata();
+                },
                 color: Colors.cyan,
                 height: 24,
                 width: 50,

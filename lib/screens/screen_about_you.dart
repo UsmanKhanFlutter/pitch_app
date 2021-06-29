@@ -21,16 +21,19 @@ class AboutYouScreen extends StatelessWidget {
             TextFieldInformation(
               title: "I am a:",
               height: 30,
+              controller: null,
             ).pSymmetric(h: 16),
             SizedBox(height: 8),
             TextFieldInformation(
               title: "Birthday:",
               height: 30,
+              controller: null,
             ).pSymmetric(h: 16),
             SizedBox(height: 8),
             TextFieldInformation(
               title: "Email:",
               height: 30,
+              controller: null,
             ).pSymmetric(h: 16),
             SizedBox(height: 30),
             StretchedButton(

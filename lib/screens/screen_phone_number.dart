@@ -1,12 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class PhoneNumberScreen extends StatelessWidget {
+class PhoneNumberScreen extends StatefulWidget {
+  @override
+  _PhoneNumberScreenState createState() => _PhoneNumberScreenState();
+}
+
+class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
+  final firestoreinstance = FirebaseFirestore.instance;
+
+  TextEditingController phonenumber = TextEditingController();
+
+  CountryCode code;
+
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).set({
+      "phonenumber": code.toString() + phonenumber.text,
+    }).then((value) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => NameScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +66,7 @@ class PhoneNumberScreen extends StatelessWidget {
                         ),
                         child: CountryCodePicker(
                           onChanged: (val) {
+                            code = val;
                             print(val);
                           },
                           // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
@@ -70,6 +93,7 @@ class PhoneNumberScreen extends StatelessWidget {
                                       BorderSide(color: Colors.grey, width: 2)),
                             ),
                             child: TextField(
+                              controller: phonenumber,
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.symmetric(
@@ -88,9 +112,9 @@ class PhoneNumberScreen extends StatelessWidget {
               ),
             ),
             StretchedButton(
-              text: "Pitch them", 
+              text: "Pitch them",
               onPressed: () {
-                context.push((context) => NameScreen());
+                senddata();
               },
             )
           ],

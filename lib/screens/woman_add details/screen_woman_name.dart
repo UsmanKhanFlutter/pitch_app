@@ -34,17 +34,20 @@ class WomanNameScreen extends StatelessWidget {
                         TextFieldInformation(
                           title: "First Name:",
                           height: 44,
+                          controller: null,
                         ),
                         SizedBox(height: 16),
                         TextFieldInformation(
                           title: "Last Name:",
                           height: 44,
+                          controller: null,
                         ),
                         SizedBox(height: 16),
                         "Where do you live?".text.bold.make(),
                         TextFieldInformation(
                           title: "",
                           height: 44,
+                          controller: null,
                         ),
                         SizedBox(height: 24),
                         "What's your email address?".text.bold.make(),
@@ -77,10 +80,9 @@ class WomanNameScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (ctx) => BirthdayScreen()));
-                              
+                                builder: (ctx) => BirthdayScreen()));
 
-                                // builder: (ctx) => ProfileScreen()));
+                        // builder: (ctx) => ProfileScreen()));
                       }),
                 ),
               ],

@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       context.push((context) => BasicInformationScreen());
                     },
-                        // AgreementScreen()),
+                    // AgreementScreen()),
                     elevation: 0,
                     child: "Login".text.white.make(),
                     color: Colors.blue,

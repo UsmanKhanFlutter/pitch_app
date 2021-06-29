@@ -1,17 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/profile/screen_profile.dart';
-import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/screens/screen_height.dart';
-import 'package:pitch_app/screens/screen_name.dart';
-import 'package:pitch_app/screens/screen_whats_your_pitch.dart';
-import 'package:pitch_app/screens/screen_your_pitch.dart';
-import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class InterestScreen extends StatefulWidget {
@@ -32,6 +27,15 @@ class _InterestScreenState extends State<InterestScreen> {
     'Don\'t know yet',
     'Marriage'
   ];
+  final firestoreinstance = FirebaseFirestore.instance;
+  void senddata() {
+    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+      "relationshipstatus": selectedRelationshipValue,
+      "interestedin": selectedValue,
+    }).then((value) {
+      Get.to(HeightScreen());
+    });
+  }
 
   String selectedRelationshipValue, selectedValue;
   @override
@@ -108,9 +112,11 @@ class _InterestScreenState extends State<InterestScreen> {
             ),
             StretchedButton(
                 text: "Save",
-                onPressed: () => context.push((context) => HeightScreen()))
-                // ProfileScreen
-                // YourPitchScreen()))
+                onPressed: () {
+                  senddata();
+                })
+            // ProfileScreen
+            // YourPitchScreen()))
           ],
         ),
       )),
