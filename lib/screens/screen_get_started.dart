@@ -8,11 +8,27 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../colors.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-class GetStartedScreen extends StatelessWidget {
+class GetStartedScreen extends StatefulWidget {
+  @override
+  _GetStartedScreenState createState() => _GetStartedScreenState();
+}
+
+class _GetStartedScreenState extends State<GetStartedScreen> {
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _firebaseMessaging.requestPermission();
+    _firebaseMessaging.getToken().then((value) => null);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -30,11 +46,11 @@ class GetStartedScreen extends StatelessWidget {
                   "PitchMe".text.bold.xl.make(),
                   SizedBox(height: 16),
                   "Friends Pitching Friends"
-                  .text
-                  .xl2
-                  .fontFamily("Calligraffiti")
-                  .color(AppColors.mainColor)
-                  .make(),
+                      .text
+                      .xl2
+                      .fontFamily("Calligraffiti")
+                      .color(AppColors.mainColor)
+                      .make(),
                   SizedBox(height: 24),
                   StretchedButton(
                     text: "Get Started",

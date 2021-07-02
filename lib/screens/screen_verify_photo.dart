@@ -1,10 +1,14 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 
 import 'package:pitch_app/screens/screen_congratulations.dart';
@@ -18,41 +22,46 @@ class VerifyPhotoScreen extends StatefulWidget {
 }
 
 class _VerifyPhotoScreenState extends State<VerifyPhotoScreen> {
-  String imageUrl;
-  uploadImage() async {
-    final _firebaseStorage = FirebaseStorage.instance;
-    final _imagePicker = ImagePicker();
-    PickedFile image;
-    //Check Permissions
-    await Permission.photos.request();
+  String urlOfImage;
 
-    var permissionStatus = await Permission.photos.status;
+  final picker = ImagePicker();
+  final firestoreInstance = FirebaseFirestore.instance;
 
-    if (permissionStatus.isGranted) {
-      //Select Image
-      image = await _imagePicker.getImage(source: ImageSource.camera);
-      var file = File(image.path);
+  Future uploadImage() async {
+    // var imageFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final imageFile = await picker.getImage(source: ImageSource.gallery);
 
-      if (image != null) {
-        //Upload to Firebase
-        var snapshot = await _firebaseStorage
-            .ref()
-            .child('images/imageName')
-            .putFile(file)
-            .whenComplete(() => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CongratulationsScreen())));
-        var downloadUrl = await snapshot.ref.getDownloadURL();
-        setState(() {
-          imageUrl = downloadUrl;
-        });
-      } else {
-        print('No Image Path Received');
-      }
-    } else {
-      print('Permission not granted. Try Again with permission access');
-    }
+    File croppedFile = await FlutterNativeImage.compressImage(imageFile.path,
+        quality: 70, percentage: 70);
+
+    String fileName = userid;
+    firebase_storage.Reference reference =
+        firebase_storage.FirebaseStorage.instance.ref().child(fileName);
+    firebase_storage.UploadTask uploadTask = reference.putFile(croppedFile);
+    firebase_storage.TaskSnapshot storageTaskSnapshot =
+        await uploadTask.whenComplete(() => print('upload complete'));
+    urlOfImage = await storageTaskSnapshot.ref.getDownloadURL();
+
+    addUserImageToFirestore(urlOfImage: urlOfImage);
+
+    // String id = await globals.functionUserId();
+    // print("????????????????????????????????????????????????????");
+    // print(id.toString());
+  }
+
+  Future<bool> addUserImageToFirestore({String urlOfImage}) async {
+    //use firebase to store user information
+    FirebaseFirestore.instance.collection('basicinfo').doc(userid).update(
+      {
+        'urlOfImage': urlOfImage,
+      },
+    ).then((value) {
+      Get.to(CongratulationsScreen());
+      return true;
+    });
+
+    return true;
+    //return false;
   }
 
   @override

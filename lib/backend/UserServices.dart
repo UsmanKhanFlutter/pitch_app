@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/screens/screen_login.dart';
@@ -13,6 +14,7 @@ String name;
 class Userservices {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth auth = FirebaseAuth.instance;
+  var facebookLogin = FacebookLogin();
   User user;
 
   Future<User> signInWithGoogle() async {
@@ -58,5 +60,62 @@ class Userservices {
     }
 
     return null;
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final FacebookLoginResult result = await facebookLogin.logIn(["email"]);
+    // Create a credential from the access token
+    final FacebookAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(result.accessToken.token);
+
+    return await FirebaseAuth.instance
+        .signInWithCredential(facebookAuthCredential);
+  }
+
+  Future<void> fbLoginAndSaveData(BuildContext context) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    await signInWithFacebook().then((value) async {
+      userid = value.user.uid;
+      print("+++++++++++++++++++++++++$userid");
+
+      _prefs.setString("uid", userid);
+      print(userid);
+    }).catchError((err) {
+      print("Facebook Sign In Error => $err");
+    });
+  }
+
+  void initiateFacebookLogin(BuildContext context) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    facebookLogin = FacebookLogin();
+    _prefs = await SharedPreferences.getInstance();
+    await signInWithFacebook().then((value) async {
+      userid = value.user.uid;
+      name = value.user.displayName;
+      email = value.user.email;
+      print("+++++++++++++++++++++++++$userid");
+
+      _prefs.setString("uid", userid);
+      print(userid);
+    }).catchError((err) {
+      print("Facebook Sign In Error => $err");
+    });
+
+    final FacebookLoginResult result = await facebookLogin.logIn(["email"]);
+
+    switch (result.status) {
+      case FacebookLoginStatus.error:
+        print("Error => ${result.errorMessage.toString()}");
+        break;
+
+      case FacebookLoginStatus.cancelledByUser:
+        print("Cancel");
+        break;
+
+      case FacebookLoginStatus.loggedIn:
+        print("logggggggggggggggggggin successfully");
+        Get.to(LoginScreen());
+    }
   }
 }

@@ -37,6 +37,13 @@
             {
               "client_id": "1057405559125-nlpab9sftd5j33b0urig7pf75ng8lmjb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1057405559125-s48m41g2edq8dodk9862l5k3dn2bld43.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.toddcrick.pitchme"
+              }
             }
           ]
         }
@@ -66,6 +73,13 @@
             {
               "client_id": "1057405559125-nlpab9sftd5j33b0urig7pf75ng8lmjb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1057405559125-s48m41g2edq8dodk9862l5k3dn2bld43.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.toddcrick.pitchme"
+              }
             }
           ]
         }

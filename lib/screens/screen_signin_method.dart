@@ -114,7 +114,9 @@ class _SignInMethodScreenState extends State<SignInMethodScreen> {
                         SizedBox(height: 10),
                         StretchedIconButton(
                           path: "assets/images/Facebook.png",
-                          onPressed: () {},
+                          onPressed: () {
+                            Userservices().initiateFacebookLogin(context);
+                          },
                           shadowColor: Colors.blue.shade300,
                           color: Colors.blue.shade500,
                           width: ConfigSize.convertWidth(context, 220),
