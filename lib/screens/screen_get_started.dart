@@ -43,7 +43,6 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                     height: ConfigSize.convertHeight(context, 160),
                     fit: BoxFit.cover,
                   ),
-                  "PitchMe".text.bold.xl.make(),
                   SizedBox(height: 16),
                   "Friends Pitching Friends"
                       .text

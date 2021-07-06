@@ -13,8 +13,7 @@ class GettingStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: GettingStartedBottomNavigation(),
-
+      bottomNavigationBar: BottomNavigation(),
       body: SafeArea(
         child: VStack(
           [
@@ -53,8 +52,8 @@ class GettingStartedScreen extends StatelessWidget {
                     StretchedColorButton(
                         text: "Pitch Someone",
                         onPressed: () {
-                      context.push((context) => PhoneNumberScreen());
-                    },
+                          context.push((context) => PhoneNumberScreen());
+                        },
                         height: 36,
                         width: ConfigSize.convertWidth(context, 250),
                         color: AppColors.lightGreen),
@@ -71,7 +70,8 @@ class GettingStartedScreen extends StatelessWidget {
                       height: 36,
                       width: ConfigSize.convertWidth(context, 250),
                       onPressed: () {
-                        context.push((context) => WomanBasicInformationScreen());//FindAMatchScreen
+                        context.push((context) =>
+                            WomanBasicInformationScreen()); //FindAMatchScreen
                       },
                       color: AppColors.mainColor,
                     ),

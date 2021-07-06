@@ -36,7 +36,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: GettingStartedBottomNavigation(),
+        bottomNavigationBar: BottomNavigation(),
         body: SafeArea(
           child: VStack(
             [
