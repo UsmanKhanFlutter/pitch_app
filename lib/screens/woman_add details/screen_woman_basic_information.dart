@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/Model/gender.dart';
@@ -21,6 +22,7 @@ class WomanBasicInformationScreen extends StatefulWidget {
 
 class _WomanBasicInformationScreenState
     extends State<WomanBasicInformationScreen> {
+  DateTime _chosenDateTime;
   TextEditingController namecontroller = TextEditingController();
 
   TextEditingController birthdaycontroller = TextEditingController();
@@ -38,6 +40,38 @@ class _WomanBasicInformationScreenState
     genders.add(new Gender(name: 'Man Interested in men', isSelected: true));
     genders
         .add(new Gender(name: 'Woman Interested in women', isSelected: false));
+  }
+
+  void _showDatePicker(ctx) {
+    // showCupertinoModalPopup is a built-in function of the cupertino library
+    showCupertinoModalPopup(
+        context: ctx,
+        builder: (_) => Container(
+              height: 500,
+              color: Color.fromARGB(255, 255, 255, 255),
+              child: Column(
+                children: [
+                  Container(
+                    height: 400,
+                    child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: DateTime(1969, 1, 1),
+                        onDateTimeChanged: (DateTime newDateTime) {
+                          setState(() {
+                            _chosenDateTime = newDateTime;
+                            print(_chosenDateTime);
+                          });
+                        }),
+                  ),
+
+                  // Close the modal
+                  CupertinoButton(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(ctx).pop(),
+                  )
+                ],
+              ),
+            ));
   }
 
   var firebaseUser = FirebaseAuth.instance.currentUser;
@@ -77,7 +111,13 @@ class _WomanBasicInformationScreenState
                     .make(),
 
                 label("First Name"),
-                infoTextField(hintText: '', controller: namecontroller),
+                infoTextField(
+                    hintText: '',
+                    controller: namecontroller,
+                    icon: Icon(
+                      Icons.near_me,
+                      color: grayTextField,
+                    )),
                 // RoundedTextField(),
                 SizedBox(
                   height: ConfigSize.blockSizeVertical * 1,
@@ -88,8 +128,11 @@ class _WomanBasicInformationScreenState
                 //   hint: globals.interestedIn,
                 // ),
                 infoTextField(
-                  hintText: globals.interestedIn,
-                ),
+                    hintText: globals.interestedIn,
+                    icon: Icon(
+                      Icons.near_me,
+                      color: grayTextField,
+                    )),
                 SizedBox(
                   height: ConfigSize.blockSizeVertical * 1,
                 ),
@@ -97,7 +140,11 @@ class _WomanBasicInformationScreenState
                 label('Birthday:'),
                 // RoundedTextField(hint: 'Date of Birth'),
                 infoTextField(
-                    hintText: 'Date of Birth', controller: birthdaycontroller),
+                  hintText: 'Date of Birth',
+                  controller: birthdaycontroller,
+                  icon: Icon(Icons.date_range_outlined),
+                  onclick: () => _showDatePicker(context),
+                ),
                 SizedBox(
                   height: ConfigSize.blockSizeVertical * 1,
                 ),
@@ -105,7 +152,12 @@ class _WomanBasicInformationScreenState
                 label("Email Address:"),
                 // RoundedTextField(hint: 'name@email.com'),
                 infoTextField(
-                    hintText: 'name@email.com', controller: emailcontroller),
+                    hintText: 'name@email.com',
+                    controller: emailcontroller,
+                    icon: Icon(
+                      Icons.near_me,
+                      color: grayTextField,
+                    )),
                 SizedBox(
                   height: ConfigSize.blockSizeVertical * 2,
                 ),
@@ -230,7 +282,11 @@ Widget label(String text) {
       .pSymmetric(h: 20, v: 3);
 }
 
-Widget infoTextField({String hintText, TextEditingController controller}) {
+Widget infoTextField(
+    {String hintText,
+    TextEditingController controller,
+    Icon icon,
+    VoidCallback onclick}) {
   return Container(
     height: ConfigSize.blockSizeVertical * 5,
     padding: EdgeInsets.only(left: 20, right: 20),
@@ -248,6 +304,10 @@ Widget infoTextField({String hintText, TextEditingController controller}) {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 12),
           // contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+          suffixIcon: InkWell(
+            child: icon,
+            onTap: onclick,
+          ),
           hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 12,
