@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CatalogItem extends StatelessWidget {
+  bool _loaded = false;
   final Function onPitchPressed;
-  CatalogItem({@required this.onPitchPressed});
+  String image;
+  String name;
+  CatalogItem({@required this.onPitchPressed, this.image, this.name});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +16,7 @@ class CatalogItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: AssetImage('assets/images/girl_2x.png'),
+          image: NetworkImage(_loaded ? imageurl : image),
           fit: BoxFit.cover,
           colorFilter: new ColorFilter.mode(
               Colors.black.withOpacity(0.2), BlendMode.darken),
@@ -23,7 +27,7 @@ class CatalogItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           VStack([
-            "Jackson, 21".text.white.size(13).bold.make(),
+            name.text.white.size(13).bold.make(),
             "California".text.white.size(13).make(),
           ]),
           StretchedButton(

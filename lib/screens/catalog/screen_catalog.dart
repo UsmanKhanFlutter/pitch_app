@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/screens/catalog/components/catalog_item.dart';
 import 'package:pitch_app/screens/screen_bio.dart';
@@ -9,7 +11,26 @@ import 'package:pitch_app/widgets/dialog_message_notification.dart';
 import 'package:pitch_app/widgets/dialog_rate_notification.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class CatalogScreen extends StatelessWidget {
+class CatalogScreen extends StatefulWidget {
+  @override
+  _CatalogScreenState createState() => _CatalogScreenState();
+}
+
+class _CatalogScreenState extends State<CatalogScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("basicinfo")
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        print(result.data());
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,20 +81,34 @@ class CatalogScreen extends StatelessWidget {
             ),
           ).box.alignTopCenter.make(),
           Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 6 / 7),
-              itemBuilder: (context, index) {
-                return CatalogItem(
-                  onPitchPressed: () => messageNotificationDialog(context),
-                );
-              },
-              itemCount: 15,
-            ).p16(),
-          )
+              child: FutureBuilder<QuerySnapshot>(
+                  // <2> Pass `Future<QuerySnapshot>` to future
+                  future:
+                      FirebaseFirestore.instance.collection('basicinfo').get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      // <3> Retrieve `List<DocumentSnapshot>` from snapshot
+                      final List<DocumentSnapshot> documents =
+                          snapshot.data.docs;
+                      return GridView(
+                          padding: EdgeInsets.only(left: 15, top: 10),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            childAspectRatio: 0.5,
+                          ),
+                          children: documents
+                              .map((doc) => CatalogItem(
+                                    onPitchPressed: () {},
+                                    name: doc["name"],
+                                    image: doc["urlOfImage"],
+                                  ))
+                              .toList());
+                    } else if (snapshot.hasError) {
+                      return Text("error");
+                    }
+                    return Text("error");
+                  }))
         ],
         crossAlignment: CrossAxisAlignment.center,
       ),

@@ -1,10 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_basic_information.dart';
+import 'package:pitch_app/screens/screen_getting_started.dart';
 import 'package:pitch_app/screens/screen_signin_method.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/dialog_location_notification.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../colors.dart';
@@ -22,7 +28,27 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
     // TODO: implement initState
     _firebaseMessaging.requestPermission();
     _firebaseMessaging.getToken().then((value) => null);
+    readLocalData();
     super.initState();
+  }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  void navigationPage() async {
+    if (userid != null) {
+      print(idofuser);
+      Get.to(GettingStartedScreen());
+    } else {
+      Get.to(SignInMethodScreen());
+    }
+  }
+
+  readLocalData() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userid = _prefs.getString("uid");
+      imageurl = _prefs.getString("image");
+    });
+    print(userid);
   }
 
   @override
@@ -54,7 +80,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   StretchedButton(
                     text: "Get Started",
                     onPressed: () {
-                      context.push((context) => SignInMethodScreen());
+                      navigationPage();
                     },
                     height: 36,
                     width: MediaQuery.of(context).size.width / 1.5,

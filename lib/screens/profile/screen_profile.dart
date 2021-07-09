@@ -12,13 +12,20 @@ import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolk
 import 'package:pitch_app/screens/screen_settings.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_upload_photos.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   bool isimage = false;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final List<String> titleList = [
     "Bio:",
     "Interested In:",
@@ -26,6 +33,7 @@ class ProfileScreen extends StatelessWidget {
     // "Hobbies/Interests:",
     // "Advance Settings",
   ];
+
   final List<String> subList = [
     "I am who I am, You will find out if we talk",
     "women",
@@ -33,9 +41,11 @@ class ProfileScreen extends StatelessWidget {
     // "Pets",
     // "Advance Settings",
   ];
+
   String urlOfImage;
 
   final picker = ImagePicker();
+
   final firestoreInstance = FirebaseFirestore.instance;
 
   Future getProfileImage() async {
@@ -75,8 +85,37 @@ class ProfileScreen extends StatelessWidget {
     //return false;
   }
 
+// getData()async{
+//   SharedP
+// }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(userid);
+    print('lllllllllllllllll');
+
+    // getData();
+  }
+
+  // firebaseimage() async {
+  //   SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+  //   imageurl = _prefs.getString("image");
+  //   return imageurl;
+  // }
+  // readLocalData() async {
+  //   SharedPreferences _prefs = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     userid = _prefs.getString("uid");
+  //     imageurl = _prefs.getString("image");
+  //   });
+  //   print(userid);
+  // }
+
   @override
   Widget build(BuildContext context) {
+    ConfigSize().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       key: _scaffoldKey,
@@ -89,11 +128,9 @@ class ProfileScreen extends StatelessWidget {
                 .doc(userid)
                 .snapshots(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                print('no data');
-                return Container();
-              } else {
-                print(snapshot.data['name']);
+              if (snapshot.hasData) {
+                print(snapshot.data);
+
                 return VStack(
                   [
                     SizedBox(
@@ -309,7 +346,8 @@ class ProfileScreen extends StatelessWidget {
                     )
                   ],
                 );
-              }
+              } else
+                return Center(child: CircularProgressIndicator());
             }),
       ),
     );

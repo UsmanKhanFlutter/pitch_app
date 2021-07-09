@@ -12,7 +12,6 @@ import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
-import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
 class BasicInformationScreen extends StatefulWidget {
   @override

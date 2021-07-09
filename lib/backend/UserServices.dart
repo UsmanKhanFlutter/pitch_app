@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
+
 import 'package:pitch_app/screens/screen_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+String emailimage;
+String idofuser;
+
 String userid;
+
 String imageurl;
 String email;
 String name;
@@ -15,8 +20,8 @@ class Userservices {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth auth = FirebaseAuth.instance;
   var facebookLogin = FacebookLogin();
-  User user;
 
+  SharedPreferences sharedUserData;
   Future<User> signInWithGoogle() async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
@@ -30,6 +35,7 @@ class Userservices {
     final UserCredential authResult =
         await auth.signInWithCredential(credential);
     final User user = authResult.user;
+
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     // userid = _prefs.get(user.uid).toString();
 
@@ -42,12 +48,18 @@ class Userservices {
 
       print('signInWithGoogle succeeded: $user');
       print(user.uid);
-      _prefs.setString("uid", user.uid);
-      userid = user.uid;
+      _prefs.setString("uid", userid);
+
+      idofuser = _prefs.getString("uid");
+      print(idofuser + "iiiiiiiiiiiiiiddddddddddddddddddddddddd");
       print(userid + "aaaaaaaaaaaaaaaa");
       _prefs.setString("image", user.photoURL);
       imageurl = user.photoURL;
+      emailimage = _prefs.getString("image");
+
       print(imageurl + "mmmmmmmmmmmmmmmmmmmm");
+      print(emailimage +
+          "emaaaaaaaaaaaaaaaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
       _prefs.setString("email", user.email);
       email = user.email;
       print(email + "eeeeeeeeeeee");
