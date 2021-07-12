@@ -6,15 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pitch_app/backend/UserServices.dart';
+
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolkit.dart';
 import 'package:pitch_app/screens/screen_settings.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_upload_photos.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:velocity_x/velocity_x.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final List<String> subList = [
     "I am who I am, You will find out if we talk",
     "women",
-    email,
+    globals.email,
     // "Pets",
     // "Advance Settings",
   ];
@@ -55,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     File croppedFile = await FlutterNativeImage.compressImage(imageFile.path,
         quality: 70, percentage: 70);
 
-    String fileName = userid;
+    String fileName = globals.userid;
     firebase_storage.Reference reference =
         firebase_storage.FirebaseStorage.instance.ref().child(fileName);
     firebase_storage.UploadTask uploadTask = reference.putFile(croppedFile);
@@ -72,7 +73,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<bool> addUserImageToFirestore({String urlOfImage}) async {
     //use firebase to store user information
-    FirebaseFirestore.instance.collection('basicinfo').doc(userid).update(
+    FirebaseFirestore.instance
+        .collection('basicinfo')
+        .doc(globals.userid)
+        .update(
       {
         'urlOfImage': urlOfImage,
       },
@@ -92,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(userid);
+    print(globals.userid);
     print('lllllllllllllllll');
 
     // getData();
@@ -125,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('basicinfo')
-                .doc(userid)
+                .doc(globals.userid)
                 .snapshots(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
@@ -142,10 +146,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: <Widget>[
                           CircleAvatar(
                               radius: 80,
-                              backgroundImage: NetworkImage(
-                                  snapshot.data.data().containsKey("urlOfImage")
-                                      ? snapshot.data["urlOfImage"]
-                                      : imageurl)),
+                              backgroundImage:
+                                  NetworkImage(snapshot.data["urlOfImage"])),
                           Positioned(
                             top: 0,
                             right: 0,

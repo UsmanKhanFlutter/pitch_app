@@ -77,7 +77,7 @@ class _WomanBasicInformationScreenState
   var firebaseUser = FirebaseAuth.instance.currentUser;
   final firestoreInstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreInstance.collection("womenbasicinfo").doc(userid).set({
+    firestoreInstance.collection("womenbasicinfo").doc(globals.userid).set({
       "name": namecontroller.text,
       "iam": globals.interestedIn,
       "birthday": birthdaycontroller.text,

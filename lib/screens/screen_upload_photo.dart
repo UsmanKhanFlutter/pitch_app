@@ -14,7 +14,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:image_picker/image_picker.dart';
 import '../strings.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 class UploadPhotoScreen extends StatefulWidget {
   @override
   _UploadPhotoScreenState createState() => _UploadPhotoScreenState();
@@ -35,7 +35,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
     File croppedFile = await FlutterNativeImage.compressImage(imageFile.path,
         quality: 70, percentage: 70);
 
-    String fileName = userid;
+    String fileName = globals.userid;
     firebase_storage.Reference reference =
         firebase_storage.FirebaseStorage.instance.ref().child(fileName);
     firebase_storage.UploadTask uploadTask = reference.putFile(croppedFile);
@@ -52,7 +52,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
 
   Future<bool> addUserImageToFirestore({String urlOfImage}) async {
     //use firebase to store user information
-    FirebaseFirestore.instance.collection('basicinfo').doc(userid).update(
+    FirebaseFirestore.instance.collection('basicinfo').doc(globals.userid).update(
       {
         'urlOfImage': urlOfImage,
       },

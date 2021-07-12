@@ -8,6 +8,7 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_write_pitch_or_provide_ratings.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class DrinkScreen extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
       "drink": selectedValue,
     }).then((value) {
       Get.to(WritePitchOrProvideRatingsScreen());

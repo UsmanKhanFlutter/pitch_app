@@ -95,6 +95,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
+                            crossAxisSpacing: 10,
                             childAspectRatio: 0.5,
                           ),
                           children: documents

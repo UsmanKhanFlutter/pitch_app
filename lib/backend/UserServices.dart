@@ -7,14 +7,7 @@ import 'package:get/get.dart';
 import 'package:pitch_app/screens/screen_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String emailimage;
-String idofuser;
-
-String userid;
-
-String imageurl;
-String email;
-String name;
+import '../GlobalVariables/globals_variable.dart' as globals;
 
 class Userservices {
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -36,36 +29,19 @@ class Userservices {
         await auth.signInWithCredential(credential);
     final User user = authResult.user;
 
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
     // userid = _prefs.get(user.uid).toString();
 
     if (user != null) {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
       assert(!user.isAnonymous);
       assert(await user.getIdToken() != null);
 
       final User currentUser = auth.currentUser;
       assert(user.uid == currentUser.uid);
+      globals.userid = user.uid;
+      _prefs.setString("currentUserId", user.uid);
+      print("+++++++++++++++++++++++++${globals.userid}");
 
-      print('signInWithGoogle succeeded: $user');
-      print(user.uid);
-      _prefs.setString("uid", userid);
-
-      idofuser = _prefs.getString("uid");
-      print(idofuser + "iiiiiiiiiiiiiiddddddddddddddddddddddddd");
-      print(userid + "aaaaaaaaaaaaaaaa");
-      _prefs.setString("image", user.photoURL);
-      imageurl = user.photoURL;
-      emailimage = _prefs.getString("image");
-
-      print(imageurl + "mmmmmmmmmmmmmmmmmmmm");
-      print(emailimage +
-          "emaaaaaaaaaaaaaaaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-      _prefs.setString("email", user.email);
-      email = user.email;
-      print(email + "eeeeeeeeeeee");
-      _prefs.setString("name", user.displayName);
-      name = user.displayName;
-      print(name + "nnnnnnnnnnn");
       Get.to(LoginScreen());
 
       return user;
@@ -88,11 +64,11 @@ class Userservices {
   Future<void> fbLoginAndSaveData(BuildContext context) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     await signInWithFacebook().then((value) async {
-      userid = value.user.uid;
-      print("+++++++++++++++++++++++++$userid");
+      globals.userid = value.user.uid;
+      print("+++++++++++++++++++++++++${globals.userid}");
 
-      _prefs.setString("uid", userid);
-      print(userid);
+      _prefs.setString("uid", globals.userid);
+      print(globals.userid);
     }).catchError((err) {
       print("Facebook Sign In Error => $err");
     });
@@ -103,13 +79,13 @@ class Userservices {
     facebookLogin = FacebookLogin();
     _prefs = await SharedPreferences.getInstance();
     await signInWithFacebook().then((value) async {
-      userid = value.user.uid;
-      name = value.user.displayName;
-      email = value.user.email;
-      print("+++++++++++++++++++++++++$userid");
+      globals.userid = value.user.uid;
+      globals.name = value.user.displayName;
+      globals.email = value.user.email;
+      print("+++++++++++++++++++++++++${globals.userid}");
 
-      _prefs.setString("uid", userid);
-      print(userid);
+      _prefs.setString("uid", globals.userid);
+      print(globals.userid);
     }).catchError((err) {
       print("Facebook Sign In Error => $err");
     });

@@ -10,6 +10,7 @@ import 'package:pitch_app/screens/screen_smoke.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class ReligionScreen extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _ReligionScreenState extends State<ReligionScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
       "religion": selectedValue,
     }).then((value) {
       Get.to(SmokeScreen());

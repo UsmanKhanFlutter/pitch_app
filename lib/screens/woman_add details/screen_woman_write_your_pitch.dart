@@ -8,6 +8,7 @@ import 'package:pitch_app/screens/woman_add%20details/screen_woman_upload_photos
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class WomanWriteYourPitchScreen extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _WomanWriteYourPitchScreenState extends State<WomanWriteYourPitchScreen> {
   var firebaseUser = FirebaseAuth.instance.currentUser;
   final firestoreInstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+    firestoreInstance.collection("womenbasicinfo").doc(globals.userid).update({
       "yourpitch": pitchcontroller.text,
     }).then((value) {
       Navigator.push(context,

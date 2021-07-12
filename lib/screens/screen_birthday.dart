@@ -11,7 +11,7 @@ import 'package:pitch_app/screens/screen_relation.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 class BirthdayScreen extends StatefulWidget {
   @override
   _BirthdayScreenState createState() => _BirthdayScreenState();
@@ -23,7 +23,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   TextEditingController yearcontroller = TextEditingController();
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
       "month": monthcontroller.text,
       "day": daycontroller.text,
       "year": yearcontroller.text,

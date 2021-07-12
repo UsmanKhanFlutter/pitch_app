@@ -9,6 +9,7 @@ import 'package:pitch_app/screens/screen_ethnicity.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class ChildrenScreen extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
       "childrens": selectedValue,
     }).then((value) {
       Get.to(EthnicityScreen());

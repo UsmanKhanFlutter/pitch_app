@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class CatalogItem extends StatelessWidget {
   bool _loaded = false;
@@ -16,7 +16,7 @@ class CatalogItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: NetworkImage(_loaded ? imageurl : image),
+          image: NetworkImage(_loaded ? globals.imageurl : image),
           fit: BoxFit.cover,
           colorFilter: new ColorFilter.mode(
               Colors.black.withOpacity(0.2), BlendMode.darken),

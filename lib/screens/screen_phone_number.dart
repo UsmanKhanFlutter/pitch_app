@@ -7,6 +7,7 @@ import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class PhoneNumberScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   CountryCode code;
 
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).set({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).set({
       "phonenumber": code.toString() + phonenumber.text,
     }).then((value) {
       Navigator.push(

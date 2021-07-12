@@ -8,7 +8,7 @@ import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_cannabis.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 class WomanSmokeScreen extends StatefulWidget {
   @override
   _WomanSmokeScreenState createState() => _WomanSmokeScreenState();
@@ -24,7 +24,7 @@ class _WomanSmokeScreenState extends State<WomanSmokeScreen> {
   var firebaseUser = FirebaseAuth.instance.currentUser;
   final firestoreInstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+    firestoreInstance.collection("womenbasicinfo").doc(globals.userid).update({
       "smoke": selectedValue,
     }).then((value) {
       Navigator.push(context,

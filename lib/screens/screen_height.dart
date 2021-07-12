@@ -11,6 +11,7 @@ import 'package:pitch_app/screens/screen_pitch_mail.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class HeightScreen extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _HeightScreenState extends State<HeightScreen> {
   double height = 7.7;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
       "height": height,
     }).then((value) {
       Get.to(BodyTypeScreen());

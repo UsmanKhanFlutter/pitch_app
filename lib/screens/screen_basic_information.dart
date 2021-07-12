@@ -30,12 +30,14 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   final firestoreInstance = FirebaseFirestore.instance;
   var firebaseUser = FirebaseAuth.instance.currentUser;
   void senddata() {
-    firestoreInstance.collection("basicinfo").doc(userid).set({
+    firestoreInstance.collection("basicinfo").doc(globals.userid).set({
       "name": nameController.text,
       "iam": globals.interestedIn,
       "birthday": _chosenDateTime.toString() + birthdaycontroller.text,
       "email": emailcontroller.text,
       "phonenumber": countrycode.toString() + numbercontroller.text,
+      "urlOfImage":
+          "https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png",
     }).then((value) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AgreementScreen()));

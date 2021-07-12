@@ -7,7 +7,7 @@ import 'package:pitch_app/screens/screen_birthday.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 class NameScreen extends StatefulWidget {
   @override
   _NameScreenState createState() => _NameScreenState();
@@ -21,7 +21,7 @@ class _NameScreenState extends State<NameScreen> {
   final firestoreinstance = FirebaseFirestore.instance;
 
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
       "firstname": firstnamecontroller.text,
       "lastname": lastnamecontroller.text,
       "location": locationcontroller.text,

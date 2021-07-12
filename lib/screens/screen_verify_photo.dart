@@ -15,6 +15,7 @@ import 'package:pitch_app/screens/screen_congratulations.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
 class VerifyPhotoScreen extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ class _VerifyPhotoScreenState extends State<VerifyPhotoScreen> {
     File croppedFile = await FlutterNativeImage.compressImage(imageFile.path,
         quality: 70, percentage: 70);
 
-    String fileName = userid;
+    String fileName = globals.userid;
     firebase_storage.Reference reference =
         firebase_storage.FirebaseStorage.instance.ref().child(fileName);
     firebase_storage.UploadTask uploadTask = reference.putFile(croppedFile);
@@ -51,7 +52,10 @@ class _VerifyPhotoScreenState extends State<VerifyPhotoScreen> {
 
   Future<bool> addUserImageToFirestore({String urlOfImage}) async {
     //use firebase to store user information
-    FirebaseFirestore.instance.collection('basicinfo').doc(userid).update(
+    FirebaseFirestore.instance
+        .collection('basicinfo')
+        .doc(globals.userid)
+        .update(
       {
         'urlOfImage': urlOfImage,
       },

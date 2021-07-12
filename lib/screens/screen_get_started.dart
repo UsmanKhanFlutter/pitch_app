@@ -12,7 +12,7 @@ import 'package:pitch_app/widgets/dialog_location_notification.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import '../GlobalVariables/globals_variable.dart' as globals;
 import '../colors.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -25,30 +25,22 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
+
     _firebaseMessaging.requestPermission();
     _firebaseMessaging.getToken().then((value) => null);
-    readLocalData();
+
     super.initState();
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void navigationPage() async {
-    if (userid != null) {
-      print(idofuser);
-      Get.to(GettingStartedScreen());
-    } else {
+    if (_auth.currentUser == null) {
       Get.to(SignInMethodScreen());
+    } else {
+      Get.to(GettingStartedScreen());
     }
-  }
-
-  readLocalData() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    setState(() {
-      userid = _prefs.getString("uid");
-      imageurl = _prefs.getString("image");
-    });
-    print(userid);
   }
 
   @override

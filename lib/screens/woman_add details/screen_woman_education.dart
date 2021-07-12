@@ -10,7 +10,7 @@ import 'package:pitch_app/screens/woman_add%20details/screen_woman_children.dart
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
-
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 class WomanEducationScreen extends StatefulWidget {
   @override
   _WomanEducationScreenState createState() => _WomanEducationScreenState();
@@ -28,7 +28,7 @@ class _WomanEducationScreenState extends State<WomanEducationScreen> {
   var firebaseUser = FirebaseAuth.instance.currentUser;
   final firestoreInstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreInstance.collection("womenbasicinfo").doc(userid).update({
+    firestoreInstance.collection("womenbasicinfo").doc(globals.userid).update({
       "education": selectedValue,
     }).then((value) {
       Navigator.push(context,
