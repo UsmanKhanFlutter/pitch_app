@@ -91,11 +91,12 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       final List<DocumentSnapshot> documents =
                           snapshot.data.docs;
                       return GridView(
-                          padding: EdgeInsets.only(left: 15, top: 10),
+                          padding: EdgeInsets.only(left: 8, top: 10, right: 8),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
                             crossAxisSpacing: 10,
+                            mainAxisSpacing: 5,
                             childAspectRatio: 0.5,
                           ),
                           children: documents
@@ -106,9 +107,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                   ))
                               .toList());
                     } else if (snapshot.hasError) {
-                      return Text("error");
+                      return Text("loading");
                     }
-                    return Text("error");
+                    return Text("loading");
                   }))
         ],
         crossAlignment: CrossAxisAlignment.center,

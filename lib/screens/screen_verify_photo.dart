@@ -30,7 +30,7 @@ class _VerifyPhotoScreenState extends State<VerifyPhotoScreen> {
 
   Future uploadImage() async {
     // var imageFile = await ImagePicker().getImage(source: ImageSource.gallery);
-    final imageFile = await picker.getImage(source: ImageSource.gallery);
+    final imageFile = await picker.getImage(source: ImageSource.camera);
 
     File croppedFile = await FlutterNativeImage.compressImage(imageFile.path,
         quality: 70, percentage: 70);

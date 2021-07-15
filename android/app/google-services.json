@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1057405559125",
+    "firebase_url": "https://pitchapp-6aed2-default-rtdb.firebaseio.com",
     "project_id": "pitchapp-6aed2",
     "storage_bucket": "pitchapp-6aed2.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1057405559125-qk9dgevm4pkb7qvq30dkq4aq6rj4tonh.apps.googleusercontent.com",
+          "client_id": "1057405559125-866s7rm6o1mt0i03h92hh2qqod8jsnhj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.imwasil.pitch_app",
-            "certificate_hash": "ecf821cd0d29495312fd265d87243503dc5f414d"
+            "certificate_hash": "a2dbe2663aff69a17db2fe34ab2dc5aac255b751"
           }
         },
         {

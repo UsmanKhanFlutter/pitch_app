@@ -12,6 +12,7 @@ import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolk
 import 'package:pitch_app/screens/screen_settings.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_upload_photos.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -89,6 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //return false;
   }
 
+  String userID;
+
 // getData()async{
 //   SharedP
 // }
@@ -98,8 +101,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     print(globals.userid);
     print('lllllllllllllllll');
-
+    readLocalData();
     // getData();
+  }
+
+  readLocalData() async {
+    SharedPreferences sharedUserData = await SharedPreferences.getInstance();
+    setState(() {
+      userID = sharedUserData.getString("currentUserId");
+    });
+    print(userID);
   }
 
   // firebaseimage() async {
@@ -129,12 +140,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('basicinfo')
-                .doc(globals.userid)
+                .doc(userID)
                 .snapshots(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                print(snapshot.data);
+              if (!snapshot.hasData) {
+                print('no data');
 
+                return Container();
+              } else {
+                print("lllllllllllll");
+                print(globals.userid);
+                print(snapshot.data['name']);
                 return VStack(
                   [
                     SizedBox(
@@ -348,8 +364,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     )
                   ],
                 );
-              } else
-                return Center(child: CircularProgressIndicator());
+              }
             }),
       ),
     );
