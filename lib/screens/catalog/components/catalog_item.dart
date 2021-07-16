@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pitch_app/screens/messaging/screen_messaging.dart';
+import 'package:pitch_app/widgets/dialog_message_notification.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;

@@ -183,6 +183,7 @@ Widget recievedMessageContainer({String message}) {
 }
 
 Widget sentMessageContainer({String message}) {
+  print("presseeeedddd");
   return Container(
       child: Row(
     mainAxisAlignment: MainAxisAlignment.end,

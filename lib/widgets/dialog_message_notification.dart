@@ -6,6 +6,9 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MessageNotificationDialog extends StatelessWidget {
+  String name;
+  String url;
+  MessageNotificationDialog(this.name, this.url);
   @override
   Widget build(BuildContext context) {
     return ClipRect(
@@ -36,29 +39,12 @@ class MessageNotificationDialog extends StatelessWidget {
                         .make()
                         .pSymmetric(h: 16),
                     SizedBox(height: 20),
-                    Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade700,
-                            spreadRadius: 0,
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.asset(
-                          'assets/images/girl_2x.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: NetworkImage(url),
                     ),
                     SizedBox(height: 10),
-                    "James".text.white.size(13).make()
+                    name.text.white.size(13).make()
                   ],
                   crossAlignment: CrossAxisAlignment.center,
                 ),
@@ -76,7 +62,8 @@ class MessageNotificationDialog extends StatelessWidget {
   }
 }
 
-Future<Widget> messageNotificationDialog(BuildContext context) {
+Future<Widget> messageNotificationDialog(
+    BuildContext context, String name, String url) {
   return showDialog(
       context: context,
       builder: (ctx) {
@@ -87,7 +74,7 @@ Future<Widget> messageNotificationDialog(BuildContext context) {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          child: MessageNotificationDialog(),
+          child: MessageNotificationDialog(name, url),
         );
       });
 }
