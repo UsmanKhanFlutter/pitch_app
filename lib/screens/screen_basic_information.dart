@@ -10,6 +10,7 @@ import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
@@ -19,6 +20,7 @@ class BasicInformationScreen extends StatefulWidget {
 }
 
 class _BasicInformationScreenState extends State<BasicInformationScreen> {
+  String currentuserid;
   TextEditingController nameController = TextEditingController();
 
   TextEditingController birthdaycontroller = TextEditingController();
@@ -38,6 +40,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
       "phonenumber": countrycode.toString() + numbercontroller.text,
       "urlOfImage":
           "https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png",
+      "userid": currentuserid,
     }).then((value) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AgreementScreen()));
@@ -79,12 +82,21 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   @override
   void initState() {
     super.initState();
+    readLocalData();
     globals.interestedIn = 'Man Interested in men';
     genders.add(new Gender(name: 'Man Interested in women', isSelected: false));
     genders.add(new Gender(name: 'Woman Interested in men', isSelected: false));
     genders.add(new Gender(name: 'Man Interested in men', isSelected: true));
     genders
         .add(new Gender(name: 'Woman Interested in women', isSelected: false));
+  }
+
+  readLocalData() async {
+    SharedPreferences sharedUserData = await SharedPreferences.getInstance();
+    setState(() {
+      currentuserid = sharedUserData.getString("currentUserId");
+    });
+    print(currentuserid);
   }
 
   @override

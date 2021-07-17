@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_preview/plugins.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
@@ -10,16 +12,113 @@ import 'package:pitch_app/screens/screen_upload_photos_of_your_guy_friend.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/dialog_unmatch_notification.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MessagingScreen extends StatefulWidget {
+  String myname;
+  String chatRoomId;
+  MessagingScreen(this.chatRoomId, this.myname);
   @override
   _MessagingScreenState createState() => _MessagingScreenState();
 }
 
 class _MessagingScreenState extends State<MessagingScreen> {
+  Stream chatRooms;
+  Stream<QuerySnapshot> chats;
+  TextEditingController messageEditingController = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final ConfigSize configSize = ConfigSize();
+
+  Widget chatMessages() {
+    return StreamBuilder(
+      stream: chats,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  return MessageTile(
+                    message: snapshot.data.docs[index]["message"],
+                    sendByMe:
+                        widget.myname == snapshot.data.docs[index]["sendBy"],
+                  );
+                })
+            : Container();
+      },
+    );
+  }
+
+  addMessage() {
+    if (messageEditingController.text.isNotEmpty) {
+      Map<String, dynamic> chatMessageMap = {
+        "sendBy": widget.myname,
+        "message": messageEditingController.text,
+        'time': DateTime.now().millisecondsSinceEpoch,
+      };
+
+      addmessage(widget.chatRoomId, chatMessageMap);
+
+      setState(() {
+        messageEditingController.text = "";
+      });
+    }
+  }
+
+  Future<void> addmessage(String chatRoomId, chatMessageData) {
+    FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .add(chatMessageData)
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  getUserChats(String itIsMyName) async {
+    return await FirebaseFirestore.instance
+        .collection("chatRoom")
+        .where('users', arrayContains: widget.myname)
+        .snapshots();
+  }
+
+  getChats(String chatRoomId) async {
+    return FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .orderBy('time')
+        .snapshots();
+  }
+
+  getUserInfogetChats() async {
+    getUserChats(widget.myname).then((snapshots) {
+      setState(() {
+        chatRooms = snapshots;
+        print(
+            "we got the data + ${chatRooms.toString()} this is name  ${widget.myname}");
+      });
+    });
+  }
+
+  readlocaldata() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    widget.myname = _prefs.getString("currentUserId");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserInfogetChats();
+    getChats(widget.chatRoomId).then((val) {
+      setState(() {
+        chats = val;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     configSize.init(context);
@@ -71,36 +170,34 @@ class _MessagingScreenState extends State<MessagingScreen> {
           ),
 
           Container(
-            height: ConfigSize.blockSizeVertical * 57,
-            width: ConfigSize.blockSizeHorizontal * 80,
-            child: ListView.builder(
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    recievedMessageContainer(message: 'Hi! How are you??'),
-                    sentMessageContainer(message: 'I am good. Whats up??'),
-                    recievedMessageContainer(
-                        message:
-                            'Not much just bored. Wondering if we can hang out somewhere?'),
-                    sentMessageContainer(
-                        message: 'Sounds fun! Where and when? '),
-                  ],
-                );
-              },
-            ),
-          ),
+              height: ConfigSize.blockSizeVertical * 57,
+              width: ConfigSize.blockSizeHorizontal * 80,
+              child: chatMessages()),
           SizedBox(
-            height: ConfigSize.blockSizeVertical * 10,
+            height: ConfigSize.blockSizeVertical * 5,
           ),
-          MessageTextArea(),
+          MessageTextArea(() {
+            addMessage();
+          }, messageEditingController),
         ]),
       ),
     );
   }
 }
 
+getChats(String chatRoomId) async {
+  return FirebaseFirestore.instance
+      .collection("chatRoom")
+      .doc(chatRoomId)
+      .collection("chats")
+      .orderBy('time')
+      .snapshots();
+}
+
 class MessageTextArea extends StatelessWidget {
+  VoidCallback onpressed;
+  TextEditingController text;
+  MessageTextArea(this.onpressed, this.text);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -113,9 +210,7 @@ class MessageTextArea extends StatelessWidget {
         child: Stack(alignment: AlignmentDirectional.centerEnd, children: [
           Container(
             child: TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              controller: text,
               minLines: 2,
               keyboardType: TextInputType.multiline,
               maxLines: 2,
@@ -135,7 +230,7 @@ class MessageTextArea extends StatelessWidget {
             color: AppColors.lightGreen,
             width: ConfigSize.blockSizeHorizontal * 15,
             height: ConfigSize.blockSizeVertical * 4,
-            onPressed: () {},
+            onPressed: onpressed,
           ).pSymmetric(h: 16, v: 8),
         ]),
       ),
@@ -243,4 +338,48 @@ Widget sendButton() {
               context.push((context) => UploadPhotosScreen());
             });
       }));
+}
+
+class MessageTile extends StatelessWidget {
+  final String message;
+  final bool sendByMe;
+
+  MessageTile({@required this.message, @required this.sendByMe});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+          top: 8, bottom: 8, left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
+      alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin:
+            sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
+        padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
+        decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: sendByMe
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomLeft: Radius.circular(23))
+                : BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomRight: Radius.circular(23)),
+            gradient: LinearGradient(
+              colors: sendByMe
+                  ? [Colors.red, Colors.red]
+                  : [Colors.green, Colors.green],
+            )),
+        child: Text(message,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: 'OverpassRegular',
+                fontWeight: FontWeight.w300)),
+      ),
+    );
+  }
 }

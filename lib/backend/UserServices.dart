@@ -41,6 +41,8 @@ class Userservices {
       globals.userid = user.uid;
       _prefs.setString("currentUserId", user.uid);
       print("+++++++++++++++++++++++++${globals.userid}");
+      _prefs.setString("name", user.displayName);
+      print(user.displayName);
 
       Get.to(LoginScreen());
 

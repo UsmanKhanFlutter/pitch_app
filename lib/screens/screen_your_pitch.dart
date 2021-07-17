@@ -27,23 +27,23 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
           children: <Widget>[
             //App bar
             Positioned(
-                top: ConfigSize.blockSizeVertical * 0.01,
-                left: ConfigSize.blockSizeHorizontal * 0.01,
-                right: ConfigSize.blockSizeHorizontal * 0.01,
-                child: 
-                // CustomAppBar(titletext: 'Your Pitch'),
-                Container(
-                  height: ConfigSize.blockSizeVertical * 7,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.end, 
-                  children: [
-                    IconButton(
-                        icon: Image.asset("assets/images/toggle.png").pSymmetric(h: 2),
-                        onPressed: () {
-                          context.push((context) => CustomDialogBox());
-                        }),
-                  ]),
-                ),
-                ),
+              top: ConfigSize.blockSizeVertical * 0.01,
+              left: ConfigSize.blockSizeHorizontal * 0.01,
+              right: ConfigSize.blockSizeHorizontal * 0.01,
+              child:
+                  // CustomAppBar(titletext: 'Your Pitch'),
+                  Container(
+                height: ConfigSize.blockSizeVertical * 7,
+                child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  IconButton(
+                      icon: Image.asset("assets/images/toggle.png")
+                          .pSymmetric(h: 2),
+                      onPressed: () {
+                        context.push((context) => CustomDialogBox());
+                      }),
+                ]),
+              ),
+            ),
             // Navigation bar
             Positioned(
               bottom: ConfigSize.blockSizeVertical * 0.01,
@@ -246,7 +246,7 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
                   height: ConfigSize.blockSizeVertical * 5,
                   text: 'Start Conversation',
                   onPressed: () {
-                    context.push((context) => MessagingScreen());
+                    context.push((context) => MessagingScreen(null,null));
                   },
                 )),
             Positioned(

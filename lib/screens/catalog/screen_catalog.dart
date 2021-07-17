@@ -102,8 +102,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           children: documents
                               .map((doc) => CatalogItem(
                                     onPitchPressed: () =>
-                                        messageNotificationDialog(context,
-                                            doc["name"], doc["urlOfImage"]),
+                                        messageNotificationDialog(
+                                            context,
+                                            doc["name"],
+                                            doc["urlOfImage"],
+                                            doc["userid"]),
                                     name: doc["name"],
                                     image: doc["urlOfImage"],
                                   ))
