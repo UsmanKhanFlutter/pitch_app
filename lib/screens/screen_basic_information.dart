@@ -20,6 +20,7 @@ class BasicInformationScreen extends StatefulWidget {
 }
 
 class _BasicInformationScreenState extends State<BasicInformationScreen> {
+  final _formKey = GlobalKey<FormState>();
   String currentuserid;
   TextEditingController nameController = TextEditingController();
 
@@ -102,190 +103,213 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                "Basic Information"
-                    .text
-                    .xl
-                    .fontWeight(FontWeight.bold)
-                    .make()
-                    .box
-                    .alignTopCenter
-                    .height(ConfigSize.convertHeight(context, 50))
-                    .make(),
+    return Form(
+      key: _formKey,
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  "Basic Information"
+                      .text
+                      .xl
+                      .fontWeight(FontWeight.bold)
+                      .make()
+                      .box
+                      .alignTopCenter
+                      .height(ConfigSize.convertHeight(context, 50))
+                      .make(),
 
-                label("First Name"),
-                infoTextField(
-                    hintText: '',
-                    controller: nameController,
-                    icon: Icon(
-                      Icons.near_me,
+                  label("First Name"),
+                  infoTextField(
+                      validate: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      hintText: '',
+                      controller: nameController,
+                      icon: Icon(
+                        Icons.near_me,
+                        color: grayTextField,
+                      )),
+                  // RoundedTextField(),
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical * 1,
+                  ),
+
+                  label("I am a:"),
+                  // RoundedTextField(
+                  //   hint: globals.interestedIn,
+                  // ),
+                  infoTextField(
+                      hintText: globals.interestedIn,
+                      icon: Icon(
+                        Icons.near_me,
+                        color: grayTextField,
+                      )),
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical * 1,
+                  ),
+
+                  label('Birthday:'),
+                  // RoundedTextField(hint: 'Date of Birth'),
+                  infoTextField(
+                    hintText: (_chosenDateTime != null
+                        ? _chosenDateTime.toString()
+                        : 'No date time picked!'),
+                    controller: birthdaycontroller,
+                    icon: Icon(Icons.date_range_outlined),
+                    onclick: () => _showDatePicker(context),
+                  ),
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical * 1,
+                  ),
+
+                  label("Email Address:"),
+                  // RoundedTextField(hint: 'name@email.com'),
+                  infoTextField(
+                      validate: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      hintText: 'name@email.com',
+                      controller: emailcontroller,
+                      icon: Icon(
+                        Icons.near_me,
+                        color: grayTextField,
+                      )),
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical * 2,
+                  ),
+                  label("Phone Number:"),
+                  Container(
+                    //  height: ConfigSize.blockSizeVertical*6,
+                    padding: EdgeInsets.only(left: 18, right: 18),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
                       color: grayTextField,
-                    )),
-                // RoundedTextField(),
-                SizedBox(
-                  height: ConfigSize.blockSizeVertical * 1,
-                ),
-
-                label("I am a:"),
-                // RoundedTextField(
-                //   hint: globals.interestedIn,
-                // ),
-                infoTextField(
-                    hintText: globals.interestedIn,
-                    icon: Icon(
-                      Icons.near_me,
-                      color: grayTextField,
-                    )),
-                SizedBox(
-                  height: ConfigSize.blockSizeVertical * 1,
-                ),
-
-                label('Birthday:'),
-                // RoundedTextField(hint: 'Date of Birth'),
-                infoTextField(
-                  hintText: (_chosenDateTime != null
-                      ? _chosenDateTime.toString()
-                      : 'No date time picked!'),
-                  controller: birthdaycontroller,
-                  icon: Icon(Icons.date_range_outlined),
-                  onclick: () => _showDatePicker(context),
-                ),
-                SizedBox(
-                  height: ConfigSize.blockSizeVertical * 1,
-                ),
-
-                label("Email Address:"),
-                // RoundedTextField(hint: 'name@email.com'),
-                infoTextField(
-                    hintText: 'name@email.com',
-                    controller: emailcontroller,
-                    icon: Icon(
-                      Icons.near_me,
-                      color: grayTextField,
-                    )),
-                SizedBox(
-                  height: ConfigSize.blockSizeVertical * 2,
-                ),
-                label("Phone Number:"),
-                Container(
-                  //  height: ConfigSize.blockSizeVertical*6,
-                  padding: EdgeInsets.only(left: 18, right: 18),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    color: grayTextField,
-                    elevation: 0,
-                    child: HStack([
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: ConfigSize.blockSizeVertical * 6,
-                          decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.grey, width: 2)),
-                          ),
-                          child: CountryCodePicker(
-                            onChanged: (val) {
-                              countrycode = val;
-                              print(val);
-                              print(countrycode.toString());
-                            },
-                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                            initialSelection: 'US',
-                            favorite: ['+1', 'US'],
-                            // optional. Shows only country name and flag
-                            showCountryOnly: false,
-                            showFlag: false,
-                            // optional. Shows only country name and flag when popup is closed.
-                            showOnlyCountryWhenClosed: false,
-                            // optional. aligns the flag and the Text left
-                            alignLeft: false,
+                      elevation: 0,
+                      child: HStack([
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: ConfigSize.blockSizeVertical * 6,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                  bottom:
+                                      BorderSide(color: Colors.grey, width: 2)),
+                            ),
+                            child: CountryCodePicker(
+                              onChanged: (val) {
+                                countrycode = val;
+                                print(val);
+                                print(countrycode.toString());
+                              },
+                              // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                              initialSelection: 'US',
+                              favorite: ['+1', 'US'],
+                              // optional. Shows only country name and flag
+                              showCountryOnly: false,
+                              showFlag: false,
+                              // optional. Shows only country name and flag when popup is closed.
+                              showOnlyCountryWhenClosed: false,
+                              // optional. aligns the flag and the Text left
+                              alignLeft: false,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                          flex: 3,
-                          child: Container(
-                              height: ConfigSize.blockSizeVertical * 6,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Colors.grey, width: 2)),
-                              ),
-                              child: TextField(
-                                controller: numbercontroller,
-                                keyboardType: TextInputType.phone,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 4),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0)),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 0)),
+                        SizedBox(width: 10),
+                        Expanded(
+                            flex: 3,
+                            child: Container(
+                                height: ConfigSize.blockSizeVertical * 6,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.grey, width: 2)),
                                 ),
-                              ))),
-                    ]),
+                                child: TextFormField(
+                                  controller: numbercontroller,
+                                  keyboardType: TextInputType.phone,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 4),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 0)),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 0)),
+                                  ),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Please enter some text';
+                                    }
+                                    return null;
+                                  },
+                                ))),
+                      ]),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: ConfigSize.blockSizeVertical * 2,
-                ),
-                StretchedButton(
-                  text: "Continue",
-                  onPressed: () {
-                    senddata();
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => AgreementScreen()));
-                  },
-                  height: 40,
-                ),
-                SizedBox(
-                  height: ConfigSize.blockSizeVertical * 2,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  height: ConfigSize.blockSizeVertical * 17,
-                  // width: ConfigSize.blockSizeHorizontal * 77,
-                  child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: genders.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            setState(() {
-                              genders.forEach(
-                                  (gender) => gender.isSelected = false);
-                              genders[index].isSelected = true;
-                              globals.interestedIn = genders[index].name;
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical * 2,
+                  ),
+                  StretchedButton(
+                    text: "Continue",
+                    onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        senddata();
+                      }
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => AgreementScreen()));
+                    },
+                    height: 40,
+                  ),
+                  SizedBox(
+                    height: ConfigSize.blockSizeVertical * 2,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: ConfigSize.blockSizeVertical * 17,
+                    // width: ConfigSize.blockSizeHorizontal * 77,
+                    child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: genders.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                genders.forEach(
+                                    (gender) => gender.isSelected = false);
+                                genders[index].isSelected = true;
+                                globals.interestedIn = genders[index].name;
 
-                              //print
-                              print(globals.interestedIn);
-                            });
-                          },
-                          child: InterestedInCard(genders[index]),
-                        );
-                      }),
-                  // InterestedInSelector(),
-                ),
-              ],
+                                //print
+                                print(globals.interestedIn);
+                              });
+                            },
+                            child: InterestedInCard(genders[index]),
+                          );
+                        }),
+                    // InterestedInSelector(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }
 
@@ -300,11 +324,13 @@ Widget label(String text) {
       .pSymmetric(h: 20, v: 3);
 }
 
-Widget infoTextField(
-    {String hintText,
-    TextEditingController controller,
-    Icon icon,
-    VoidCallback onclick}) {
+Widget infoTextField({
+  String hintText,
+  TextEditingController controller,
+  Icon icon,
+  VoidCallback onclick,
+  Function validate,
+}) {
   return Container(
     height: ConfigSize.blockSizeVertical * 5,
     padding: EdgeInsets.only(left: 20, right: 20),
@@ -314,7 +340,8 @@ Widget infoTextField(
       ),
       color: grayTextField,
       elevation: 0,
-      child: TextField(
+      child: TextFormField(
+        validator: validate,
         controller: controller,
         minLines: 2,
         keyboardType: TextInputType.multiline,
