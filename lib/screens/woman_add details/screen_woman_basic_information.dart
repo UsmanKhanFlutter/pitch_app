@@ -5,10 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/Model/gender.dart';
-import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
-import 'package:pitch_app/screens/screen_agreement.dart';
-import 'package:pitch_app/screens/woman_add%20details/screen_woman_height.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_interest.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -22,6 +19,7 @@ class WomanBasicInformationScreen extends StatefulWidget {
 
 class _WomanBasicInformationScreenState
     extends State<WomanBasicInformationScreen> {
+  String interestedIn;
   DateTime _chosenDateTime;
   TextEditingController namecontroller = TextEditingController();
 
@@ -34,7 +32,7 @@ class _WomanBasicInformationScreenState
   @override
   void initState() {
     super.initState();
-    globals.interestedIn = 'Man Interested in men';
+    interestedIn = 'Man Interested in men';
     genders.add(new Gender(name: 'Man Interested in women', isSelected: false));
     genders.add(new Gender(name: 'Woman Interested in men', isSelected: false));
     genders.add(new Gender(name: 'Man Interested in men', isSelected: true));
@@ -79,7 +77,7 @@ class _WomanBasicInformationScreenState
   void senddata() {
     firestoreInstance.collection("womenbasicinfo").doc(globals.userid).set({
       "name": namecontroller.text,
-      "iam": globals.interestedIn,
+      "iam": interestedIn,
       "birthday": birthdaycontroller.text,
       "email": emailcontroller.text,
       "phonenumber": code.toString() + phonecontroller.text,
@@ -125,10 +123,10 @@ class _WomanBasicInformationScreenState
 
                 label("I am a:"),
                 // RoundedTextField(
-                //   hint: globals.interestedIn,
+                //   hint: interestedIn,
                 // ),
                 infoTextField(
-                    hintText: globals.interestedIn,
+                    hintText: interestedIn,
                     icon: Icon(
                       Icons.near_me,
                       color: grayTextField,
@@ -253,10 +251,10 @@ class _WomanBasicInformationScreenState
                               genders.forEach(
                                   (gender) => gender.isSelected = false);
                               genders[index].isSelected = true;
-                              globals.interestedIn = genders[index].name;
+                              interestedIn = genders[index].name;
 
                               //print
-                              print(globals.interestedIn);
+                              print(interestedIn);
                             });
                           },
                           child: InterestedInCard(genders[index]),

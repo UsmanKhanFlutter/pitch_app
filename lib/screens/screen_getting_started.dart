@@ -32,6 +32,7 @@ class GettingStartedScreen extends StatelessWidget {
                 .make()
                 .pSymmetric(h: 24, v: 16),
             Expanded(
+              // flex: 2,
               child: VxBox(
                 child: VxBox(
                         child: VStack(
@@ -78,7 +79,7 @@ class GettingStartedScreen extends StatelessWidget {
                   ],
                   crossAlignment: CrossAxisAlignment.center,
                 ).pSymmetric(h: 24, v: 16))
-                    .height(ConfigSize.convertHeight(context, 250))
+                    .height(ConfigSize.convertHeight(context, 350))
                     .width(double.infinity)
                     .rounded
                     .alignCenter
