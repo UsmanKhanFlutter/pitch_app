@@ -1,4 +1,4 @@
-String interestedIn;
+
 String emailimage;
 String idofuser;
 

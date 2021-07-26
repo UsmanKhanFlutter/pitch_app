@@ -13,6 +13,7 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class BasicInformationScreen extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class BasicInformationScreen extends StatefulWidget {
 class _BasicInformationScreenState extends State<BasicInformationScreen> {
   final _formKey = GlobalKey<FormState>();
   String currentuserid;
+  String interestedIn;
   TextEditingController nameController = TextEditingController();
 
   TextEditingController birthdaycontroller = TextEditingController();
@@ -35,7 +37,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   void senddata() {
     firestoreInstance.collection("basicinfo").doc(globals.userid).set({
       "name": nameController.text,
-      "iam": globals.interestedIn,
+      "iam": interestedIn,
       "birthday": _chosenDateTime.toString() + birthdaycontroller.text,
       "email": emailcontroller.text,
       "phonenumber": countrycode.toString() + numbercontroller.text,
@@ -84,7 +86,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   void initState() {
     super.initState();
     readLocalData();
-    globals.interestedIn = 'Man Interested in men';
+    interestedIn = 'Man Interested in men';
     genders.add(new Gender(name: 'Man Interested in women', isSelected: false));
     genders.add(new Gender(name: 'Woman Interested in men', isSelected: false));
     genders.add(new Gender(name: 'Man Interested in men', isSelected: true));
@@ -125,12 +127,6 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
 
                   label("First Name"),
                   infoTextField(
-                      validate: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
                       hintText: '',
                       controller: nameController,
                       icon: Icon(
@@ -147,7 +143,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   //   hint: globals.interestedIn,
                   // ),
                   infoTextField(
-                      hintText: globals.interestedIn,
+                      hintText: interestedIn,
                       icon: Icon(
                         Icons.near_me,
                         color: grayTextField,
@@ -173,12 +169,6 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   label("Email Address:"),
                   // RoundedTextField(hint: 'name@email.com'),
                   infoTextField(
-                      validate: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
                       hintText: 'name@email.com',
                       controller: emailcontroller,
                       icon: Icon(
@@ -266,7 +256,51 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   StretchedButton(
                     text: "Continue",
                     onPressed: () {
-                      if (_formKey.currentState.validate()) {
+                      if (nameController.text.isEmpty) {
+                        return Fluttertoast.showToast(
+                            msg: "please enter your name",
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16.0);
+                      }
+                      if (interestedIn == null) {
+                        return Fluttertoast.showToast(
+                            msg: "please enter your interest",
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16.0);
+                      }
+                      if (_chosenDateTime == null) {
+                        return Fluttertoast.showToast(
+                            msg: "please enter your birthday",
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16.0);
+                      }
+                      if (emailcontroller.text.isEmpty) {
+                        return Fluttertoast.showToast(
+                            msg: "please enter your email",
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16.0);
+                      }
+                      if (numbercontroller.text.isEmpty) {
+                        return Fluttertoast.showToast(
+                            msg: "please enter your number",
+                            backgroundColor: Colors.white,
+                            textColor: Colors.red,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16.0);
+                      } else {
                         senddata();
                       }
                       // Navigator.push(
@@ -294,10 +328,10 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                                 genders.forEach(
                                     (gender) => gender.isSelected = false);
                                 genders[index].isSelected = true;
-                                globals.interestedIn = genders[index].name;
+                                interestedIn = genders[index].name;
 
                                 //print
-                                print(globals.interestedIn);
+                                print(interestedIn);
                               });
                             },
                             child: InterestedInCard(genders[index]),
@@ -329,7 +363,6 @@ Widget infoTextField({
   TextEditingController controller,
   Icon icon,
   VoidCallback onclick,
-  Function validate,
 }) {
   return Container(
     height: ConfigSize.blockSizeVertical * 5,
@@ -341,7 +374,6 @@ Widget infoTextField({
       color: grayTextField,
       elevation: 0,
       child: TextFormField(
-        validator: validate,
         controller: controller,
         minLines: 2,
         keyboardType: TextInputType.multiline,
