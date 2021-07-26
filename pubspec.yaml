@@ -51,7 +51,7 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: assets/images/logo.jpg
+  image_path: assets/images/logo.png
 
 
 
