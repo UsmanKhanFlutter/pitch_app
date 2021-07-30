@@ -48,6 +48,8 @@ dependencies:
   firebase_messaging: ^10.0.2
   flutter_cupertino_date_picker: ^1.0.26
   fluttertoast: ^7.1.8
+  date_format: ^2.0.2
+  flutter_local_notifications: ^6.0.0
 
 flutter_icons:
   android: true

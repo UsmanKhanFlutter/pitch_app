@@ -34,6 +34,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ConfigSize().init(context);
     return Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: BottomNavigation(),

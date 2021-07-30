@@ -22,7 +22,7 @@ class MessageNotificationDialog extends StatefulWidget {
 }
 
 class _MessageNotificationDialogState extends State<MessageNotificationDialog> {
-  String myname;
+  String userid;
   @override
   void initState() {
     // TODO: implement initState
@@ -32,14 +32,14 @@ class _MessageNotificationDialogState extends State<MessageNotificationDialog> {
 
   readlocaldata() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    myname = _prefs.getString("currentUserId");
+    userid = _prefs.getString("currentUserId");
   }
 
-  sendMessage(String userName) {
-    List<String> users = [myname, userName];
-    print(myname);
+  sendMessage(String otheruserid) {
+    List<String> users = [userid, otheruserid];
+    print(userid);
 
-    String chatRoomId = getChatRoomId(myname, userName);
+    String chatRoomId = getChatRoomId(userid, otheruserid);
 
     Map<String, dynamic> chatRoom = {
       "basicinfo": users,
@@ -48,7 +48,7 @@ class _MessageNotificationDialogState extends State<MessageNotificationDialog> {
 
     addChatRoom(chatRoom, chatRoomId);
 
-    Get.to(MessagingScreen(chatRoomId, myname));
+    Get.to(MessagingScreen(chatRoomId, userid,widget.name,widget.url));
   }
 
   getChatRoomId(String a, String b) {

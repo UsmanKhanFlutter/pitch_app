@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/Model/gender.dart';
-import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:date_format/date_format.dart';
 
 class BasicInformationScreen extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   TextEditingController numbercontroller = TextEditingController();
   CountryCode countrycode;
   DateTime _chosenDateTime;
+
   List<Gender> genders = [];
   final firestoreInstance = FirebaseFirestore.instance;
   var firebaseUser = FirebaseAuth.instance.currentUser;
@@ -63,10 +65,11 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                     height: 400,
                     child: CupertinoDatePicker(
                         mode: CupertinoDatePickerMode.date,
-                        initialDateTime: DateTime(1969, 1, 1),
+                        initialDateTime: DateTime(1990, 1, 1),
                         onDateTimeChanged: (DateTime newDateTime) {
                           setState(() {
                             _chosenDateTime = newDateTime;
+
                             print(_chosenDateTime);
                           });
                         }),
@@ -92,6 +95,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
     genders.add(new Gender(name: 'Man Interested in men', isSelected: true));
     genders
         .add(new Gender(name: 'Woman Interested in women', isSelected: false));
+    FirebaseMessaging.instance.getToken().then((value) => {});
   }
 
   readLocalData() async {
@@ -156,7 +160,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   // RoundedTextField(hint: 'Date of Birth'),
                   infoTextField(
                     hintText: (_chosenDateTime != null
-                        ? _chosenDateTime.toString()
+                        ? formatDate(_chosenDateTime, [yyyy, '-', mm, '-', dd])
                         : 'No date time picked!'),
                     controller: birthdaycontroller,
                     icon: Icon(Icons.date_range_outlined),

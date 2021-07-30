@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/screen_messaging.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
+import 'package:pitch_app/widgets/dialog_message_notification.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  bool isloading = false;
   List<String> message = [
     "Recently active, match now",
     "Hi, there!",
@@ -45,6 +48,19 @@ class _ChatScreenState extends State<ChatScreen> {
     "30/3/2021",
     "30/3/2021",
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("messageslist")
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        print(result.data());
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,90 +149,96 @@ class _ChatScreenState extends State<ChatScreen> {
 
               // List of conversation
               Container(
-                height: ConfigSize.blockSizeVertical * 50,
-                child: ListView.builder(
-                  itemCount: name.length,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.only(left: 10, right: 8),
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Get.to(MessagingScreen(null, null));
-                          },
-                          child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                //profle image
-                                CircleAvatar(
-                                  backgroundImage: ExactAssetImage(
-                                      'assets/images/girl.png'), //images[index]),
-                                  maxRadius: 26,
-                                ),
-                                SizedBox(
-                                  width: 16,
-                                ),
+                  height: ConfigSize.blockSizeVertical * 50,
+                  child: FutureBuilder<QuerySnapshot>(
+                      // <2> Pass `Future<QuerySnapshot>` to future
+                      future: FirebaseFirestore.instance
+                          .collection('messageslist')
+                          .get(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          // <3> Retrieve `List<DocumentSnapshot>` from snapshot
+                          final List<DocumentSnapshot> documents =
+                              snapshot.data.docs;
+                          return ListView(
+                              padding:
+                                  EdgeInsets.only(left: 8, top: 10, right: 8),
+                              children: documents
+                                  .map((doc) => Column(
+                                        children: <Widget>[
+                                          InkWell(
+                                            onTap: () {
+                                              Get.to(MessagingScreen(
+                                                  null, null, null, null));
+                                            },
+                                            child: Container(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  //profle image
+                                                  CircleAvatar(
+                                                    backgroundImage:
+                                                        NetworkImage(doc[
+                                                            "imageurl"]), //images[index]),
+                                                    maxRadius: 26,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 16,
+                                                  ),
 
-                                Container(
-                                  width: ConfigSize.blockSizeHorizontal * 55,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      // Name
-                                      Container(
-                                        child: Text(
-                                          name[index],
-                                          style: TextStyle(
-                                              color: Colors.grey.shade900,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
+                                                  Container(
+                                                    width: ConfigSize
+                                                            .blockSizeHorizontal *
+                                                        55,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        // Name
+                                                        Container(
+                                                          child: Text(
+                                                            doc["name"],
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade900,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
 
-                                      //message
-                                      Container(
-                                        child: Text(
-                                          message[index],
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.grey.shade600,
-                                              height: 1.3),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                                        //message
+                                                      ],
+                                                    ),
+                                                  ),
 
-                                //time
-                                Container(
-                                  child: Text(
-                                    time[index],
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey.shade600),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Divider(
-                          color: Colors.grey.shade700,
-                          height: 1,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                      ],
-                    );
-                  }, //itemBuilder
-                ),
-              ),
+                                                  //time
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 4),
+                                          Divider(
+                                            color: Colors.grey.shade700,
+                                            height: 1,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ))
+                                  .toList());
+                        } else if (snapshot.hasError) {
+                          return Text("loading");
+                        }
+                        return Text("loading");
+                      })),
             ],
           ),
         ),

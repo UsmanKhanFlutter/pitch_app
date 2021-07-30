@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_phone_number.dart';
@@ -6,9 +9,123 @@ import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_basic_information.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class GettingStartedScreen extends StatelessWidget {
+class GettingStartedScreen extends StatefulWidget {
+  @override
+  _GettingStartedScreenState createState() => _GettingStartedScreenState();
+}
+
+class _GettingStartedScreenState extends State<GettingStartedScreen> {
+  String currentuserid;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  pushMessagingToken() async {
+    print(currentuserid);
+    FirebaseMessaging.instance.getToken().then((token) {
+      print(token);
+      FirebaseFirestore.instance.collection('basicinfo').doc(currentuserid).set(
+        {'userToken': token},
+      ).then((value) {
+        print("user token saved........");
+      });
+    });
+  }
+
+  void configLocalNotification() {
+    AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@drawable/logo');
+    IOSInitializationSettings initializationSettingsIOS =
+        IOSInitializationSettings();
+    InitializationSettings initializationSettings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void registerNotification() {
+    print('requesting permission');
+    FirebaseMessaging.instance.requestPermission();
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('onMessage: $message');
+      if (message.notification != null) {
+        showNotification(message.notification);
+      }
+      return;
+    });
+
+    FirebaseMessaging.instance.getToken().then((token) {
+      print('token: $token');
+      FirebaseFirestore.instance
+          .collection('basicinfo')
+          .doc(currentuserid)
+          .update({'pushToken': token});
+    }).catchError((err) {
+      showErrorToastMessage(msg: err.message.toString());
+    });
+  }
+
+  void showNotification(RemoteNotification remoteNotification) async {
+    var android = new AndroidNotificationDetails(
+        'channel id', 'channel NAME', 'CHANNEL DESCRIPTION',
+        priority: Priority.high, importance: Importance.max);
+    AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'com.imwasil.pitch_app',
+      'PitchApp',
+      'your channel description',
+      playSound: true,
+      enableVibration: true,
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    IOSNotificationDetails iOSPlatformChannelSpecifics =
+        IOSNotificationDetails();
+    NotificationDetails platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+
+    print(remoteNotification);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      remoteNotification.title,
+      remoteNotification.body,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
+
+  readLocalData() async {
+    SharedPreferences sharedUserData = await SharedPreferences.getInstance();
+    setState(() {
+      currentuserid = sharedUserData.getString("currentUserId");
+    });
+    print(currentuserid);
+  }
+
+  Future showErrorToastMessage({String msg}) {
+    return Fluttertoast.showToast(
+        backgroundColor: Colors.red,
+        textColor: Colors.black,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        fontSize: 16.0,
+        msg: msg);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    configLocalNotification();
+    registerNotification();
+    readLocalData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

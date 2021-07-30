@@ -23,15 +23,29 @@ class GetStartedScreen extends StatefulWidget {
 
 class _GetStartedScreenState extends State<GetStartedScreen> {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
-
-    _firebaseMessaging.requestPermission();
-    _firebaseMessaging.getToken().then((value) => null);
-
     super.initState();
+    _firebaseMessaging.requestPermission();
+
+    firebaseCloudMessagingListeners(context);
+  }
+
+  void firebaseCloudMessagingListeners(BuildContext context) async {
+    _firebaseMessaging.getToken().then((deviceToken) {
+      print("Firebase Device token: $deviceToken");
+      setState(() {
+        globals.userToken = deviceToken;
+
+        print(globals.userToken);
+      });
+    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("token", globals.userToken);
+    print("++++++++++++++++++++++++${globals.userToken}");
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;

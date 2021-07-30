@@ -18,7 +18,10 @@ import 'package:velocity_x/velocity_x.dart';
 class MessagingScreen extends StatefulWidget {
   String myname;
   String chatRoomId;
-  MessagingScreen(this.chatRoomId, this.myname);
+  String otherusername;
+  String imageUrl;
+  MessagingScreen(
+      this.chatRoomId, this.myname, this.otherusername, this.imageUrl);
   @override
   _MessagingScreenState createState() => _MessagingScreenState();
 }
@@ -29,6 +32,12 @@ class _MessagingScreenState extends State<MessagingScreen> {
   TextEditingController messageEditingController = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final ConfigSize configSize = ConfigSize();
+  final firestoreInstance = FirebaseFirestore.instance;
+  void messageslist() {
+    firestoreInstance
+        .collection("messageslist")
+        .add({"name": widget.otherusername, "imageurl": widget.imageUrl});
+  }
 
   Widget chatMessages() {
     return StreamBuilder(
@@ -178,6 +187,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
           ),
           MessageTextArea(() {
             addMessage();
+            messageslist();
           }, messageEditingController),
         ]),
       ),
