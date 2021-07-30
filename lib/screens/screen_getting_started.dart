@@ -149,6 +149,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                 .make()
                 .pSymmetric(h: 24, v: 16),
             Expanded(
+              // flex: 2,
               child: VxBox(
                 child: VxBox(
                         child: VStack(
@@ -195,7 +196,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                   ],
                   crossAlignment: CrossAxisAlignment.center,
                 ).pSymmetric(h: 24, v: 16))
-                    .height(ConfigSize.convertHeight(context, 250))
+                    .height(ConfigSize.convertHeight(context, 350))
                     .width(double.infinity)
                     .rounded
                     .alignCenter
