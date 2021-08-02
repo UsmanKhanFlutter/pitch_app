@@ -8,6 +8,7 @@ import 'package:pitch_app/screens/screen_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../GlobalVariables/globals_variable.dart' as globals;
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class Userservices {
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -106,6 +107,35 @@ class Userservices {
       case FacebookLoginStatus.loggedIn:
         print("logggggggggggggggggggin successfully");
         Get.to(LoginScreen());
+    }
+  }
+
+  void appleSignIn(BuildContext context) async {
+    SharedPreferences sharedPrefs = await SharedPreferences.getInstance();
+    try {
+      final appleResult = await SignInWithApple.getAppleIDCredential(scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ]);
+
+      final AuthCredential credential = OAuthProvider('apple.com').credential(
+        accessToken: appleResult.authorizationCode,
+        idToken: appleResult.identityToken,
+      );
+
+      print(credential);
+
+      UserCredential firebaseResult =
+          await auth.signInWithCredential(credential);
+      User user = firebaseResult.user;
+      globals.userid = user.uid;
+      print("IOS${globals.userid}");
+      if (user != null) {
+        sharedPrefs.setString("uid", globals.userid);
+        Get.to(LoginScreen());
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +10,7 @@ import 'package:pitch_app/screens/screen_login.dart';
 import 'package:pitch_app/strings.dart';
 import 'package:pitch_app/widgets/profile_image.dart';
 import 'package:pitch_app/widgets/stretched_icon_button.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignInMethodScreen extends StatefulWidget {
@@ -104,13 +107,24 @@ class _SignInMethodScreenState extends State<SignInMethodScreen> {
                           ],
                         ),
                         SizedBox(height: 16),
-                        StretchedIconButton(
-                          path: "assets/images/Apple.png",
-                          onPressed: () {},
-                          color: Colors.white,
-                          shadowColor: Colors.grey,
-                          width: ConfigSize.convertWidth(context, 220),
-                        ),
+                        Platform.isIOS
+                            ? Container(
+                                padding: EdgeInsets.only(
+                                  top: 30,
+                                  right: 40,
+                                  left: 40,
+                                ),
+                                child: SignInWithAppleButton(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(50),
+                                  ),
+                                  style: SignInWithAppleButtonStyle.white,
+                                  height: 50,
+                                  onPressed: () async =>
+                                      Userservices().appleSignIn(context),
+                                ),
+                              )
+                            : Container(),
                         SizedBox(height: 10),
                         StretchedIconButton(
                           path: "assets/images/Facebook.png",
