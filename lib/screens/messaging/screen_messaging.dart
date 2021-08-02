@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolkit.dart';
@@ -16,23 +17,41 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MessagingScreen extends StatefulWidget {
-  String myname;
+  String userId;
   String chatRoomId;
   String otherusername;
   String imageUrl;
-  MessagingScreen(
-      this.chatRoomId, this.myname, this.otherusername, this.imageUrl);
+  String otheruserid;
+
+  MessagingScreen(this.chatRoomId, this.userId, this.otherusername,
+      this.imageUrl, this.otheruserid);
   @override
   _MessagingScreenState createState() => _MessagingScreenState();
 }
 
 class _MessagingScreenState extends State<MessagingScreen> {
+  String username;
   Stream chatRooms;
   Stream<QuerySnapshot> chats;
   TextEditingController messageEditingController = new TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final ConfigSize configSize = ConfigSize();
   final firestoreInstance = FirebaseFirestore.instance;
+
+  getUserName() {
+    FirebaseFirestore.instance
+        .collection("basicinfo")
+        .doc(widget.userId)
+        .get()
+        .then((doc) {
+      setState(() {
+        username = doc.data()["name"];
+      });
+      print(username);
+      print("aaaaaaaaaaaaaa");
+    });
+  }
+
   void messageslist() {
     firestoreInstance
         .collection("messageslist")
@@ -50,7 +69,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
                   return MessageTile(
                     message: snapshot.data.docs[index]["message"],
                     sendByMe:
-                        widget.myname == snapshot.data.docs[index]["sendBy"],
+                        widget.userId == snapshot.data.docs[index]["sendBy"],
                   );
                 })
             : Container();
@@ -61,9 +80,11 @@ class _MessagingScreenState extends State<MessagingScreen> {
   addMessage() {
     if (messageEditingController.text.isNotEmpty) {
       Map<String, dynamic> chatMessageMap = {
-        "sendBy": widget.myname,
+        "sendBy": widget.userId,
         "message": messageEditingController.text,
         'time': DateTime.now().millisecondsSinceEpoch,
+        "revieverid": widget.otheruserid,
+        "sendusername": username
       };
 
       addmessage(widget.chatRoomId, chatMessageMap);
@@ -88,7 +109,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
   getUserChats(String itIsMyName) async {
     return await FirebaseFirestore.instance
         .collection("chatRoom")
-        .where('users', arrayContains: widget.myname)
+        .where('users', arrayContains: widget.userId)
         .snapshots();
   }
 
@@ -102,18 +123,18 @@ class _MessagingScreenState extends State<MessagingScreen> {
   }
 
   getUserInfogetChats() async {
-    getUserChats(widget.myname).then((snapshots) {
+    getUserChats(widget.userId).then((snapshots) {
       setState(() {
         chatRooms = snapshots;
         print(
-            "we got the data + ${chatRooms.toString()} this is name  ${widget.myname}");
+            "we got the data + ${chatRooms.toString()} this is name  ${widget.userId}");
       });
     });
   }
 
   readlocaldata() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    widget.myname = _prefs.getString("currentUserId");
+    widget.userId = _prefs.getString("currentUserId");
   }
 
   @override
@@ -121,6 +142,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
     // TODO: implement initState
     super.initState();
     getUserInfogetChats();
+    getUserName();
     getChats(widget.chatRoomId).then((val) {
       setState(() {
         chats = val;

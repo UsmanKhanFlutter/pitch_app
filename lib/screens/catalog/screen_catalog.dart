@@ -26,6 +26,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
         .get()
         .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
+        print(result.data()["name"]);
         print(result.data());
       });
     });

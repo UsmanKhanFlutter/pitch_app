@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(globals.userid);
+
     print('lllllllllllllllll');
     readLocalData();
     // getData();

@@ -246,8 +246,8 @@ class _YourPitchScreenState extends State<YourPitchScreen> {
                   height: ConfigSize.blockSizeVertical * 5,
                   text: 'Start Conversation',
                   onPressed: () {
-                    context.push(
-                        (context) => MessagingScreen(null, null, null, null));
+                    context.push((context) =>
+                        MessagingScreen(null, null, null, null, null));
                   },
                 )),
             Positioned(

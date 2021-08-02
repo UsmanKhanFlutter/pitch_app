@@ -22,6 +22,7 @@ class GetStartedScreen extends StatefulWidget {
 }
 
 class _GetStartedScreenState extends State<GetStartedScreen> {
+  String userID;
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
@@ -29,6 +30,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
+    readLocalData();
     _firebaseMessaging.requestPermission();
 
     firebaseCloudMessagingListeners(context);
@@ -50,11 +52,19 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void navigationPage() async {
-    if (_auth.currentUser == null) {
+    if (userID == null) {
       Get.to(SignInMethodScreen());
     } else {
       Get.to(GettingStartedScreen());
     }
+  }
+
+  readLocalData() async {
+    SharedPreferences sharedUserData = await SharedPreferences.getInstance();
+    setState(() {
+      userID = sharedUserData.getString("currentUserId");
+    });
+    print(userID);
   }
 
   @override

@@ -10,12 +10,13 @@ exports.sendNotification = functions.firestore.document(
   const msgInfo = snap.data();
   console.log(msgInfo);
   
-  const idFrom = msgInfo.sendBy;
   
+  const senderUserName=msgInfo.sendusername;
+  const idTo = msgInfo.revieverid;
   const contentMessage = msgInfo.message;
   
   admin.firestore().collection("basicinfo").where(
-      "userid", "==", idFrom
+      "userid", "==", idTo
   ).get().then((querySnapshot) => {
     querySnapshot.forEach((userTo) => {
       console.log(userTo.data().name);
@@ -25,7 +26,7 @@ exports.sendNotification = functions.firestore.document(
     });
       var payload = {
         notification: {
-         title:idFrom,
+         title:senderUserName,
           body: contentMessage,
           badge: "1",
           sound: "default",

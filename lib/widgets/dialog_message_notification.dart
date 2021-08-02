@@ -48,7 +48,8 @@ class _MessageNotificationDialogState extends State<MessageNotificationDialog> {
 
     addChatRoom(chatRoom, chatRoomId);
 
-    Get.to(MessagingScreen(chatRoomId, userid,widget.name,widget.url));
+    Get.to(MessagingScreen(
+        chatRoomId, userid, widget.name, widget.url, widget.uid));
   }
 
   getChatRoomId(String a, String b) {

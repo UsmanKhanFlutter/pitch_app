@@ -168,8 +168,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                         children: <Widget>[
                                           InkWell(
                                             onTap: () {
-                                              Get.to(MessagingScreen(
-                                                  null, null, null, null));
+                                              Get.to(MessagingScreen(null, null,
+                                                  null, null, null));
                                             },
                                             child: Container(
                                               child: Row(
