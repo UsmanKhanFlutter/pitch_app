@@ -37,6 +37,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final ConfigSize configSize = ConfigSize();
   final firestoreInstance = FirebaseFirestore.instance;
+  ScrollController _scrollController;
 
   getUserName() {
     FirebaseFirestore.instance
@@ -64,6 +65,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
+                reverse: false,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   return MessageTile(
@@ -141,8 +143,10 @@ class _MessagingScreenState extends State<MessagingScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     getUserInfogetChats();
     getUserName();
+
     getChats(widget.chatRoomId).then((val) {
       setState(() {
         chats = val;
