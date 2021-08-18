@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/screens/screen_birthday.dart';
@@ -8,6 +9,7 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/textfield_information.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
+
 class NameScreen extends StatefulWidget {
   @override
   _NameScreenState createState() => _NameScreenState();
@@ -102,7 +104,45 @@ class _NameScreenState extends State<NameScreen> {
                   child: StretchedButton(
                       text: "Save",
                       onPressed: () {
-                        senddata();
+                        if (firstnamecontroller.text.isEmpty) {
+                          return Fluttertoast.showToast(
+                              msg: "Please Enter First Name",
+                              backgroundColor: Colors.white,
+                              textColor: Colors.red,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              fontSize: 16.0);
+                        }
+                        if (lastnamecontroller.text.isEmpty) {
+                          return Fluttertoast.showToast(
+                              msg: "Please Enter Last Name",
+                              backgroundColor: Colors.white,
+                              textColor: Colors.red,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              fontSize: 16.0);
+                        }
+                        if (locationcontroller.text.isEmpty) {
+                          return Fluttertoast.showToast(
+                              msg: "Please Enter Location",
+                              backgroundColor: Colors.white,
+                              textColor: Colors.red,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              fontSize: 16.0);
+                        }
+                        if (emailcontroller.text.isEmpty) {
+                          return Fluttertoast.showToast(
+                              msg: "Please Enter Email",
+                              backgroundColor: Colors.white,
+                              textColor: Colors.red,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              fontSize: 16.0);
+                        } else {
+                          senddata();
+                        }
+
                         // builder: (ctx) => ProfileScreen()));
                       }),
                 ),

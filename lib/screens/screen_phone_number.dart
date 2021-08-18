@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_agreement.dart';
@@ -22,6 +23,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   CountryCode code;
 
   void senddata() {
+    print(globals.userid);
     firestoreinstance.collection("Pitchsomeone").doc(globals.userid).set({
       "phonenumber": code.toString() + phonenumber.text,
     }).then((value) {
@@ -115,7 +117,17 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
             StretchedButton(
               text: "Pitch them",
               onPressed: () {
-                senddata();
+                if (phonenumber.text.isEmpty) {
+                  return Fluttertoast.showToast(
+                      msg: "Please Enter Number",
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      fontSize: 16.0);
+                } else {
+                  senddata();
+                }
               },
             )
           ],

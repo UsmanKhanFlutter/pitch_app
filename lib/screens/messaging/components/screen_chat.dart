@@ -180,8 +180,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 children: <Widget>[
                                                   //profle image
                                                   CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(doc[
+                                                    backgroundImage: NetworkImage(doc[
+                                                                "imageurl"] ==
+                                                            null
+                                                        ? "https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"
+                                                        : doc[
                                                             "imageurl"]), //images[index]),
                                                     maxRadius: 26,
                                                   ),

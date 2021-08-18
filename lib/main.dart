@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pitch_app/screens/screen_basic_information.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:firebase_core/firebase_core.dart';
 

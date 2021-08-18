@@ -51,6 +51,7 @@ dependencies:
   date_format: ^2.0.2
   flutter_local_notifications: ^6.0.0
   sign_in_with_apple: ^3.0.0
+  
 
 flutter_icons:
   android: true

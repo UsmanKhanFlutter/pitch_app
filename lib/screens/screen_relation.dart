@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/backend/UserServices.dart';
@@ -92,7 +93,26 @@ class _RelationScreenState extends State<RelationScreen> {
             StretchedButton(
                 text: "Save",
                 onPressed: () {
-                  senddata();
+                  if (selectedValue == null) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Select Relationship",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  }
+                  if (yearcontroller.text.isEmpty) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Enter Year",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  } else {
+                    senddata();
+                  }
                 })
           ],
         ),
@@ -139,19 +159,8 @@ class _RelationScreenState extends State<RelationScreen> {
   _titleTextField(String title, TextEditingController controller) {
     return HStack([
       Container(
-        height: 10,
-        width: 10,
-        decoration: BoxDecoration(
-          color: AppColors.lightGreen,
-          borderRadius: BorderRadius.circular(5),
-        ),
-      ),
-      SizedBox(width: 8),
-      "$title".text.make(),
-      SizedBox(width: 36),
-      Container(
         height: 30,
-        width: 55,
+        width: 68,
         alignment: Alignment.center,
         child: TextFormField(
           keyboardType: TextInputType.phone,
@@ -170,6 +179,17 @@ class _RelationScreenState extends State<RelationScreen> {
           ),
         ),
       ),
+      SizedBox(width: 36),
+      Container(
+        height: 10,
+        width: 20,
+        decoration: BoxDecoration(
+          color: AppColors.lightGreen,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+      SizedBox(width: 8),
+      "$title".text.make(),
     ]);
   }
 }

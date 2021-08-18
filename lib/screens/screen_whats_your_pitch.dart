@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/backend/UserServices.dart';
@@ -55,7 +56,7 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
               SizedBox(
                 height: ConfigSize.blockSizeVertical * 5,
               ),
-              "what’s Your Pitch?"
+              "What’s Your Pitch?"
                   .text
                   .xl
                   .fontWeight(FontWeight.w400)
@@ -149,7 +150,17 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
                 child: StretchedColorButton(
                         text: "Save",
                         onPressed: () {
-                          senddata();
+                          if (scriptcontroller.text.isEmpty) {
+                            return Fluttertoast.showToast(
+                                msg: "Please Write Your Script",
+                                backgroundColor: Colors.white,
+                                textColor: Colors.red,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                fontSize: 16.0);
+                          } else {
+                            senddata();
+                          }
                         },
                         height: 36,
                         width: ConfigSize.convertWidth(context, 300),

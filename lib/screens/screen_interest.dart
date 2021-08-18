@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
@@ -114,7 +115,26 @@ class _InterestScreenState extends State<InterestScreen> {
             StretchedButton(
                 text: "Save",
                 onPressed: () {
-                  senddata();
+                  if (selectedRelationshipValue == null) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Select Relationship status",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  }
+                  if (selectedValue == null) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Select Interest",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  } else {
+                    senddata();
+                  }
                 })
             // ProfileScreen
             // YourPitchScreen()))

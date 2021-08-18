@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
@@ -12,6 +13,7 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
+
 class BirthdayScreen extends StatefulWidget {
   @override
   _BirthdayScreenState createState() => _BirthdayScreenState();
@@ -73,7 +75,35 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
             StretchedButton(
               text: "Save",
               onPressed: () {
-                senddata();
+                if (monthcontroller.text.isEmpty) {
+                  return Fluttertoast.showToast(
+                      msg: "Please Enter Month",
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      fontSize: 16.0);
+                }
+                if (daycontroller.text.isEmpty) {
+                  return Fluttertoast.showToast(
+                      msg: "Please Enter Day",
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      fontSize: 16.0);
+                }
+                if (yearcontroller.text.isEmpty) {
+                  return Fluttertoast.showToast(
+                      msg: "Please Enter Year",
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      fontSize: 16.0);
+                } else {
+                  senddata();
+                }
               },
             )
           ],
@@ -88,7 +118,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
       SizedBox(width: 4),
       Container(
         height: 30,
-        width: 65,
+        width: 68,
         alignment: Alignment.center,
         child: TextFormField(
           controller: controller,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/colors.dart';
@@ -11,6 +12,7 @@ import 'package:pitch_app/widgets/stretched_button.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
+
 class CannabisScreen extends StatefulWidget {
   @override
   _CannabisScreenState createState() => _CannabisScreenState();
@@ -80,7 +82,17 @@ class _CannabisScreenState extends State<CannabisScreen> {
             StretchedButton(
                 text: "Save",
                 onPressed: () {
-                  senddata();
+                  if (selectedValue == null) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Select One",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  } else {
+                    senddata();
+                  }
                 })
           ],
         ),

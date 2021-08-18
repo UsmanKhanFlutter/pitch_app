@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
@@ -71,7 +72,17 @@ class _BioScreenState extends State<BioScreen> {
               StretchedColorButton(
                 text: "Send",
                 onPressed: () {
-                  senddata();
+                  if (biocontroller.text.isEmpty) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Write Bio",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  } else {
+                    senddata();
+                  }
                 },
                 color: Colors.cyan,
                 height: 24,

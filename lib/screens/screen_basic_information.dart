@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/Model/gender.dart';
 import 'package:pitch_app/helpers/size_config.dart';
@@ -24,7 +25,7 @@ class BasicInformationScreen extends StatefulWidget {
 class _BasicInformationScreenState extends State<BasicInformationScreen> {
   final _formKey = GlobalKey<FormState>();
   String currentuserid;
-  String interestedIn;
+
   TextEditingController nameController = TextEditingController();
 
   TextEditingController birthdaycontroller = TextEditingController();
@@ -33,13 +34,12 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   CountryCode countrycode;
   DateTime _chosenDateTime;
 
-  List<Gender> genders = [];
   final firestoreInstance = FirebaseFirestore.instance;
   var firebaseUser = FirebaseAuth.instance.currentUser;
   void senddata() {
     firestoreInstance.collection("basicinfo").doc(globals.userid).set({
       "name": nameController.text,
-      "iam": interestedIn,
+      "iam": _selectedLocation,
       "birthday": _chosenDateTime.toString() + birthdaycontroller.text,
       "email": emailcontroller.text,
       "phonenumber": countrycode.toString() + numbercontroller.text,
@@ -89,12 +89,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   void initState() {
     super.initState();
     readLocalData();
-    interestedIn = 'Man Interested in men';
-    genders.add(new Gender(name: 'Man Interested in women', isSelected: false));
-    genders.add(new Gender(name: 'Woman Interested in men', isSelected: false));
-    genders.add(new Gender(name: 'Man Interested in men', isSelected: true));
-    genders
-        .add(new Gender(name: 'Woman Interested in women', isSelected: false));
+
     FirebaseMessaging.instance.getToken().then((value) => {});
   }
 
@@ -106,6 +101,14 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
     print(currentuserid);
   }
 
+  List<String> _locations = [
+    'Man Interested in men',
+    'Man Interested in women',
+    'Woman Interested in men',
+    'Man Interested in men',
+    'Woman Interested in women',
+  ]; // Option 2
+  String _selectedLocation;
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);
@@ -146,14 +149,40 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   // RoundedTextField(
                   //   hint: globals.interestedIn,
                   // ),
-                  infoTextField(
-                      hintText: interestedIn,
-                      icon: Icon(
-                        Icons.near_me,
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    width: 350,
+                    height: ConfigSize.blockSizeVertical * 5,
+                    decoration: BoxDecoration(
                         color: grayTextField,
-                      )),
-                  SizedBox(
-                    height: ConfigSize.blockSizeVertical * 1,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: DropdownButtonHideUnderline(
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          canvasColor: Colors.white,
+                        ),
+                        child: DropdownButton(
+                          hint: Text(_selectedLocation == null
+                              ? 'Women interested in Men'
+                              : _selectedLocation), // Not necessary for Option 1
+                          style: new TextStyle(
+                            color: Colors.black,
+                          ),
+
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedLocation = newValue;
+                            });
+                          },
+                          items: _locations.map((location) {
+                            return DropdownMenuItem(
+                              child: new Text(location),
+                              value: location,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
                   ),
 
                   label('Birthday:'),
@@ -269,7 +298,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                             gravity: ToastGravity.CENTER,
                             fontSize: 16.0);
                       }
-                      if (interestedIn == null) {
+                      if (_selectedLocation == null) {
                         return Fluttertoast.showToast(
                             msg: "please enter your interest",
                             backgroundColor: Colors.white,
@@ -317,32 +346,33 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   SizedBox(
                     height: ConfigSize.blockSizeVertical * 2,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: ConfigSize.blockSizeVertical * 17,
-                    // width: ConfigSize.blockSizeHorizontal * 77,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: genders.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                genders.forEach(
-                                    (gender) => gender.isSelected = false);
-                                genders[index].isSelected = true;
-                                interestedIn = genders[index].name;
+                  // Container(
+                  //   color: Colors.red,
+                  //   alignment: Alignment.center,
+                  //   height: ConfigSize.blockSizeVertical * 17,
+                  //   // width: ConfigSize.blockSizeHorizontal * 77,
+                  //   child: ListView.builder(
+                  //       scrollDirection: Axis.vertical,
+                  //       shrinkWrap: true,
+                  //       itemCount: genders.length,
+                  //       itemBuilder: (context, index) {
+                  //         return InkWell(
+                  //           onTap: () {
+                  //             setState(() {
+                  //               genders.forEach(
+                  //                   (gender) => gender.isSelected = false);
+                  //               genders[index].isSelected = true;
+                  //               interestedIn = genders[index].name;
 
-                                //print
-                                print(interestedIn);
-                              });
-                            },
-                            child: InterestedInCard(genders[index]),
-                          );
-                        }),
-                    // InterestedInSelector(),
-                  ),
+                  //               //print
+                  //               print(interestedIn);
+                  //             });
+                  //           },
+                  //           child: InterestedInCard(genders[index]),
+                  //         );
+                  //       }),
+                  //   // InterestedInSelector(),
+                  // ),
                 ],
               ),
             ),

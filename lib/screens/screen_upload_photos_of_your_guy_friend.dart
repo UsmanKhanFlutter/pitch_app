@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
@@ -23,6 +25,7 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
   double val = 0;
   CollectionReference imgRef;
   firebase_storage.Reference ref;
+  bool isuploaded = false;
 
   List<File> _image = [];
   final picker = ImagePicker();
@@ -60,12 +63,17 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
           .child('guyimages/${Path.basename(img.path)}');
       await ref.putFile(img).whenComplete(() async {
         await ref.getDownloadURL().then((value) {
-          imgRef.add({'url': value});
-          i++;
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CongratulationsTwoScreen()));
+          if (_image.length < 2) {
+            setState(() {
+              isuploaded = false;
+            });
+            return Fluttertoast.showToast(
+                msg: "Please Upload Minimum 2 pictures");
+          } else {
+            imgRef.add({'url': value});
+            i++;
+            Get.off(CongratulationsTwoScreen());
+          }
         });
       });
     }
@@ -146,24 +154,19 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
                 // childAspectRatio: MediaQuery.of(context).size.width /(MediaQuery.of(context).size.height / 5),
               ),
             ),
-            uploading
+            isuploaded == true
                 ? Center(
                     child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        child: Text(
-                          'uploading...',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
+                          child: Text(
+                        'uploading...' "",
+                        style: TextStyle(fontSize: 20),
+                      )),
                       SizedBox(
                         height: 10,
                       ),
-                      CircularProgressIndicator(
-                        value: val,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                      )
                     ],
                   ))
                 : Container(),
@@ -175,7 +178,7 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
               height: ConfigSize.blockSizeVertical * 6,
               onPressed: () {
                 setState(() {
-                  uploading = true;
+                  isuploaded = true;
                 });
                 uploadFile();
               },

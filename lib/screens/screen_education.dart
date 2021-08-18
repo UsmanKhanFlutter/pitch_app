@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
@@ -83,7 +84,17 @@ class _EducationScreenState extends State<EducationScreen> {
             StretchedButton(
                 text: "Save",
                 onPressed: () {
-                  senddata();
+                  if (selectedValue == null) {
+                    return Fluttertoast.showToast(
+                        msg: "Please Select Education",
+                        backgroundColor: Colors.white,
+                        textColor: Colors.red,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        fontSize: 16.0);
+                  } else {
+                    senddata();
+                  }
                 })
           ],
         ),
