@@ -30,7 +30,7 @@ class _EducationScreenState extends State<EducationScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "education": selectedValue,
     }).then((value) {
       Get.to(ChildrenScreen());

@@ -48,6 +48,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("token", globals.userToken);
     print("++++++++++++++++++++++++${globals.userToken}");
+    setState(() {
+      globals.userid = prefs.getString("currentUserId");
+    });
   }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;

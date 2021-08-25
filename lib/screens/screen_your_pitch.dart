@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_find_a_match.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
@@ -18,6 +20,11 @@ class YourPitchScreen extends StatefulWidget {
 }
 
 class _YourPitchScreenState extends State<YourPitchScreen> {
+
+ 
+  @override
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

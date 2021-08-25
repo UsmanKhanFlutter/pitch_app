@@ -146,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (!snapshot.hasData) {
                 print('no data');
 
-                return Container();
+                return Container(); 
               } else {
                 print("lllllllllllll");
                 print(globals.userid);

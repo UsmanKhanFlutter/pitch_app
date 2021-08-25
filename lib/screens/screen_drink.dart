@@ -26,7 +26,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "drink": selectedValue,
     }).then((value) {
       Get.to(WritePitchOrProvideRatingsScreen());
@@ -35,6 +35,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ConfigSize().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

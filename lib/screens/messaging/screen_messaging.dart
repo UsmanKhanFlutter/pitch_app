@@ -56,7 +56,16 @@ class _MessagingScreenState extends State<MessagingScreen> {
   void messageslist() {
     firestoreInstance
         .collection("messageslist")
-        .add({"name": widget.otherusername, "imageurl": widget.imageUrl});
+        .doc(widget.userId)
+        .collection("contacts")
+        .doc(widget.otheruserid)
+        .set({
+      "name": widget.otherusername,
+      "imageurl": widget.imageUrl,
+      "chatroomid": widget.chatRoomId,
+      "otheruserid": widget.otheruserid,
+      "currentuserid": widget.userId
+    });
   }
 
   Widget chatMessages() {
@@ -65,7 +74,8 @@ class _MessagingScreenState extends State<MessagingScreen> {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
-                reverse: false,
+                reverse: true,
+                shrinkWrap: true,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   return MessageTile(
@@ -120,7 +130,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
         .collection("chatRoom")
         .doc(chatRoomId)
         .collection("chats")
-        .orderBy('time')
+        .orderBy('time', descending: true)
         .snapshots();
   }
 
@@ -146,6 +156,8 @@ class _MessagingScreenState extends State<MessagingScreen> {
 
     getUserInfogetChats();
     getUserName();
+    readlocaldata();
+    print(userid);
 
     getChats(widget.chatRoomId).then((val) {
       setState(() {

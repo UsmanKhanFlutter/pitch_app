@@ -23,7 +23,7 @@ class _NameScreenState extends State<NameScreen> {
   final firestoreinstance = FirebaseFirestore.instance;
 
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "firstname": firstnamecontroller.text,
       "lastname": lastnamecontroller.text,
       "location": locationcontroller.text,

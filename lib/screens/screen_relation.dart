@@ -26,7 +26,7 @@ class _RelationScreenState extends State<RelationScreen> {
   TextEditingController yearcontroller = TextEditingController();
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "relation": selectedValue,
       "knowingyears": yearcontroller.text,
     }).then((value) {

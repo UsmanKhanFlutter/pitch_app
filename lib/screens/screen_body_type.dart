@@ -26,7 +26,7 @@ class _BodyTypeScreenState extends State<BodyTypeScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "bodytype": selectedValue,
     }).then((value) {
       Get.to(EducationScreen());

@@ -31,7 +31,7 @@ class _EthnicityScreenState extends State<EthnicityScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "ethnicity": selectedValue,
     }).then((value) {
       Get.to(ReligionScreen());

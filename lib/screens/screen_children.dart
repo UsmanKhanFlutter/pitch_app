@@ -26,7 +26,7 @@ class _ChildrenScreenState extends State<ChildrenScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "childrens": selectedValue,
     }).then((value) {
       Get.to(EthnicityScreen());

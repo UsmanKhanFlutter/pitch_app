@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class YourPitchesScreen extends StatefulWidget {
@@ -14,7 +17,7 @@ class YourPitchesScreen extends StatefulWidget {
 class _YourPitchesScreenState extends State<YourPitchesScreen> {
   int _radioValue;
   String _view;
-
+  bool isgirl = false;
   void _handleRadioValueChange(int value) {
     setState(() {
       _radioValue = value;
@@ -30,6 +33,58 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
           break;
       }
     });
+  }
+
+  FirebaseFirestore instance = FirebaseFirestore.instance;
+
+  String iam;
+  String userID;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    print('lllllllllllllllll');
+    readLocalData();
+    // instance
+    //     .collection("basicinfo")
+    //     .where(
+    //       "iam",
+    //       isEqualTo: 'Woman Interested in men',
+    //     )
+    //     .get()
+    //     .then((value) => {
+    //           setState(() {
+    //             isgirl = true;
+    //           }),
+    //         });
+
+    // print(iam);
+    // getData();
+  }
+
+  readLocalData() async {
+    SharedPreferences sharedUserData = await SharedPreferences.getInstance();
+    setState(() {
+      userID = sharedUserData.getString("currentUserId");
+    });
+    print(userID);
+    instance.collection("basicinfo").doc(userID).get().then((value) => {
+          print(value.data()['iam']),
+          print('kkkkkkkkkkkkkkkkkkkk'),
+          if (value.data()['iam'] == 'Man Interested in women' || value.data()['iam'] == 'Man Interested in man')
+            {
+              setState(() {
+                isgirl = false;
+              }),
+            }
+          else// if(value.data()['iam'] == 'Woman Interested in men' || value.data()['iam'] == 'Woman Interested in women')
+            {
+              setState(() {
+                isgirl = true;
+              })
+            }
+        });
   }
 
   @override
@@ -56,108 +111,120 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
               SizedBox(
                 height: ConfigSize.blockSizeVertical * 1,
               ),
-              "Girl View"
-                  .text
-                  .align(TextAlign.left)
-                  .fontWeight(FontWeight.bold)
-                  .make()
-                  .box
-                  .alignTopLeft
-                  .make()
-                  .pSymmetric(h: 24, v: 11),
-              Container(
-                height: ConfigSize.blockSizeVertical * 31,
-                padding: EdgeInsets.only(
-                    left: ConfigSize.blockSizeHorizontal * 4,
-                    right: ConfigSize.blockSizeHorizontal * 4,
-                    bottom: ConfigSize.blockSizeVertical * 1),
-                child: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      child:
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                            buildProfileViewCard(name: 'Fred Jones'),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                'Edit'
-                                    .text
-                                    .xl
-                                    .color(lightBlue)
-                                    .align(TextAlign.right)
-                                    .underline
-                                    .make()
-                                    .box
-                                    .make()
-                                    .pSymmetric(h: 11, v: 11),
-                                index == 0
-                                    ? Icon(
-                                        Icons.circle,
-                                        size: 30,
-                                        color: AppColors.lightGreen,
-                                      )
-                                    : Icon(
-                                        Icons.add_circle_outline,
-                                        size: 30,
-                                        color: Colors.grey,
-                                      ),
-                              ],
-                            ),
-                          ]),
-                    ); // GirlViewListItem(),
-                  },
-                ),
-              ),
-              Center(
-                child: StretchedColorButton(
-                    text: "Pitch another friend",
-                    onPressed: () {
-                      // context.push((context) => MainScreen());
-                    },
-                    height: 36,
-                    width: ConfigSize.convertWidth(context, 300),
-                    color: red),
-              ),
-              "Guy View"
-                  .text
-                  .align(TextAlign.left)
-                  .fontWeight(FontWeight.bold)
-                  .make()
-                  .box
-                  .alignTopLeft
-                  .make()
-                  .pSymmetric(h: 24, v: 11),
-              Container(
-                height: ConfigSize.blockSizeVertical * 31,
-                padding: EdgeInsets.only(
-                    left: ConfigSize.blockSizeHorizontal * 4,
-                    right: ConfigSize.blockSizeHorizontal * 4,
-                    bottom: ConfigSize.blockSizeVertical * 1),
-                child: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (context, index) {
-                    return Column(
+              isgirl
+                  ? Column(
                       children: [
-                        GuyViewListItem(),
+                        "Girl View"
+                            .text
+                            .align(TextAlign.left)
+                            .fontWeight(FontWeight.bold)
+                            .make()
+                            .box
+                            .alignTopLeft
+                            .make()
+                            .pSymmetric(h: 24, v: 11),
+                        Container(
+                          height: ConfigSize.blockSizeVertical * 31,
+                          padding: EdgeInsets.only(
+                              left: ConfigSize.blockSizeHorizontal * 4,
+                              right: ConfigSize.blockSizeHorizontal * 4,
+                              bottom: ConfigSize.blockSizeVertical * 1),
+                          child: ListView.builder(
+                            itemCount: 2,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    // crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      buildProfileViewCard(name: 'Fred Jones'),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          'Edit'
+                                              .text
+                                              .xl
+                                              .color(lightBlue)
+                                              .align(TextAlign.right)
+                                              .underline
+                                              .make()
+                                              .box
+                                              .make()
+                                              .pSymmetric(h: 11, v: 11),
+                                          index == 0
+                                              ? Icon(
+                                                  Icons.circle,
+                                                  size: 30,
+                                                  color: AppColors.lightGreen,
+                                                )
+                                              : Icon(
+                                                  Icons.add_circle_outline,
+                                                  size: 30,
+                                                  color: Colors.grey,
+                                                ),
+                                        ],
+                                      ),
+                                    ]),
+                              ); // GirlViewListItem(),
+                            },
+                          ),
+                        ),
+                        Center(
+                          child: StretchedColorButton(
+                              text: "Pitch another friend",
+                              onPressed: () {
+                                // context.push((context) => MainScreen());
+                              },
+                              height: 36,
+                              width: ConfigSize.convertWidth(context, 300),
+                              color: red),
+                        ),
                       ],
-                    );
-                  },
-                ),
-              ),
-              Center(
-                child: StretchedColorButton(
-                    text: "Ask another friend to pitch you",
-                    onPressed: () {
-                      // context.push((context) => InviteAnotherFriendToPitchScreen());
-                    },
-                    height: 36,
-                    width: ConfigSize.convertWidth(context, 300),
-                    color: red),
-              )
+                    )
+                  : Column(
+                      children: [
+                        "Guy View"
+                            .text
+                            .align(TextAlign.left)
+                            .fontWeight(FontWeight.bold)
+                            .make()
+                            .box
+                            .alignTopLeft
+                            .make()
+                            .pSymmetric(h: 24, v: 11),
+                        Container(
+                          height: ConfigSize.blockSizeVertical * 31,
+                          padding: EdgeInsets.only(
+                              left: ConfigSize.blockSizeHorizontal * 4,
+                              right: ConfigSize.blockSizeHorizontal * 4,
+                              bottom: ConfigSize.blockSizeVertical * 1),
+                          child: ListView.builder(
+                            itemCount: 2,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  GuyViewListItem(),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                        Center(
+                          child: StretchedColorButton(
+                              text: "Ask another friend to pitch you",
+                              onPressed: () {
+                                // context.push((context) => InviteAnotherFriendToPitchScreen());
+                              },
+                              height: 36,
+                              width: ConfigSize.convertWidth(context, 300),
+                              color: red),
+                        ),
+                      ],
+                    )
             ],
             alignment: MainAxisAlignment.center,
           ),

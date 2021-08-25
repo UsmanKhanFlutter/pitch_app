@@ -22,7 +22,7 @@ class _HeightScreenState extends State<HeightScreen> {
   double height = 7.7;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "height": height,
     }).then((value) {
       Get.to(BodyTypeScreen());

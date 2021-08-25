@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_phone_number.dart';
@@ -19,14 +20,13 @@ class GettingStartedScreen extends StatefulWidget {
 }
 
 class _GettingStartedScreenState extends State<GettingStartedScreen> {
-  String currentuserid;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   pushMessagingToken() async {
-    print(currentuserid);
+    print(uSerIdd);
     FirebaseMessaging.instance.getToken().then((token) {
       print(token);
-      FirebaseFirestore.instance.collection('basicinfo').doc(currentuserid).set(
+      FirebaseFirestore.instance.collection('basicinfo').doc(uSerIdd).set(
         {'userToken': token},
       ).then((value) {
         print("user token saved........");
@@ -60,7 +60,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
       print('token: $token');
       FirebaseFirestore.instance
           .collection('basicinfo')
-          .doc(currentuserid)
+          .doc(uSerIdd)
           .update({'pushToken': token});
     }).catchError((err) {
       showErrorToastMessage(msg: err.message.toString());
@@ -98,12 +98,31 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
     );
   }
 
+  FirebaseFirestore instance = FirebaseFirestore.instance;
+  bool isgirl = false;
   readLocalData() async {
     SharedPreferences sharedUserData = await SharedPreferences.getInstance();
     setState(() {
-      currentuserid = sharedUserData.getString("currentUserId");
+      uSerIdd = sharedUserData.getString("currentUserId");
     });
-    print(currentuserid);
+    print(uSerIdd);
+    instance.collection("basicinfo").doc(uSerIdd).get().then((value) => {
+          print(value.data()['iam']),
+          print('kkkkkkkkkkkkkkkkkkkk'),
+          if (value.data()['iam'] == 'Man Interested in women' ||
+              value.data()['iam'] == 'Man Interested in man')
+            {
+              setState(() {
+                isgirl = false;
+              }),
+            }
+          else // if(value.data()['iam'] == 'Woman Interested in men' || value.data()['iam'] == 'Woman Interested in women')
+            {
+              setState(() {
+                isgirl = true;
+              })
+            }
+        });
   }
 
   Future showErrorToastMessage({String msg}) {
@@ -154,35 +173,52 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                 child: VxBox(
                         child: VStack(
                   [
-                    Container(
-                      width: double.infinity,
-                      alignment: Alignment.topLeft,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            "assets/images/girl.png",
-                            height: 40,
-                            width: 40,
-                            fit: BoxFit.cover,
-                          )),
-                    ),
-                    SizedBox(height: 16),
-                    StretchedColorButton(
-                        text: "Pitch Someone",
-                        onPressed: () {
-                          context.push((context) => PhoneNumberScreen());
-                        },
-                        height: 36,
-                        width: ConfigSize.convertWidth(context, 250),
-                        color: AppColors.lightGreen),
-                    MaterialButton(
-                      onPressed: () {
-                        context.push((context) => YourPitchesScreen());
-                      },
-                      child: "Edit your pitches".text.gray500.underline.make(),
-                    ),
-                    "OR".text.xl.gray700.bold.align(TextAlign.center).make(),
-                    SizedBox(height: 16),
+                    isgirl
+                        ? Column(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                alignment: Alignment.topLeft,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.asset(
+                                      "assets/images/girl.png",
+                                      height: 40,
+                                      width: 40,
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              SizedBox(height: 16),
+                              StretchedColorButton(
+                                  text: "Pitch Someone",
+                                  onPressed: () {
+                                    context
+                                        .push((context) => PhoneNumberScreen());
+                                  },
+                                  height: 36,
+                                  width: ConfigSize.convertWidth(context, 250),
+                                  color: AppColors.lightGreen),
+                              MaterialButton(
+                                onPressed: () {
+                                  context
+                                      .push((context) => YourPitchesScreen());
+                                },
+                                child: "Edit your pitches"
+                                    .text
+                                    .gray500
+                                    .underline
+                                    .make(),
+                              ),
+                              "OR"
+                                  .text
+                                  .xl
+                                  .gray700
+                                  .bold
+                                  .align(TextAlign.center)
+                                  .make(),
+                            ],
+                          )
+                        : SizedBox(height: 16),
                     StretchedColorButton(
                       text: "Find a match",
                       height: 36,

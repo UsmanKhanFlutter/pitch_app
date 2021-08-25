@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/screen_messaging.dart';
 import 'package:pitch_app/widgets/app_bar_main.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/dialog_message_notification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -52,13 +54,14 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseFirestore.instance
-        .collection("messageslist")
-        .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        print(result.data());
-      });
+    readlocaldata();
+  }
+
+  readlocaldata() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      userid = prefs.getString("currentUserId");
     });
   }
 
@@ -150,92 +153,91 @@ class _ChatScreenState extends State<ChatScreen> {
               // List of conversation
               Container(
                   height: ConfigSize.blockSizeVertical * 50,
-                  child: FutureBuilder<QuerySnapshot>(
-                      // <2> Pass `Future<QuerySnapshot>` to future
-                      future: FirebaseFirestore.instance
+                  child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
                           .collection('messageslist')
-                          .get(),
+                          .doc(userid)
+                          .collection("contacts")
+                          .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          // <3> Retrieve `List<DocumentSnapshot>` from snapshot
                           final List<DocumentSnapshot> documents =
                               snapshot.data.docs;
+                          // <3> Retrieve `List<DocumentSnapshot>` from snapshot
+
                           return ListView(
                               padding:
                                   EdgeInsets.only(left: 8, top: 10, right: 8),
                               children: documents
-                                  .map((doc) => Column(
-                                        children: <Widget>[
-                                          InkWell(
-                                            onTap: () {
-                                              Get.to(MessagingScreen(null, null,
-                                                  null, null, null));
-                                            },
-                                            child: Container(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  //profle image
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage(doc[
-                                                                "imageurl"] ==
-                                                            null
-                                                        ? "https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png"
-                                                        : doc[
-                                                            "imageurl"]), //images[index]),
-                                                    maxRadius: 26,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 16,
-                                                  ),
+                                  .map(
+                                    (doc) => InkWell(
+                                      onTap: () {
+                                        Get.to(MessagingScreen(
+                                            doc["chatroomid"],
+                                            doc["currentuserid"],
+                                            doc["name"],
+                                            doc["imageurl"],
+                                            doc["otheruserid"]));
+                                      },
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: <Widget>[
+                                                //profle image
+                                                CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      doc["imageurl"]), //images[index]),
+                                                  maxRadius: 26,
+                                                ),
+                                                SizedBox(
+                                                  width: 16,
+                                                ),
 
-                                                  Container(
-                                                    width: ConfigSize
-                                                            .blockSizeHorizontal *
-                                                        55,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[
-                                                        // Name
-                                                        Container(
-                                                          child: Text(
-                                                            doc["name"],
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade900,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
+                                                Container(
+                                                  width: ConfigSize
+                                                          .blockSizeHorizontal *
+                                                      55,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      // Name
+                                                      Container(
+                                                        child: Text(
+                                                          doc["name"],
+                                                          style: TextStyle(
+                                                              color: Colors.grey
+                                                                  .shade900,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
                                                         ),
+                                                      ),
 
-                                                        //message
-                                                      ],
-                                                    ),
+                                                      //message
+                                                    ],
                                                   ),
+                                                ),
 
-                                                  //time
-                                                ],
-                                              ),
+                                                //time
+                                              ],
                                             ),
-                                          ),
-                                          SizedBox(height: 4),
-                                          Divider(
-                                            color: Colors.grey.shade700,
-                                            height: 1,
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                        ],
-                                      ))
+                                            Divider(),
+                                            SizedBox(
+                                              height: 15,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                   .toList());
                         } else if (snapshot.hasError) {
                           return Text("loading");

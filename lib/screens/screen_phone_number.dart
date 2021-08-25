@@ -24,7 +24,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
 
   void senddata() {
     print(globals.userid);
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).set({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).set({
       "phonenumber": code.toString() + phonenumber.text,
     }).then((value) {
       Navigator.push(

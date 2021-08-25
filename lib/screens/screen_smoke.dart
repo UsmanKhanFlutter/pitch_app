@@ -27,7 +27,7 @@ class _SmokeScreenState extends State<SmokeScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "doeshesmoke": selectedValue,
     }).then((value) {
       Get.to(CannabisScreen());

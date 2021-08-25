@@ -23,7 +23,7 @@ class _BioScreenState extends State<BioScreen> {
   final firestoreinstance = FirebaseFirestore.instance;
 
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "bio": biocontroller.text,
     }).then((value) {
       Get.to(UploadPhotosScreen());

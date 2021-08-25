@@ -31,7 +31,7 @@ class _InterestScreenState extends State<InterestScreen> {
   ];
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "relationshipstatus": selectedRelationshipValue,
       "interestedin": selectedValue,
     }).then((value) {

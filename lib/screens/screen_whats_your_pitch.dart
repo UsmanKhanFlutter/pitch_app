@@ -38,7 +38,7 @@ class _WhatsYourPitchScreenState extends State<WhatsYourPitchScreen> {
   final firestoreinstance = FirebaseFirestore.instance;
 
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "pitchscript": scriptcontroller.text,
     }).then((value) {
       Get.to(BioScreen());

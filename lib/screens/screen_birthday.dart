@@ -25,7 +25,7 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   TextEditingController yearcontroller = TextEditingController();
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "month": monthcontroller.text,
       "day": daycontroller.text,
       "year": yearcontroller.text,

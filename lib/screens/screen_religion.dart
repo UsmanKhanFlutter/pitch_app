@@ -34,7 +34,7 @@ class _ReligionScreenState extends State<ReligionScreen> {
   String selectedValue;
   final firestoreinstance = FirebaseFirestore.instance;
   void senddata() {
-    firestoreinstance.collection("Pitchsomeone").doc(globals.userid).update({
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
       "religion": selectedValue,
     }).then((value) {
       Get.to(SmokeScreen());

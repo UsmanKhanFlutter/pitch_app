@@ -70,7 +70,7 @@ class Userservices {
       globals.userid = value.user.uid;
       print("+++++++++++++++++++++++++${globals.userid}");
 
-      _prefs.setString("uid", globals.userid);
+      _prefs.setString("currentUserId", globals.userid);
       print(globals.userid);
     }).catchError((err) {
       print("Facebook Sign In Error => $err");
@@ -131,7 +131,7 @@ class Userservices {
       globals.userid = user.uid;
       print("IOS${globals.userid}");
       if (user != null) {
-        sharedPrefs.setString("uid", globals.userid);
+        sharedPrefs.setString("currentUserId", globals.userid);
         Get.to(LoginScreen());
       }
     } catch (e) {
