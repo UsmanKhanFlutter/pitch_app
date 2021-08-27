@@ -39,6 +39,10 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
 
   String iam;
   String userID;
+  String firstname;
+  String lastname;
+  String image = "";
+  bool isempty = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -72,18 +76,36 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
     instance.collection("basicinfo").doc(userID).get().then((value) => {
           print(value.data()['iam']),
           print('kkkkkkkkkkkkkkkkkkkk'),
-          if (value.data()['iam'] == 'Man Interested in women' || value.data()['iam'] == 'Man Interested in man')
+          if (value.data()['iam'] == 'Man Interested in women' ||
+              value.data()['iam'] == 'Man Interested in men')
             {
               setState(() {
                 isgirl = false;
               }),
             }
-          else// if(value.data()['iam'] == 'Woman Interested in men' || value.data()['iam'] == 'Woman Interested in women')
+          else // if(value.data()['iam'] == 'Woman Interested in men' || value.data()['iam'] == 'Woman Interested in women')
             {
               setState(() {
                 isgirl = true;
               })
             }
+        });
+    instance.collection("Pitchsomeone").doc(userID).get().then((value) => {
+          setState(() {
+            firstname = value.data()["firstname"].toString();
+            lastname = value.data()["lastname"].toString();
+            isempty = false;
+          })
+        });
+
+    instance.collection("imageURLs").doc(userID).get().then((value) => {
+          {
+            setState(() {
+              image = value.data()["urls"][0].toString();
+              isempty = false;
+              print(value.data()["urls"][0]);
+            })
+          }
         });
   }
 
@@ -111,7 +133,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
               SizedBox(
                 height: ConfigSize.blockSizeVertical * 1,
               ),
-              isgirl
+              isgirl == true
                   ? Column(
                       children: [
                         "Girl View"
@@ -138,36 +160,48 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                                         MainAxisAlignment.spaceBetween,
                                     // crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      buildProfileViewCard(name: 'Fred Jones'),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          'Edit'
-                                              .text
-                                              .xl
-                                              .color(lightBlue)
-                                              .align(TextAlign.right)
-                                              .underline
-                                              .make()
-                                              .box
-                                              .make()
-                                              .pSymmetric(h: 11, v: 11),
-                                          index == 0
-                                              ? Icon(
-                                                  Icons.circle,
-                                                  size: 30,
-                                                  color: AppColors.lightGreen,
-                                                )
-                                              : Icon(
-                                                  Icons.add_circle_outline,
-                                                  size: 30,
-                                                  color: Colors.grey,
-                                                ),
-                                        ],
-                                      ),
+                                      isempty
+                                          ? Container()
+                                          : buildProfileViewCard(
+                                              name: firstname,
+                                              imageurl: image,
+                                              lastname: lastname),
+                                      isempty
+                                          ? Container()
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                isempty
+                                                    ? Container()
+                                                    : 'Edit'
+                                                        .text
+                                                        .xl
+                                                        .color(lightBlue)
+                                                        .align(TextAlign.right)
+                                                        .underline
+                                                        .make()
+                                                        .box
+                                                        .make()
+                                                        .pSymmetric(
+                                                            h: 11, v: 11),
+                                                index == 0
+                                                    ? Icon(
+                                                        Icons.circle,
+                                                        size: 30,
+                                                        color: AppColors
+                                                            .lightGreen,
+                                                      )
+                                                    : Icon(
+                                                        Icons
+                                                            .add_circle_outline,
+                                                        size: 30,
+                                                        color: Colors.grey,
+                                                      )
+                                              ],
+                                            ),
                                     ]),
                               ); // GirlViewListItem(),
                             },
@@ -207,7 +241,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
-                                  GuyViewListItem(),
+                                  //GuyViewListItem(),
                                 ],
                               );
                             },
@@ -274,7 +308,11 @@ class GuyViewListItem extends StatelessWidget {
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildProfileViewCard(name: 'Mary Janes'),
+            buildProfileViewCard(
+              name: 'Mary Janes',
+              imageurl:
+                  'https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png',
+            ),
             Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),
@@ -291,22 +329,21 @@ class GuyViewListItem extends StatelessWidget {
   }
 }
 
-Widget buildProfileViewCard({String name}) {
+Widget buildProfileViewCard({String name, String lastname, String imageurl}) {
   return Stack(children: <Widget>[
     //Card with a blurred background image
     Container(
       height: ConfigSize.blockSizeVertical * 15,
       width: ConfigSize.blockSizeVertical * 12,
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40.0),
-        ),
-        elevation: 4.0,
-        child: Image.asset(
-          'assets/images/girl.png',
-          fit: BoxFit.fill,
-        ),
-      ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+          elevation: 4.0,
+          child: Image.network(
+            imageurl,
+            fit: BoxFit.fill,
+          )),
     ),
 
     //position the container(name and age) over the card.
@@ -322,12 +359,26 @@ Widget buildProfileViewCard({String name}) {
         ),
         padding: EdgeInsets.all(8),
         margin: EdgeInsets.all(8),
-        child: Text(
-          name,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 10,
-          ),
+        child: Row(
+          children: [
+            Text(
+              name ?? "",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+              ),
+            ),
+            SizedBox(
+              width: 2,
+            ),
+            Text(
+              lastname ?? "",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+              ),
+            ),
+          ],
         ),
       ),
     ),

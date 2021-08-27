@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/screen_congratulations_2.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
@@ -53,7 +54,7 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
 
   Future uploadFile() async {
     int i = 1;
-
+    List<String> li = [];
     for (var img in _image) {
       setState(() {
         val = i / _image.length;
@@ -63,6 +64,7 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
           .child('guyimages/${Path.basename(img.path)}');
       await ref.putFile(img).whenComplete(() async {
         await ref.getDownloadURL().then((value) {
+          li.add(value);
           if (_image.length < 2) {
             setState(() {
               isuploaded = false;
@@ -70,13 +72,14 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
             return Fluttertoast.showToast(
                 msg: "Please Upload Minimum 2 pictures");
           } else {
-            imgRef.add({'url': value});
+            //
             i++;
             Get.off(CongratulationsTwoScreen());
           }
         });
       });
     }
+    imgRef.doc(uSerIdd).set({'urls': li.toList()});
   }
 
   @override

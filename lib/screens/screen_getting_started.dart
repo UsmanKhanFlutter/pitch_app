@@ -110,7 +110,7 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
           print(value.data()['iam']),
           print('kkkkkkkkkkkkkkkkkkkk'),
           if (value.data()['iam'] == 'Man Interested in women' ||
-              value.data()['iam'] == 'Man Interested in man')
+              value.data()['iam'] == 'Man Interested in men')
             {
               setState(() {
                 isgirl = false;

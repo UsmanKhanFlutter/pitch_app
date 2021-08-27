@@ -172,7 +172,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigation(),
+
       appBar: AppBar(
         title: "Message".text.fontWeight(FontWeight.w400).black.make(),
         backgroundColor: Colors.white,
@@ -217,7 +217,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
           ),
 
           Container(
-              height: ConfigSize.blockSizeVertical * 57,
+              height: ConfigSize.blockSizeVertical * 60,
               width: ConfigSize.blockSizeHorizontal * 80,
               child: chatMessages()),
           SizedBox(

@@ -1,10 +1,58 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_signin_method.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:location/location.dart';
 
-class LocationDialog extends StatelessWidget {
+class LocationDialog extends StatefulWidget {
+  @override
+  _LocationDialogState createState() => _LocationDialogState();
+}
+
+class _LocationDialogState extends State<LocationDialog> {
+  Location location = new Location();
+
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _locationData;
+  double latitude;
+  double longitude;
+  static const GOOGLE_API_KEY = "AIzaSyCSdrFyxyy9tqE-cEy76e4pszwI-Y1cMG0";
+  Future loc() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    print(".///////////////");
+    _locationData = await location.getLocation();
+    setState(() {
+      latitude = _locationData.latitude;
+      longitude = _locationData.longitude;
+    });
+  }
+
+  Widget checkUrl(String url) {
+    try {
+      return Image.network(url, height: 70.0, width: 70.0, fit: BoxFit.cover);
+    } catch (e) {
+      return Icon(Icons.image);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRect(
@@ -32,19 +80,39 @@ class LocationDialog extends StatelessWidget {
                   .pSymmetric(h: 16),
               SizedBox(height: 16),
               Container(
-                height: ConfigSize.convertHeight(context, 180),
+                height: ConfigSize.convertHeight(context, 220),
                 width: double.infinity,
-                child: Image.asset(
-                  'assets/images/map.png',
-                  fit: BoxFit.contain,
-                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=11&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=$GOOGLE_API_KEY"))),
               ),
               SizedBox(height: 16),
-              _dialogButton(text: 'Allow Once', onPressed: () {}),
+              _dialogButton(
+                  text: 'Allow Once',
+                  onPressed: () {
+                    loc().whenComplete(() => {
+                          Future.delayed(Duration(seconds: 3), () {
+                            Get.off(SignInMethodScreen());
+                          })
+                        });
+                  }),
               SizedBox(height: 8),
-              _dialogButton(text: 'Allow while using app', onPressed: () {}),
+              _dialogButton(
+                  text: 'Allow while using app',
+                  onPressed: () {
+                    loc().whenComplete(() => {
+                          Future.delayed(Duration(seconds: 3), () {
+                            Get.off(SignInMethodScreen());
+                          })
+                        });
+                  }),
               SizedBox(height: 8),
-              _dialogButton(text: "Don't Allow", onPressed: () {}),
+              _dialogButton(
+                  text: "Don't Allow",
+                  onPressed: () {
+                    Get.off(SignInMethodScreen());
+                  }),
             ],
             crossAlignment: CrossAxisAlignment.center,
           ),
