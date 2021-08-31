@@ -1,12 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pitch_app/backend/UserServices.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_agreement.dart';
 import 'package:pitch_app/screens/screen_name.dart';
 import 'package:pitch_app/widgets/stretched_button.dart';
-import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:pitch_app/GlobalVariables/globals_variable.dart' as globals;
 
-class WomanPhoneNumberScreen extends StatelessWidget {
+class UpdatePitch extends StatefulWidget {
+  @override
+  _UpdatePitchState createState() => _UpdatePitchState();
+}
+
+class _UpdatePitchState extends State<UpdatePitch> {
+  final firestoreinstance = FirebaseFirestore.instance;
+
+  TextEditingController phonenumber = TextEditingController();
+
+  CountryCode code;
+
+  void senddata() {
+    print(globals.userid);
+    firestoreinstance.collection("Pitchsomeone").doc(globals.uSerIdd).update({
+      "phonenumber": code.toString() + phonenumber.text,
+    }).then((value) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => NameScreen()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +53,7 @@ class WomanPhoneNumberScreen extends StatelessWidget {
                       .alignTopCenter
                       .height(ConfigSize.convertHeight(context, 50))
                       .make(),
-                  "What'\ Your hone Number?"
+                  "What is his Phone Number?"
                       .text
                       .xl
                       .make()
@@ -44,6 +69,7 @@ class WomanPhoneNumberScreen extends StatelessWidget {
                         ),
                         child: CountryCodePicker(
                           onChanged: (val) {
+                            code = val;
                             print(val);
                           },
                           // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
@@ -70,6 +96,7 @@ class WomanPhoneNumberScreen extends StatelessWidget {
                                       BorderSide(color: Colors.grey, width: 2)),
                             ),
                             child: TextField(
+                              controller: phonenumber,
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.symmetric(
@@ -90,7 +117,17 @@ class WomanPhoneNumberScreen extends StatelessWidget {
             StretchedButton(
               text: "Pitch them",
               onPressed: () {
-                context.push((context) => NameScreen());
+                if (phonenumber.text.isEmpty) {
+                  return Fluttertoast.showToast(
+                      msg: "Please Enter Number",
+                      backgroundColor: Colors.white,
+                      textColor: Colors.red,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      fontSize: 16.0);
+                } else {
+                  senddata();
+                }
               },
             )
           ],

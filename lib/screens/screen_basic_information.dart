@@ -98,6 +98,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
     setState(() {
       currentuserid = sharedUserData.getString("currentUserId");
     });
+    print("aaaaaaaaa");
     print(currentuserid);
   }
 

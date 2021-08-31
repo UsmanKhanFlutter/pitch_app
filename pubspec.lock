@@ -258,13 +258,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.26+2"
-  flutter_facebook_login:
-    dependency: "direct main"
-    description:
-      name: flutter_facebook_login
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -298,6 +291,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_login_facebook:
+    dependency: "direct main"
+    description:
+      name: flutter_login_facebook
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter_native_image:
     dependency: "direct main"
     description:
@@ -393,7 +393,7 @@ packages:
     source: hosted
     version: "0.10.0"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -455,6 +455,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  list_ext:
+    dependency: transitive
+    description:
+      name: list_ext
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   location:
     dependency: "direct main"
     description:

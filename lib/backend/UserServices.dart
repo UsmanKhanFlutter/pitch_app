@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:get/get.dart';
 
@@ -9,11 +11,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../GlobalVariables/globals_variable.dart' as globals;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:http/http.dart' as http;
 
 class Userservices {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth auth = FirebaseAuth.instance;
-  var facebookLogin = FacebookLogin();
+
+  // var facebookLogin = FacebookLogin();
 
   SharedPreferences sharedUserData;
   Future<User> signInWithGoogle() async {
@@ -30,7 +34,7 @@ class Userservices {
         await auth.signInWithCredential(credential);
     final User user = authResult.user;
 
-    // userid = _prefs.get(user.uid).toString();
+    // userid = _prefs.get(user.userid).toString();
 
     if (user != null) {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
@@ -53,10 +57,12 @@ class Userservices {
     return null;
   }
 
+  var facebookLogin = FacebookLogin();
   Future<UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
-    final FacebookLoginResult result = await facebookLogin.logIn(["email"]);
     // Create a credential from the access token
+    final FacebookLoginResult result = await facebookLogin.logIn();
+
     final FacebookAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(result.accessToken.token);
 
@@ -64,51 +70,118 @@ class Userservices {
         .signInWithCredential(facebookAuthCredential);
   }
 
-  Future<void> fbLoginAndSaveData(BuildContext context) async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    await signInWithFacebook().then((value) async {
-      globals.userid = value.user.uid;
-      print("+++++++++++++++++++++++++${globals.userid}");
+  // Future<void> fbLoginAndSaveData(BuildContext context) async {
+  //   sharedUserData = await SharedPreferences.getInstance();
+  //   await signInWithFacebook().then((value) async {
+  //     globals.userid = value.user.uid;
+  //     print("+++++++++++++++++++++++++${globals.userid}");
 
-      _prefs.setString("currentUserId", globals.userid);
-      print(globals.userid);
-    }).catchError((err) {
-      print("Facebook Sign In Error => $err");
-    });
-  }
+  //     sharedUserData.setString("userid", globals.userid);
+  //     print(globals.userid);
+  //   }).catchError((err) {
+  //     print("Facebook Sign In Error => $err");
+  //   });
+  // }
 
   void initiateFacebookLogin(BuildContext context) async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    sharedUserData = await SharedPreferences.getInstance();
     facebookLogin = FacebookLogin();
-    _prefs = await SharedPreferences.getInstance();
+    final FacebookLoginResult result = await facebookLogin.logIn();
+
+    sharedUserData = await SharedPreferences.getInstance();
     await signInWithFacebook().then((value) async {
       globals.userid = value.user.uid;
-      globals.name = value.user.displayName;
-      globals.email = value.user.email;
       print("+++++++++++++++++++++++++${globals.userid}");
 
-      _prefs.setString("uid", globals.userid);
+      sharedUserData.setString("currentUserId", globals.userid);
       print(globals.userid);
     }).catchError((err) {
       print("Facebook Sign In Error => $err");
     });
-
-    final FacebookLoginResult result = await facebookLogin.logIn(["email"]);
 
     switch (result.status) {
       case FacebookLoginStatus.error:
-        print("Error => ${result.errorMessage.toString()}");
+        print("Error => ${result.error.toString()}");
         break;
 
-      case FacebookLoginStatus.cancelledByUser:
+      case FacebookLoginStatus.cancel:
         print("Cancel");
         break;
 
-      case FacebookLoginStatus.loggedIn:
+      case FacebookLoginStatus.success:
+        print("logggggggggggggggggggin");
+        String _url =
+            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.height(200)&access_token=${result.accessToken.token}';
+        var graphResponse = await http.get(Uri.parse(_url));
+
+        var profile = json.decode(graphResponse.body);
+        print(profile.toString());
         print("logggggggggggggggggggin successfully");
         Get.to(LoginScreen());
+
+        break;
+
+      default:
     }
   }
+
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final FacebookLoginResult result = await facebookLogin.logIn(["email"]);
+  //   // Create a credential from the access token
+  //   final FacebookAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(result.accessToken.token);
+
+  //   return await FirebaseAuth.instance
+  //       .signInWithCredential(facebookAuthCredential);
+  // }
+
+  // Future<void> fbLoginAndSaveData(BuildContext context) async {
+  //   SharedPreferences _prefs = await SharedPreferences.getInstance();
+  //   await signInWithFacebook().then((value) async {
+  //     globals.userid = value.user.userid;
+  //     print("+++++++++++++++++++++++++${globals.userid}");
+  //     print(value.user.userid);
+
+  //     _prefs.setString("currentUserId", globals.userid);
+  //     print(globals.userid);
+  //   }).catchError((err) {
+  //     print("Facebook Sign In Error => $err");
+  //   });
+  // }
+
+  // void initiateFacebookLogin(BuildContext context) async {
+  //   SharedPreferences _prefs = await SharedPreferences.getInstance();
+  //   facebookLogin = FacebookLogin();
+  //   _prefs = await SharedPreferences.getInstance();
+  //   await signInWithFacebook().then((value) async {
+  //     globals.userid = value.user.userid;
+  //     globals.name = value.user.displayName;
+  //     globals.email = value.user.email;
+  //     print("+++++++++++++++++++++++++${globals.userid}");
+
+  //     _prefs.setString("currentUserId", globals.userid);
+  //     print(globals.userid);
+  //   }).catchError((err) {
+  //     print("Facebook Sign In Error => $err");
+  //   });
+
+  //   final FacebookLoginResult result = await facebookLogin.logIn(["email"]);
+
+  //   switch (result.status) {
+  //     case FacebookLoginStatus.error:
+  //       print("Error => ${result.errorMessage.toString()}");
+  //       break;
+
+  //     case FacebookLoginStatus.cancelledByUser:
+  //       print("Cancel");
+  //       break;
+
+  //     case FacebookLoginStatus.loggedIn:
+  //       print("logggggggggggggggggggin successfully");
+  //       Get.to(LoginScreen());
+  //   }
+  // }
 
   void appleSignIn(BuildContext context) async {
     SharedPreferences sharedPrefs = await SharedPreferences.getInstance();

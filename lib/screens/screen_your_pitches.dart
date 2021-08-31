@@ -1,13 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/screen_phone_number.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../update_pitch.dart';
 
 class YourPitchesScreen extends StatefulWidget {
   @override
@@ -152,7 +156,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                               right: ConfigSize.blockSizeHorizontal * 4,
                               bottom: ConfigSize.blockSizeVertical * 1),
                           child: ListView.builder(
-                            itemCount: 2,
+                            itemCount: 1,
                             itemBuilder: (context, index) {
                               return Container(
                                 child: Row(
@@ -176,17 +180,29 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                                               children: [
                                                 isempty
                                                     ? Container()
-                                                    : 'Edit'
-                                                        .text
-                                                        .xl
-                                                        .color(lightBlue)
-                                                        .align(TextAlign.right)
-                                                        .underline
-                                                        .make()
-                                                        .box
-                                                        .make()
-                                                        .pSymmetric(
-                                                            h: 11, v: 11),
+                                                    : InkWell(
+                                                        onTap: () {
+                                                          Get.to(UpdatePitch());
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            'Edit'
+                                                                .text
+                                                                .xl
+                                                                .color(
+                                                                    lightBlue)
+                                                                .align(TextAlign
+                                                                    .right)
+                                                                .underline
+                                                                .make()
+                                                                .box
+                                                                .make()
+                                                                .pSymmetric(
+                                                                    h: 11,
+                                                                    v: 11),
+                                                          ],
+                                                        ),
+                                                      ),
                                                 index == 0
                                                     ? Icon(
                                                         Icons.circle,
@@ -211,7 +227,7 @@ class _YourPitchesScreenState extends State<YourPitchesScreen> {
                           child: StretchedColorButton(
                               text: "Pitch another friend",
                               onPressed: () {
-                                // context.push((context) => MainScreen());
+                                Get.to(PhoneNumberScreen());
                               },
                               height: 36,
                               width: ConfigSize.convertWidth(context, 300),
@@ -334,7 +350,7 @@ Widget buildProfileViewCard({String name, String lastname, String imageurl}) {
     //Card with a blurred background image
     Container(
       height: ConfigSize.blockSizeVertical * 15,
-      width: ConfigSize.blockSizeVertical * 12,
+      width: ConfigSize.blockSizeVertical * 14,
       child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40.0),
