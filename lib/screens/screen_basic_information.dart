@@ -46,6 +46,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
       "urlOfImage":
           "https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png",
       "userid": currentuserid,
+      "bio": "Your Bio"
     }).then((value) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AgreementScreen()));
@@ -110,6 +111,17 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
     'Woman Interested in women',
   ]; // Option 2
   String _selectedLocation;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    nameController.dispose();
+    birthdaycontroller.dispose();
+    emailcontroller.dispose();
+    numbercontroller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     ConfigSize().init(context);

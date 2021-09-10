@@ -5,10 +5,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolkit.dart';
+import 'package:pitch_app/screens/profile/userBio.dart';
+import 'package:pitch_app/screens/screen_bio.dart';
 import 'package:pitch_app/screens/screen_settings.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_upload_photos.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
@@ -146,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (!snapshot.hasData) {
                 print('no data');
 
-                return Container(); 
+                return Container();
               } else {
                 print("lllllllllllll");
                 print(globals.userid);
@@ -336,11 +339,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       fontSize: 19,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                InkWell(child: Icon(Icons.edit))
+                                InkWell(
+                                    onTap: () {
+                                      Get.to(
+                                          UserBioScreen(snapshot.data["bio"]));
+                                    },
+                                    child: Icon(Icons.edit))
                               ],
                             ),
                             SizedBox(height: 7),
-                            Text("Your Bio"),
+                            Text(snapshot.data["bio"]),
                             Divider(),
                             Text(
                               "Interested In",

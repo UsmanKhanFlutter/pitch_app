@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/location.dart';
 import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -79,7 +80,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             // SizedBox(height: ConfigSize.blockSizeVertical*1),
             settingContainer(label: 'Email', details: '$email'),
             SizedBox(height: ConfigSize.blockSizeVertical * 5),
-            settingContainer(label: 'Location', details: 'My Current Location'),
+            settingContainer(
+                label: 'Location',
+                details: 'My Current Location',
+                onpress: () {
+                  Get.to(MyCurrentLocation());
+                }),
             // SizedBox(height: ConfigSize.blockSizeVertical*3),
             DistanceContainer(
               labelText: 'Maximum Distance',
@@ -160,15 +166,20 @@ Widget settingAppBar() {
         ),
         Expanded(
           flex: 1,
-          child: "Done"
-              .text
-              .red600
-              .xl
-              .make()
-              .box
-              .height(ConfigSize.blockSizeVertical * 6)
-              .alignCenterRight
-              .make(),
+          child: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: "Done"
+                .text
+                .red600
+                .xl
+                .make()
+                .box
+                .height(ConfigSize.blockSizeVertical * 6)
+                .alignCenterRight
+                .make(),
+          ),
         ),
       ],
     ),
@@ -189,42 +200,45 @@ Widget label({String text}) {
   );
 }
 
-Widget settingContainer({String label, String details}) {
-  return Card(
-    child: Container(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          label.text.bold.sm
-              .make()
-              .box
-              .height(ConfigSize.blockSizeVertical * 3)
-              .alignCenterLeft
-              .make(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              details.text
-                  .color(Color(0xffBBBBBB))
-                  .normal
-                  .sm
-                  .make()
-                  .box
-                  .height(ConfigSize.blockSizeVertical * 3)
-                  .alignCenterLeft
-                  .make(),
-              SizedBox(
-                width: ConfigSize.blockSizeHorizontal * 2,
-              ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xffBBBBBB),
-                size: 15,
-              )
-            ],
-          ),
-        ],
+Widget settingContainer({String label, String details, VoidCallback onpress}) {
+  return InkWell(
+    onTap: onpress,
+    child: Card(
+      child: Container(
+        padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            label.text.bold.sm
+                .make()
+                .box
+                .height(ConfigSize.blockSizeVertical * 3)
+                .alignCenterLeft
+                .make(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                details.text
+                    .color(Color(0xffBBBBBB))
+                    .normal
+                    .sm
+                    .make()
+                    .box
+                    .height(ConfigSize.blockSizeVertical * 3)
+                    .alignCenterLeft
+                    .make(),
+                SizedBox(
+                  width: ConfigSize.blockSizeHorizontal * 2,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Color(0xffBBBBBB),
+                  size: 15,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );

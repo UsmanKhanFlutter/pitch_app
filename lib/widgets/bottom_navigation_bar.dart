@@ -57,10 +57,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         setState(() {
                           pageIndex = 0;
                         });
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => ProfileScreen()),
-                            (Route<dynamic> route) => false);
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileScreen()),
+                              (Route<dynamic> route) => false);
                       },
                       icon: Icon(
                         CupertinoIcons.person_fill,

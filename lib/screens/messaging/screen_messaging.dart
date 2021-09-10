@@ -1,20 +1,26 @@
+import 'dart:io';
+import 'package:chewie/chewie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_preview/plugins.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:pitch_app/CustomColors/all_colors.dart';
 import 'package:pitch_app/GlobalVariables/global_fonts.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
 import 'package:pitch_app/screens/messaging/components/bottom_sheet_safety_toolkit.dart';
-import 'package:pitch_app/screens/screen_main.dart';
+import 'package:pitch_app/screens/messaging/videoplayer.dart';
 import 'package:pitch_app/screens/screen_upload_photos_of_your_guy_friend.dart';
-import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
-import 'package:pitch_app/widgets/dialog_unmatch_notification.dart';
 import 'package:pitch_app/widgets/stretched_color_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:path/path.dart' as Path;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:video_player/video_player.dart';
+import 'package:thumbnails/thumbnails.dart';
 
 class MessagingScreen extends StatefulWidget {
   String userId;
@@ -38,6 +44,104 @@ class _MessagingScreenState extends State<MessagingScreen> {
   final ConfigSize configSize = ConfigSize();
   final firestoreInstance = FirebaseFirestore.instance;
   ScrollController _scrollController;
+  String urlOfImage = "";
+  String videoUrl = "";
+
+  final picker = ImagePicker();
+  File image;
+  File video;
+  ChewieController _chewieController;
+  VideoPlayerController videoPlayerController;
+  int imageInProgress = 0;
+  int videoInProgress = 0;
+  double progress = 0.0;
+
+  Future pickimage() async {
+    // var imageFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final imageFile = await picker.getImage(source: ImageSource.gallery);
+    if (imageFile == null) return;
+    setState(() => imageInProgress = 1);
+    File croppedFile = await FlutterNativeImage.compressImage(imageFile.path,
+        quality: 70, percentage: 70);
+
+    firebase_storage.Reference reference = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child("chatFiles/${Path.basename(imageFile.path)}");
+    firebase_storage.UploadTask uploadTask = reference.putFile(croppedFile);
+    firebase_storage.TaskSnapshot storageTaskSnapshot = await uploadTask
+        .whenComplete(() => setState(() => imageInProgress = 2));
+    // if (storageTaskSnapshot.bytesTransferred ==
+    //     storageTaskSnapshot.totalBytes) {
+    //   print('jjjjjjjjjjjjjjjjjjj');
+    // }
+    urlOfImage =
+        await storageTaskSnapshot.ref.getDownloadURL().whenComplete(() {
+      if (imageFile != null) {
+        setState(() {
+          image = File(imageFile.path);
+        });
+      }
+    });
+
+    // addUserImageToFirestore(urlOfImage: urlOfImage);
+
+    // String id = await globals.functionUserId();
+    // print("????????????????????????????????????????????????????");
+    // print(id.toString());
+    print("image uploaded");
+  }
+
+  String thumbPath;
+  Future pickvideo() async {
+    // var imageFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final imageFile = await picker.getVideo(source: ImageSource.gallery);
+
+    if (imageFile == null) return;
+
+    String path = await _getImage(imageFile.path);
+    print(path);
+    thumbPath = path;
+    setState(() => videoInProgress = 1);
+    firebase_storage.Reference reference = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child("chatFiles/${Path.basename(imageFile.path)}");
+    firebase_storage.UploadTask uploadTask =
+        reference.putFile(File(imageFile.path));
+    uploadTask.snapshotEvents.listen((event) {
+      double prog = (event.bytesTransferred.toDouble() /
+          event.totalBytes.toDouble()); // *
+      // 100;
+      setState(() => progress = prog);
+    });
+    firebase_storage.TaskSnapshot storageTaskSnapshot =
+        await uploadTask.whenComplete(() => setState(() {
+              progress = 0.0;
+              videoInProgress = 2;
+            }));
+
+    videoUrl =
+        await storageTaskSnapshot.ref.getDownloadURL().whenComplete(() async {
+      if (imageFile != null) {
+        setState(() {
+          video = File(imageFile.path);
+        });
+      }
+    });
+
+    // addUserImageToFirestore(urlOfImage: urlOfImage);
+
+    // String id = await globals.functionUserId();
+    // print("????????????????????????????????????????????????????");
+    // print(id.toString());
+  }
+
+  _getImage(String videoPath) async {
+    String thumb = await Thumbnails.getThumbnail(
+        videoFile: videoPath, imageType: ThumbFormat.PNG, quality: 30);
+    return thumb;
+  }
 
   getUserName() {
     FirebaseFirestore.instance
@@ -78,11 +182,73 @@ class _MessagingScreenState extends State<MessagingScreen> {
                 shrinkWrap: true,
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
-                  return MessageTile(
-                    message: snapshot.data.docs[index]["message"],
-                    sendByMe:
-                        widget.userId == snapshot.data.docs[index]["sendBy"],
-                  );
+                  return snapshot.data.docs[index]["message"] != ""
+                      ? MessageTile(
+                          message: snapshot.data.docs[index]["message"],
+                          sendByMe: widget.userId ==
+                              snapshot.data.docs[index]["sendBy"],
+                        )
+                      : snapshot.data.docs[index]["imageurl"] != ""
+                          ? Container(
+                              margin: EdgeInsets.only(left: 150, bottom: 10),
+                              height: 220,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        snapshot.data.docs[index]["imageurl"],
+                                      ),
+                                      fit: BoxFit.fill)),
+                            )
+                          : snapshot.data.docs[index]["videourl"] != ""
+                              ? Container(
+                                  margin: EdgeInsets.only(left: 20, bottom: 10),
+                                  height: 200,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.file(
+                                          File(
+                                            snapshot.data.docs[index]
+                                                ["thumbnail"],
+                                          ),
+                                          fit: BoxFit.fill),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (context) => VideoItems(
+                                                            videoPlayerController:
+                                                                VideoPlayerController
+                                                                    .network(snapshot
+                                                                            .data
+                                                                            .docs[index]
+                                                                        [
+                                                                        "videourl"],),
+                                                            autoplay: true,
+                                                          )));
+                                        },
+                                        child: Icon(
+                                          Icons.play_arrow,
+                                          color: Colors.white,
+                                          size: 70,
+                                        ),
+                                      )
+                                    ],
+                                  ))
+                              : MessageTile(
+                                  message: snapshot.data.docs[index]["message"],
+                                  sendByMe: widget.userId ==
+                                      snapshot.data.docs[index]["sendBy"],
+                                );
                 })
             : Container();
       },
@@ -96,19 +262,63 @@ class _MessagingScreenState extends State<MessagingScreen> {
         "message": messageEditingController.text,
         'time': DateTime.now().millisecondsSinceEpoch,
         "revieverid": widget.otheruserid,
-        "sendusername": username
+        "sendusername": username,
+        "imageurl": urlOfImage,
+        "videourl": videoUrl
       };
 
       addmessage(widget.chatRoomId, chatMessageMap);
 
       setState(() {
         messageEditingController.text = "";
+        urlOfImage = "";
+        image = null;
+        video = null;
+        videoUrl = "";
+      });
+    } else if (image != null) {
+      Map<String, dynamic> chatMessageMap = {
+        "sendBy": widget.userId,
+        "message": messageEditingController.text,
+        'time': DateTime.now().millisecondsSinceEpoch,
+        "revieverid": widget.otheruserid,
+        "sendusername": username,
+        "imageurl": urlOfImage,
+        "videourl": videoUrl
+      };
+      addmessage(widget.chatRoomId, chatMessageMap);
+      setState(() {
+        urlOfImage = "";
+        image = null;
+        video = null;
+        videoUrl = "";
+        imageInProgress = 0;
+      });
+    } else if (video != null) {
+      Map<String, dynamic> chatMessageMap = {
+        "sendBy": widget.userId,
+        "message": messageEditingController.text,
+        'time': DateTime.now().millisecondsSinceEpoch,
+        "revieverid": widget.otheruserid,
+        "sendusername": username,
+        "imageurl": urlOfImage,
+        "videourl": videoUrl,
+        "thumbnail": thumbPath
+      };
+      addmessage(widget.chatRoomId, chatMessageMap);
+      setState(() {
+        urlOfImage = "";
+        image = null;
+        video = null;
+        videoUrl = "";
+        videoInProgress = 0;
+        thumbPath = null;
       });
     }
   }
 
-  Future<void> addmessage(String chatRoomId, chatMessageData) {
-    FirebaseFirestore.instance
+  Future<void> addmessage(String chatRoomId, chatMessageData) async {
+    await FirebaseFirestore.instance
         .collection("chatRoom")
         .doc(chatRoomId)
         .collection("chats")
@@ -116,6 +326,7 @@ class _MessagingScreenState extends State<MessagingScreen> {
         .catchError((e) {
       print(e.toString());
     });
+    urlOfImage = "";
   }
 
   getUserChats(String itIsMyName) async {
@@ -149,6 +360,37 @@ class _MessagingScreenState extends State<MessagingScreen> {
     widget.userId = _prefs.getString("currentUserId");
   }
 
+  showAttachmentBottomSheet(
+    context,
+  ) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            color: Colors.white,
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                    leading: Icon(Icons.image),
+                    title: Text('Image'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      pickimage();
+                    }),
+                ListTile(
+                    leading: Icon(Icons.videocam),
+                    title: Text('Video'),
+                    onTap: () {
+                      Navigator.pop(context);
+
+                      pickvideo();
+                    }),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -164,6 +406,13 @@ class _MessagingScreenState extends State<MessagingScreen> {
         chats = val;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    messageEditingController.dispose();
   }
 
   @override
@@ -223,10 +472,50 @@ class _MessagingScreenState extends State<MessagingScreen> {
           SizedBox(
             height: ConfigSize.blockSizeVertical * 5,
           ),
-          MessageTextArea(() {
-            addMessage();
-            messageslist();
-          }, messageEditingController),
+          MessageTextArea(
+              () {
+                addMessage();
+                messageslist();
+              },
+              messageEditingController,
+              () {
+                showAttachmentBottomSheet(context);
+              }),
+          // image != null
+          // videoInProgress==2?Container(
+
+          // ):
+          videoInProgress == 1 || videoInProgress == 2
+              ? Container(
+                  height: 70,
+                  width: 90,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      if (thumbPath != null) Image.file(File(thumbPath)),
+                      // CircularProgressIndicator(),
+                      if (videoInProgress != 2)
+                        CircularProgressIndicator(
+                          value: progress,
+                          valueColor: AlwaysStoppedAnimation(Colors.red),
+                        )
+                    ],
+                  ))
+              : Container(),
+
+          imageInProgress == 2
+              ? Container(
+                  height: 70,
+                  width: 90,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: FileImage(image),
+                    ),
+                  ),
+                )
+              : imageInProgress == 1
+                  ? CircularProgressIndicator()
+                  : Container()
         ]),
       ),
     );
@@ -242,10 +531,28 @@ getChats(String chatRoomId) async {
       .snapshots();
 }
 
-class MessageTextArea extends StatelessWidget {
+class MessageTextArea extends StatefulWidget {
   VoidCallback onpressed;
+  VoidCallback onpressed1;
   TextEditingController text;
-  MessageTextArea(this.onpressed, this.text);
+  MessageTextArea(this.onpressed, this.text, this.onpressed1);
+
+  @override
+  _MessageTextAreaState createState() => _MessageTextAreaState();
+}
+
+class _MessageTextAreaState extends State<MessageTextArea> {
+  // Future<bool> addUserImageToFirestore({String urlOfImage}) async {
+  //   //use firebase to store user information
+  //   FirebaseFirestore.instance
+  //       .collection('chatRoom')
+  //       .doc(MessagingScreen(null, null, null, null, null).chatRoomId)
+  //       .collection("chats")
+  //       .add({"imageurl": urlOfImage});
+
+  //   //return false;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -258,7 +565,7 @@ class MessageTextArea extends StatelessWidget {
         child: Stack(alignment: AlignmentDirectional.centerEnd, children: [
           Container(
             child: TextField(
-              controller: text,
+              controller: widget.text,
               minLines: 2,
               keyboardType: TextInputType.multiline,
               maxLines: 2,
@@ -273,13 +580,19 @@ class MessageTextArea extends StatelessWidget {
               ),
             ),
           ),
-          StretchedColorButton(
-            text: "Send",
-            color: AppColors.lightGreen,
-            width: ConfigSize.blockSizeHorizontal * 15,
-            height: ConfigSize.blockSizeVertical * 4,
-            onPressed: onpressed,
-          ).pSymmetric(h: 16, v: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(onTap: widget.onpressed1, child: Icon(Icons.attach_file)),
+              StretchedColorButton(
+                text: "Send",
+                color: AppColors.lightGreen,
+                width: ConfigSize.blockSizeHorizontal * 15,
+                height: ConfigSize.blockSizeVertical * 4,
+                onPressed: widget.onpressed,
+              ).pSymmetric(h: 16, v: 8),
+            ],
+          ),
         ]),
       ),
     );

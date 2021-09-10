@@ -32,11 +32,10 @@ class _MessagingScreenState extends State<MessagingScreen> {
             //App bar
             AppBarBackSecurity(
               title: 'Message',
-              onLeadingPressed:(){
+              onLeadingPressed: () {
                 Navigator.pop(context);
-
               },
-              onActionPressed:(){
+              onActionPressed: () {
                 _scaffoldKey.currentState.showBottomSheet(
                   (context) => SafetyToolkitBottomSheet(
                     context.screenHeight * 0.4,
@@ -70,10 +69,9 @@ class _MessagingScreenState extends State<MessagingScreen> {
               ),
             ),
             // SizedBox(
-            //   height: ConfigSize.blockSizeVertical*2,
+            //   height: ConfigSize.blockSizeVertical * 2,
             // ),
             MessageTextArea(),
-            
           ]),
         ),
       ),
@@ -81,19 +79,16 @@ class _MessagingScreenState extends State<MessagingScreen> {
   }
 }
 
-
 class MessageTextArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(13.0),
-        side: BorderSide(color: grayborder)),
-    elevation: 0,
-    child: Scrollbar(
-      child: Stack(
-        alignment: AlignmentDirectional.centerEnd,
-        children: [
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(13.0),
+          side: BorderSide(color: grayborder)),
+      elevation: 0,
+      child: Scrollbar(
+        child: Stack(alignment: AlignmentDirectional.centerEnd, children: [
           Container(
             child: TextField(
               onChanged: (value) {
@@ -103,29 +98,29 @@ class MessageTextArea extends StatelessWidget {
               keyboardType: TextInputType.multiline,
               maxLines: 2,
               decoration: InputDecoration(
-              contentPadding:EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              hintText: 'Write something...',
-              hintStyle: TextStyle(
-                fontSize: 12,
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                hintText: 'Write something...',
+                hintStyle: TextStyle(
+                  fontSize: 12,
+                ),
+                border: InputBorder.none,
               ),
-              border: InputBorder.none,
             ),
           ),
-        ),
-        StretchedColorButton(
-          text: "Send",
-          color: lightGreen,
-          width: ConfigSize.blockSizeHorizontal * 15,
-          height: ConfigSize.blockSizeVertical * 4,
-          onPressed: () {
+          StretchedColorButton(
+            text: "Send",
+            color: lightGreen,
+            width: ConfigSize.blockSizeHorizontal * 15,
+            height: ConfigSize.blockSizeVertical * 4,
+            onPressed: () {
               context.push((context) => UploadPhotosScreen());
             },
-        ).pSymmetric(h: 16, v: 8),
-        ]
+          ).pSymmetric(h: 16, v: 8),
+        ]),
       ),
-    ),
-  );
-}
+    );
+  }
 }
 
 Widget recievedMessageContainer({String message}) {
@@ -226,4 +221,3 @@ Widget sendButton() {
             });
       }));
 }
-
