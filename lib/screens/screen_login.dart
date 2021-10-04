@@ -55,15 +55,15 @@ class LoginScreen extends StatelessWidget {
                       .text
                       .make(),
                   SizedBox(height: 10),
-                  MaterialButton(
-                    onPressed: () {},
-                    child: "Edit the info you provide"
-                        .text
-                        .fontWeight(FontWeight.w400)
-                        .color(Colors.blue)
-                        .underline
-                        .make(),
-                  )
+                  // MaterialButton(
+                  //   onPressed: () {},
+                  //   child: "Edit the info you provide"
+                  //       .text
+                  //       .fontWeight(FontWeight.w400)
+                  //       .color(Colors.blue)
+                  //       .underline
+                  //       .make(),
+                  // )
                 ],
               ),
             ),
@@ -74,7 +74,9 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     elevation: 0,
                     color: Colors.white,
                     child: "Cancel".text.color(Colors.grey).make(),

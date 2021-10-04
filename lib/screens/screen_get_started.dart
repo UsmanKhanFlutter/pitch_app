@@ -57,7 +57,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void navigationPage() async {
     if (userID == null) {
-      Get.to(SignInMethodScreen());
+      Get.to(locationDialog(context));
     } else {
       Get.to(GettingStartedScreen());
     }

@@ -12,6 +12,7 @@ import 'package:pitch_app/screens/screen_get_started.dart';
 import 'package:pitch_app/widgets/bottom_navigation_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -54,6 +55,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             email = value.data()["email"];
           })
         });
+  }
+
+  String _url = 'http://upitchme.com/';
+
+  void _launchURL() async {
+    await launch(_url);
+    // await canLaunch(_url) ?  : throw 'Could not launch $_url';
   }
 
   @override
@@ -122,7 +130,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
             settingContainer(label: 'Safety Center', details: ''),
             SizedBox(height: ConfigSize.blockSizeVertical * 3),
             label(text: 'PRIVACY POLICY'),
-            settingContainer(label: 'Privacy Policy', details: ''),
+            InkWell(
+              onTap: () {
+                _launchURL();
+              },
+              child: Column(
+                children: [
+                  settingContainer(label: 'Privacy Policy', details: ''),
+                ],
+              ),
+            ),
             settingContainer(label: 'Terms of Service', details: ''),
             settingContainer(label: 'Licenses', details: ''),
             settingContainer(label: 'Privacy Preferences', details: ''),

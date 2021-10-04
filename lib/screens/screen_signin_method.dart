@@ -70,43 +70,42 @@ class _SignInMethodScreenState extends State<SignInMethodScreen> {
                           height: ConfigSize.convertHeight(context, 70),
                         ),
                         "PitchMe".text.size(8).bold.make(),
-                        SizedBox(height: 16),
+                        SizedBox(height: 50),
                         ProfileImage(
                           height: 120,
                           width: 120,
                           radius: 60,
                         ),
-                        SizedBox(height: 30),
-                        "Have an Account?".text.make(),
-                        MaterialButton(
-                          onPressed: () =>
-                              context.push((context) => LoginScreen()),
-                          child: "Sign In"
-                              .text
-                              .bold
-                              .color(AppColors.mainColor)
-                              .underline
-                              .make(),
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: Divider(
-                              indent: 100,
-                              endIndent: 10,
-                              thickness: 1,
-                            )),
-                            "OR".text.color(Colors.grey).make(),
-                            Expanded(
-                                child: Divider(
-                              indent: 10,
-                              endIndent: 100,
-                              thickness: 1,
-                            )),
-                          ],
-                        ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 40),
+                        // "Have an Account?".text.make(),
+                        // MaterialButton(
+                        //   onPressed: () {},
+                        //   child: "Sign In"
+                        //       .text
+                        //       .bold
+                        //       .color(AppColors.mainColor)
+                        //       .underline
+                        //       .make(),
+                        // ),
+                        // SizedBox(height: 16),
+                        // Row(
+                        //   children: [
+                        //     // Expanded(
+                        //     //     child: Divider(
+                        //     //   indent: 100,
+                        //     //   endIndent: 10,
+                        //     //   thickness: 1,
+                        //     // )),
+                        //     // "OR".text.color(Colors.grey).make(),
+                        //     // Expanded(
+                        //     //     child: Divider(
+                        //     //   indent: 10,
+                        //     //   endIndent: 100,
+                        //     //   thickness: 1,
+                        //     // )),
+                        //   ],
+                        // ),
+                        SizedBox(height: 25),
                         Platform.isIOS
                             ? Container(
                                 padding: EdgeInsets.only(
@@ -128,7 +127,7 @@ class _SignInMethodScreenState extends State<SignInMethodScreen> {
                         SizedBox(height: 10),
                         StretchedIconButton(
                           path: "assets/images/Facebook.png",
-                          onPressed: () async{
+                          onPressed: () async {
                             Userservices().initiateFacebookLogin(context);
                           },
                           shadowColor: Colors.blue.shade300,

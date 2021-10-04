@@ -25,6 +25,9 @@ class BasicInformationScreen extends StatefulWidget {
 class _BasicInformationScreenState extends State<BasicInformationScreen> {
   final _formKey = GlobalKey<FormState>();
   String currentuserid;
+  String googleName;
+  String photo;
+  String email;
 
   TextEditingController nameController = TextEditingController();
 
@@ -37,14 +40,13 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
   final firestoreInstance = FirebaseFirestore.instance;
   var firebaseUser = FirebaseAuth.instance.currentUser;
   void senddata() {
-    firestoreInstance.collection("basicinfo").doc(globals.userid).set({
-      "name": nameController.text,
+    firestoreInstance.collection("basicinfo").doc(currentuserid).set({
+      "name": nameController.text.isEmpty ? googleName : nameController.text,
       "iam": _selectedLocation,
       "birthday": _chosenDateTime.toString() + birthdaycontroller.text,
-      "email": emailcontroller.text,
+      "email": emailcontroller.text.isEmpty ? email : emailcontroller.text,
       "phonenumber": countrycode.toString() + numbercontroller.text,
-      "urlOfImage":
-          "https://www.worldfuturecouncil.org/wp-content/uploads/2020/02/dummy-profile-pic-300x300-1.png",
+      "urlOfImage": photo,
       "userid": currentuserid,
       "bio": "Your Bio"
     }).then((value) {
@@ -98,9 +100,15 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
     SharedPreferences sharedUserData = await SharedPreferences.getInstance();
     setState(() {
       currentuserid = sharedUserData.getString("currentUserId");
+      googleName = sharedUserData.getString("name");
+      photo = sharedUserData.getString("image");
+      email = sharedUserData.getString("email");
     });
     print("aaaaaaaaa");
     print(currentuserid);
+    print(googleName);
+    print(photo);
+    print(email);
   }
 
   List<String> _locations = [
@@ -147,8 +155,9 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
 
                   label("First Name"),
                   infoTextField(
-                      hintText: '',
-                      controller: nameController,
+                      hintText: '$googleName',
+                      controller:
+                          nameController == null ? googleName : nameController,
                       icon: Icon(
                         Icons.near_me,
                         color: grayTextField,
@@ -215,7 +224,7 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   label("Email Address:"),
                   // RoundedTextField(hint: 'name@email.com'),
                   infoTextField(
-                      hintText: 'name@email.com',
+                      hintText: '$email',
                       controller: emailcontroller,
                       icon: Icon(
                         Icons.near_me,
@@ -302,15 +311,15 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                   StretchedButton(
                     text: "Continue",
                     onPressed: () {
-                      if (nameController.text.isEmpty) {
-                        return Fluttertoast.showToast(
-                            msg: "please enter your name",
-                            backgroundColor: Colors.white,
-                            textColor: Colors.red,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            fontSize: 16.0);
-                      }
+                      // if (nameController.text.isEmpty) {
+                      //   return Fluttertoast.showToast(
+                      //       msg: "please enter your name",
+                      //       backgroundColor: Colors.white,
+                      //       textColor: Colors.red,
+                      //       toastLength: Toast.LENGTH_SHORT,
+                      //       gravity: ToastGravity.CENTER,
+                      //       fontSize: 16.0);
+                      // }
                       if (_selectedLocation == null) {
                         return Fluttertoast.showToast(
                             msg: "please enter your interest",
@@ -329,15 +338,15 @@ class _BasicInformationScreenState extends State<BasicInformationScreen> {
                             gravity: ToastGravity.CENTER,
                             fontSize: 16.0);
                       }
-                      if (emailcontroller.text.isEmpty) {
-                        return Fluttertoast.showToast(
-                            msg: "please enter your email",
-                            backgroundColor: Colors.white,
-                            textColor: Colors.red,
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            fontSize: 16.0);
-                      }
+                      // if (emailcontroller.text.isEmpty) {
+                      //   return Fluttertoast.showToast(
+                      //       msg: "please enter your email",
+                      //       backgroundColor: Colors.white,
+                      //       textColor: Colors.red,
+                      //       toastLength: Toast.LENGTH_SHORT,
+                      //       gravity: ToastGravity.CENTER,
+                      //       fontSize: 16.0);
+                      // }
                       if (numbercontroller.text.isEmpty) {
                         return Fluttertoast.showToast(
                             msg: "please enter your number",

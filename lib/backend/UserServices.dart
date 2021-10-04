@@ -47,6 +47,8 @@ class Userservices {
       _prefs.setString("currentUserId", user.uid);
       print("+++++++++++++++++++++++++${globals.userid}");
       _prefs.setString("name", user.displayName);
+      _prefs.setString("image", user.photoURL);
+      _prefs.setString("email", user.email);
       print(user.displayName);
 
       Get.to(LoginScreen());
@@ -62,12 +64,12 @@ class Userservices {
     // Trigger the sign-in flow
     // Create a credential from the access token
     final FacebookLoginResult result = await facebookLogin.logIn();
-
-    final FacebookAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(result.accessToken.token);
-
-    return await FirebaseAuth.instance
-        .signInWithCredential(facebookAuthCredential);
+    if (result.status == FacebookLoginStatus.success) {
+      final FacebookAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(result.accessToken.token);
+      return await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+    }
   }
 
   // Future<void> fbLoginAndSaveData(BuildContext context) async {
@@ -93,7 +95,6 @@ class Userservices {
       globals.userid = value.user.uid;
       print("+++++++++++++++++++++++++${globals.userid}");
 
-      sharedUserData.setString("currentUserId", globals.userid);
       print(globals.userid);
     }).catchError((err) {
       print("Facebook Sign In Error => $err");
@@ -115,8 +116,16 @@ class Userservices {
         var graphResponse = await http.get(Uri.parse(_url));
 
         var profile = json.decode(graphResponse.body);
+        print(profile["name"]);
+        print(profile["id"]);
+        print(profile["picture"]["data"]["url"]);
+
         print(profile.toString());
         print("logggggggggggggggggggin successfully");
+        sharedUserData.setString("currentUserId", profile["id"]);
+        sharedUserData.setString("name", profile["name"]);
+        sharedUserData.setString("image", profile["picture"]["data"]["url"]);
+        sharedUserData.setString("email", profile["email"]);
         Get.to(LoginScreen());
 
         break;

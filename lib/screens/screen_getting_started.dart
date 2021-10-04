@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pitch_app/GlobalVariables/globals_variable.dart';
 import 'package:pitch_app/colors.dart';
 import 'package:pitch_app/helpers/size_config.dart';
+import 'package:pitch_app/screens/catalog/screen_catalog.dart';
 import 'package:pitch_app/screens/screen_phone_number.dart';
 import 'package:pitch_app/screens/screen_your_pitches.dart';
 import 'package:pitch_app/screens/woman_add%20details/screen_woman_basic_information.dart';
@@ -112,9 +113,12 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
           if (value.data()['iam'] == 'Man Interested in women' ||
               value.data()['iam'] == 'Man Interested in men')
             {
-              setState(() {
-                isgirl = false;
-              }),
+              if (mounted)
+                {
+                  setState(() {
+                    isgirl = false;
+                  }),
+                }
             }
           else // if(value.data()['iam'] == 'Woman Interested in men' || value.data()['iam'] == 'Woman Interested in women')
             {
@@ -224,8 +228,8 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                       height: 36,
                       width: ConfigSize.convertWidth(context, 250),
                       onPressed: () {
-                        context.push((context) =>
-                            WomanBasicInformationScreen()); //FindAMatchScreen
+                        context.push(
+                            (context) => CatalogScreen()); //FindAMatchScreen
                       },
                       color: AppColors.mainColor,
                     ),
